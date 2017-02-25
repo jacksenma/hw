@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nju.hw.mapper.VipMapper">
+	<!-- 根据所有信息查找Hostel-->
+ 	<select id="selectVipByUid"  resultType="Vip">
+ 		select * from vip where uid = #{0}
+ 	</select>
+ 	
+ 	<!-- 根据识别码查找Vip-->
+ 	<select id="selectVipById"  resultType="Vip">
+ 		select * from vip where id = #{0}
+ 	</select>
+ 	
+ 	<!-- 增加一个Vip -->  
+    <insert id="addVip"> 
+        insert into vip(phone,bankCard,idCard,uid,id) values(#{0},#{1},#{2},#{3},#{4})  
+     </insert>
+     
+     <!-- 会员充值与激活 -->  
+    <update id="updateVipByVid">
+    	update vip set balance=#{0},bankBalance=#{1},state=1 where id=#{2} 
+    </update>
+    
+    <!-- 会员积分充值 -->  
+    <update id="updateVipPByVid">
+    	update vip set balance=#{0},point=#{1},state=1 where id=#{2} 
+    </update>
+    
+    <!-- 更新ddl -->  
+    <update id="updateDDL">
+    	update vip set ddl=#{0} where id=#{1} 
+    </update>
+    
+    <!-- 修改会员卡信息（手机，银行卡） -->  
+    <update id="updateVipPandBByVid">
+    	update vip set phone=#{0},bankCard=#{1} where id=#{2} 
+    </update>
+    
+    <!-- 删除会员信息 -->
+    <delete id="deleteVipByVid">
+    	delete from vip where id=#{0}
+    </delete>
+    
+    
+    <!-- 预订之后扣钱，加积分和经验值 -->  
+    <update id="updateBPX">
+    	update vip set balance=#{1},point=#{2} ,xp=#{3} where id=#{0}
+    </update>
+    
+    <!-- HW加钱 -->  
+    <update id="updateHW">
+    	update hw set balance=#{0} where id=1
+    </update>
+    
+    <!-- 查询HW账户金钱-->
+ 	<select id="selectHWBalanceById"  resultType="double">
+ 		select balance from hw where id = #{0}
+ 	</select>
+</mapper>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SantaHat</title>
+
+    <!-- Bootstrap -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="../css/component.css" rel="stylesheet">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/tether/1.3.6/js/tether.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/fileinput.js" type="text/javascript"></script>
+    <script src="../js/locales/fr.js" type="text/javascript"></script>
+    <script src="../js/locales/es.js" type="text/javascript"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
+        function fileChange(target) {
+            var fileSize = 0;
+            if (isIE && !target.files) {
+                var filePath = target.value;
+                var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+                var file = fileSystem.GetFile (filePath);
+                fileSize = file.Size;
+            } else {
+                fileSize = target.files[0].size;
+            }
+            var size = fileSize / 1024;
+            if(size>1024){
+                alert("文件超过1M!点击提交可以欣赏错误界面！");
+                return false;
+            }
+        }
+    </script>
+</head>
+
+<body>
+<img alt="" src="D:\j2ee\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\hw\1486537638814h2.png">
+<div class="container">
+    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 upload" >
+        <form class="form" action="/imgTest" method="post" enctype="multipart/form-data">
+            <input id="input-6" name="file" type="file" multiple class="file-loading" accept="image/*"/>
+            <script>
+                $(document).on('ready', function() {
+                    $("#input-6").fileinput({
+                        uploadAsync:false,
+                        maxFileCount: 1,
+                        mainClass: "input-group-lg"
+                    });
+                });
+            </script>
+        </form>
+        <div class="explain">
+            <h2>上传照片</h2>
+            <p>1、自动生成戴圣诞帽的照片<br/>
+            2、图片上需要有一个或多个清晰正脸<br/>
+            3、图片不要超过1M<br/>
+            4、点击上传没有反应？稍等一下...<br/>
+            5、隐私政策：每隔10分钟删除上传的所有图片</p>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+</body>
+</html>
