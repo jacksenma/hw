@@ -1,5 +1,7 @@
 package edu.nju.hw.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +25,7 @@ public interface VipService {
 	void deleteVip(String vid);
 
 	void addMyOrder(String vid, String hid, String myStartDate, String myEndDate, String myBed, double myTotalPrice,
-			int roomNum, String name);
+			int roomNum, String name, String haddress, String hlevel, String hname, String hphone, String now);
 
 	void updateBPX(String vid, double balance, int point, int xp);
 
@@ -35,5 +37,13 @@ public interface VipService {
 	void rechargeP(String vid, int money, int point, double balance);
 
 	void updateDDL(String ddl, String vid);
+
+	List getMyOrders(String vid);
+
+	Vip getVipInfoByVid(String vid);
+
+	void updateOrderCancel(int oid, String nowTime);
+
+	void updateFinance(String vid, double double2);
 
 }

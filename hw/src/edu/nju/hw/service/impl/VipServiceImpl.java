@@ -1,10 +1,15 @@
 package edu.nju.hw.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.hw.mapper.FinanceMapper;
 import edu.nju.hw.mapper.OrderMapper;
 import edu.nju.hw.mapper.VipMapper;
 import edu.nju.hw.model.Vip;
@@ -19,6 +24,9 @@ public class VipServiceImpl implements VipService {
 	
 	@Resource
 	public OrderMapper orderMapper;
+	
+	@Resource
+	public FinanceMapper financeMapper;
 
 	@Override
 	public boolean isRegistered(int uid) {
@@ -82,9 +90,9 @@ public class VipServiceImpl implements VipService {
 
 	@Override
 	public void addMyOrder(String vid, String hid, String myStartDate, String myEndDate, String myBed,
-			double myTotalPrice, int roomNum,String name) {
+			double myTotalPrice, int roomNum,String name,String haddress, String hlevel, String hname, String hphone,String now) {
 		// TODO Auto-generated method stub
-		orderMapper.addOrder(vid,hid,myStartDate,myEndDate,myBed,myTotalPrice,roomNum,name);
+		orderMapper.addOrder(vid,hid,myStartDate,myEndDate,myBed,myTotalPrice,roomNum,name,haddress,hlevel,hname,hphone,now);
 	}
 
 	@Override
@@ -109,6 +117,47 @@ public class VipServiceImpl implements VipService {
 	public void updateDDL(String ddl, String vid) {
 		// TODO Auto-generated method stub
 		vipMapper.updateDDL(ddl,vid);
+	}
+
+	@Override
+	public List getMyOrders(String vid) {
+		// TODO Auto-generated method stub
+		return orderMapper.getMyOrders(vid);
+	}
+
+	@Override
+	public Vip getVipInfoByVid(String vid) {
+		// TODO Auto-generated method stub
+		return vipMapper.selectVipById(vid);
+	}
+
+	@Override
+	public void updateOrderCancel(int oid, String nowTime) {
+		// TODO Auto-generated method stub
+		orderMapper.updateOrderCancel(oid,nowTime);
+	}
+
+	@Override
+	public void updateFinance(String vid, double double2) {
+		// TODO Auto-generated method stub
+		System.out.println("id:"+financeMapper.getFinanceByDate(getNowDate()));
+//		if(financeMapper.getFinanceId(getNowDate())==0){
+//			
+//		}
+	}
+	
+	public static String getNowTime(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	     System.out.println("当前时间：" + sdf.format(d));
+	     return sdf.format(d);
+	}
+	
+	public static String getNowDate(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     System.out.println("当前日期：" + sdf.format(d));
+	     return sdf.format(d);
 	}
 
 	

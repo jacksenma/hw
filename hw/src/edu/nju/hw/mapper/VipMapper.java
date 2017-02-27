@@ -24,4 +24,6 @@ public interface VipMapper {
 	public void updateVipPByVid(double vipBalance, double vipPoint, String vid);
 
 	public void updateDDL(String ddl, String vid);
+
+	
 }

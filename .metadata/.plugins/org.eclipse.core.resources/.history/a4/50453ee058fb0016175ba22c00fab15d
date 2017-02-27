@@ -1,0 +1,58 @@
+package edu.nju.hw.model;
+
+public class Order {
+	private String vid;
+	private String hid;
+	private String startDate;
+	private String endDate;
+	private String bed;
+	private String name;
+	private int num;//房间数
+	private double price;//总价
+	private String hname;//客栈名城
+	private String address;//客站地址
+	private String phone;//联系电话
+	private String level;//客栈星级
+	private int id;
+	
+	public String getVid(){
+		return vid;
+	}
+	public String getHid(){
+		return hid;
+	}
+	public String getStartDate(){
+		return startDate;
+	}
+	public String getEndDate(){
+		return endDate;
+	}
+	public String getBed(){
+		return bed;
+	}
+	public int getNum(){
+		return num;
+	}
+	public double price(){
+		return price;
+	}
+	public String hname(){
+		return hname;
+	}
+	public String address(){
+		return address;
+	}
+	public String phone(){
+		return phone;
+	}
+	public String level(){
+		return level;
+	}
+	public String name(){
+		return name;
+	}
+	public int id(){
+		return id;
+	}
+	
+}

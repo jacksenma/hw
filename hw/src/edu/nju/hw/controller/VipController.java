@@ -2,9 +2,12 @@ package edu.nju.hw.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.hw.model.Order;
 import edu.nju.hw.model.User;
 import edu.nju.hw.model.Vip;
 import edu.nju.hw.service.HostelService;
@@ -224,6 +228,17 @@ public class VipController {
 		String planEndDate=request.getParameter("planEndDate");
 		session.setAttribute("planEndDate", planEndDate);
 		
+		String preHname=request.getParameter("preHname");
+		session.setAttribute("preHname", preHname);
+		
+		String preAddress=request.getParameter("preAddress");
+		session.setAttribute("preAddress", preAddress);
+		
+		String preLevel=request.getParameter("preLevel");
+		session.setAttribute("preLevel", preLevel);
+		
+		String prePhone=request.getParameter("prePhone");
+		session.setAttribute("prePhone", prePhone);
 		
 		
 		
@@ -244,12 +259,16 @@ public class VipController {
 		double myTotalPrice=Double.parseDouble(request.getParameter("myTotalPrice"));
 		int roomNum=Integer.parseInt(request.getParameter("roomNum"));
 		int myPoint=Integer.parseInt(request.getParameter("myPoint"));
-		
+		String haddress=request.getParameter("haddress");
+		String hlevel=request.getParameter("hlevel");
+		String hname=request.getParameter("hname");
+		String hphone=request.getParameter("hphone");
 		
 		//step1:增加一个预订记录
 		String vid=me.getId();
 		String hid=(String) session.getAttribute("preHid");
-		vipService.addMyOrder(vid,hid,myStartDate,myEndDate,myBed,myTotalPrice,roomNum,name);
+		String now=getNowTime();
+		vipService.addMyOrder(vid,hid,myStartDate,myEndDate,myBed,myTotalPrice,roomNum,name,haddress,hlevel,hname,hphone,now);
 		
 		//step2:会员扣钱，加积分,加经验值
 		double balance=me.getBalance()-myTotalPrice;
@@ -275,9 +294,75 @@ public class VipController {
 		session.setAttribute("preNum", num);
 //		vipService.addMyOrder(me.get)
 		
+		//得到预订信息返回我的预定界面
+		List<Order> myOrders=new ArrayList<Order>();
+		myOrders=vipService.getMyOrders(vid);
+		session.setAttribute("myOrdersInfo", myOrders);
 		return "uorderCancel";
 		
 		
+	}
+	
+	@RequestMapping("/orderCancel")
+	public String orderCancel(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		System.out.println("ordercancel");
+		
+		// 扣除积分，经验值，退回80%卡余额
+		String vid=request.getParameter("vid");
+		double price=Double.parseDouble(request.getParameter("cancelPrice"));
+		System.out.println("price:"+price);
+		int point=(int)(price/10);
+		int xp=point;
+		Vip v=vipService.getVipInfoByVid(vid);
+		int c=0;//保存积分和余额的差值
+		if(v.getPoint()>=point)
+			point=v.getPoint()-point;
+		else{
+			c=point-v.getPoint();
+			point=0;
+		}
+		double balance=v.getBalance()+(getDouble2((price*0.8)))-c;
+		xp=v.getXp()-xp;
+		vipService.updateBPX(vid, balance, point, xp);
+		//hw账号退钱
+		double myTotalPrice=vipService.getHW(1);
+		myTotalPrice=myTotalPrice-getDouble2((price*0.8));
+		vipService.updateHW(myTotalPrice);
+		
+		//设置state=0(取消状态),增加取消时间
+		int oid=Integer.parseInt(request.getParameter("oid"));
+		vipService.updateOrderCancel(oid,getNowTime());
+		
+		//hw账号金额记录变化(同一天的变化合并)
+		vipService.updateFinance(vid,getDouble2(price*0.8));
+		
+		
+		
+		
+		//消费记录增加一笔
+		return null;
+		
+	}
+	
+	public static String getNowTime(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	     System.out.println("当前时间：" + sdf.format(d));
+	     return sdf.format(d);
+	}
+	
+	public static String getNowDate(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     System.out.println("当前日期：" + sdf.format(d));
+	     return sdf.format(d);
+	}
+	public static double getDouble2(double d){
+		DecimalFormat df = new DecimalFormat("0.00");
+		double dd=d;
+		double db = Double.parseDouble(df.format(dd));
+		System.out.println("double:"+db);
+		return db;
 	}
 	
 	

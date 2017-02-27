@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- ???????????????????????? -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- ? Bootstrap ?? CSS ?? -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- ???Bootstrap???????????? -->
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- jQuery??????bootstrap.min.js ???? -->
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+
+<!-- ??? Bootstrap ?? JavaScript ?? -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<title>用户</title>
+</head>
+<body>
+<%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
+<script type="text/javascript">
+$("#orderCancel").addClass("active");
+</script>
+<div class="container" style="margin-top:50px">
+<table class="table table-striped">
+    <caption>待审批开店信息</caption>
+    <thead>
+      <tr>
+        <th>入住时间</th>
+        <th>退房时间</th>
+        <th>客栈名称</th>
+        <th>客栈地址</th>
+        <th>客栈星级</th>
+        <th>联系电话</th>
+        <th>房间类型</th>
+        <th>预订数量</th>
+        <th>共计房费</th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${hostelUnsettled}" var="h">
+    	
+    		<tr id="tr${h.name}${h.phone}${h.province}${h.city}${h.district}">
+    			<td>${h.name}</td>
+    			<td>${h.level}</td>
+    			<td>${h.province}${h.city}${h.district}</td>
+    			<td>${h.phone}</td>
+    			<td>${h.bankCard}</td>
+    			<td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#${h.name}${h.phone}${h.province}${h.city}${h.district}">查看图片</button></td>
+    			<!-- 模态框（Modal） -->
+<div class="modal fade" id="${h.name}${h.phone}${h.province}${h.city}${h.district}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">图片</h4>
+            </div>
+            <div class="modal-body"><img alt="" src="${h.imgUrl}" style="width:100%;height:100%"></div>
+            <div class="modal-footer">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+    			<td><button type="button" class="btn btn-success btn-xs" onclick='pass("${h.name}","${h.level}","${h.province}","${h.city}","${h.district}","${h.phone}","${h.bankCard}")'>审批通过</button></td>
+    			
+    			<td><button type="button" class="btn btn-danger btn-xs" onclick='notPass("${h.name}","${h.level}","${h.province}","${h.city}","${h.district}","${h.phone}","${h.bankCard}")'>不予通过</button></td>
+    		</tr>
+    	
+    </c:forEach>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

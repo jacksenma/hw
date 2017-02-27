@@ -1,0 +1,5 @@
+package edu.nju.hw.mapper;
+
+public interface FinanceMapper {
+	public Finance getFinanceId(String date);
+}

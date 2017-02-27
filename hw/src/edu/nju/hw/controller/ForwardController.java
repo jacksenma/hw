@@ -1,19 +1,26 @@
 package edu.nju.hw.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.nju.hw.model.Hostel;
-import edu.nju.hw.model.User;
+import edu.nju.hw.model.Order;
+import edu.nju.hw.model.Vip;
+import edu.nju.hw.service.VipService;
 
 @Controller
 public class ForwardController {
+	
+	@Autowired
+	private VipService vipService;
 
 	@RequestMapping("/fasettleHostel")
 	public String settle1(){
@@ -87,7 +94,10 @@ public class ForwardController {
 	}
 	
 	@RequestMapping("/fuorderCancel")
-	public String fuorderCancel(){
+	public String fuorderCancel(HttpSession session){
+		List<Order> myOrders=new ArrayList<Order>();
+		myOrders=vipService.getMyOrders(((Vip)session.getAttribute("vipInfo")).getId());
+		session.setAttribute("myOrdersInfo", myOrders);
 		return "uorderCancel";
 	}
 	
