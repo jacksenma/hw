@@ -65,7 +65,7 @@ $("#orderCancel").addClass("active");
     				<div class="modal-dialog">
         				<div class="modal-content">
             				<div class="modal-header">
-                				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                				<button type="button" id="rs1" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 				<h4 class="modal-title" id="myModalLabel">取消预订</h4>
             				</div>
             				<div class="modal-body">
@@ -77,11 +77,11 @@ $("#orderCancel").addClass("active");
             		
             					<!-- <button type="button" onclick='vCancel' class="btn btn-primary">确定</button>
             					<input type="submit" style="display:none" id="subCancel"> -->
-            					<button type="button" class="btn btn-primary" onclick="checkForm(form${o.id })">确定</button>
+            					<button type="button" class="btn btn-primary" onclick="checkForm(form${o.id },tr${o.id },${o.id })">确定</button>
             					<input type="submit" id="sub" style="display:none">
             					<input type="text" id="vid" name="vid" value="${o.vid }" style="display:none">
             					<input type="text" id="cancelPrice" name="cancelPrice" value="${o.price }" style="display:none">
-            					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            					<button type="button" id="rs" class="btn btn-default" data-dismiss="modal">取消</button>
             				</form>
             				</div>
         				</div><!-- /.modal-content -->

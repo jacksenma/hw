@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.nju.hw.mapper.FinanceMapper;
 import edu.nju.hw.mapper.OrderMapper;
 import edu.nju.hw.mapper.VipMapper;
+import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Vip;
 import edu.nju.hw.service.VipService;
 
@@ -140,10 +141,15 @@ public class VipServiceImpl implements VipService {
 	@Override
 	public void updateFinance(String vid, double double2) {
 		// TODO Auto-generated method stub
-		System.out.println("id:"+financeMapper.getFinanceByDate(getNowDate()));
-//		if(financeMapper.getFinanceId(getNowDate())==0){
-//			
-//		}
+//		System.out.println("id:"+financeMapper.getFinanceByDate(getNowDate()));
+		String date=getNowDate();
+		Finance f=financeMapper.getFinanceByDate(date,vid);
+		if(f==null){
+			financeMapper.insertFinance(vid,double2,date);
+		}else{
+			double2+=f.getMoney();
+			financeMapper.updateFinance(vid,double2,date);
+		}
 	}
 	
 	public static String getNowTime(){
@@ -158,6 +164,12 @@ public class VipServiceImpl implements VipService {
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	     System.out.println("当前日期：" + sdf.format(d));
 	     return sdf.format(d);
+	}
+
+	@Override
+	public void updateVipFinance(String vid, double price, String remark,String nowTime) {
+		// TODO Auto-generated method stub
+		financeMapper.insertVipFinance(vid,price,nowTime,remark);
 	}
 
 	

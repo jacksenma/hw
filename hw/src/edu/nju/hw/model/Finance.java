@@ -5,6 +5,7 @@ public class Finance {
 	private String date;
 	private double money;//两位小数
 	private String roleId;
+	private String remark;
 	
 	public int getId(){
 		return id;
@@ -21,5 +22,7 @@ public class Finance {
 	public String getRoleId(){
 		return roleId;
 	}
-	
+	public String getRemark(){
+		return remark;
+	}
 }

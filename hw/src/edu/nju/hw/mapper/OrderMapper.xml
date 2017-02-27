@@ -10,7 +10,7 @@
      
      <!-- 查找vid的所有订单 -->
      <select id="getMyOrders" resultMap="orderResultMap" resultType="Order">
-     	select * from myorder where vid=#{0}
+     	select * from myorder where vid=#{0} and state=1
      </select>
      <resultMap type="Order" id="orderResultMap">
 		<result property="vid" column="vid"/>

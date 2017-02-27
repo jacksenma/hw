@@ -102,7 +102,12 @@ public class ForwardController {
 	}
 	
 	@RequestMapping("/fustatistics")
-	public String fustatistics(){
+	public String fustatistics(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		Vip  v=(Vip)session.getAttribute("vipInfo");
+		List<Order> myOrders=new ArrayList<Order>();
+		myOrders=vipService.getMyOrders(v.getId());
+		System.out.println(myOrders.get(0).getHlevel());
+		session.setAttribute("orderTimeLine", myOrders);
 		return "ustatistics";
 	}
 	
@@ -114,6 +119,12 @@ public class ForwardController {
 	@RequestMapping("/userRegister")
 	public String userRegister(){
 		return "uregister";
+	}
+	
+	
+	@RequestMapping("/fnew")
+	public String fnew(){
+		return "NewFile";
 	}
 	
 	

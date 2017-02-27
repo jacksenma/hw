@@ -298,13 +298,13 @@ public class VipController {
 		List<Order> myOrders=new ArrayList<Order>();
 		myOrders=vipService.getMyOrders(vid);
 		session.setAttribute("myOrdersInfo", myOrders);
-		return "uorderCancel";
+		return "redirect:fuorderCancel";
 		
 		
 	}
 	
 	@RequestMapping("/orderCancel")
-	public String orderCancel(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+	public void orderCancel(HttpServletRequest request,HttpServletResponse response,HttpSession session){
 		System.out.println("ordercancel");
 		
 		// 扣除积分，经验值，退回80%卡余额
@@ -331,16 +331,15 @@ public class VipController {
 		
 		//设置state=0(取消状态),增加取消时间
 		int oid=Integer.parseInt(request.getParameter("oid"));
-		vipService.updateOrderCancel(oid,getNowTime());
+		
+		String nowTime=getNowTime();
+		vipService.updateOrderCancel(oid,nowTime);
 		
 		//hw账号金额记录变化(同一天的变化合并)
-		vipService.updateFinance(vid,getDouble2(price*0.8));
-		
-		
-		
-		
-		//消费记录增加一笔
-		return null;
+		vipService.updateFinance("HW",getDouble2(price*0.8)*(-1));
+		//vip财务记录增加一笔
+		vipService.updateVipFinance(vid,getDouble2(price*0.8),"取消订单",nowTime);
+//		return null;
 		
 	}
 	

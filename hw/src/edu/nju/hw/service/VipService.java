@@ -46,4 +46,6 @@ public interface VipService {
 
 	void updateFinance(String vid, double double2);
 
+	void updateVipFinance(String vid, double price, String remark, String nowTime);
+
 }

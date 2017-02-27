@@ -1,9 +1,0 @@
-function checkForm() {
-	//TODO增加对手机号和银行卡号的格式校验
-	if($("#phone").val()==""||$("#bc").val()=="")
-		toastr.warning('请填写完整信息');
-	else{
-		toastr.success('修改成功');
-		setTimeout(function() { $("#sub").click() }, 1000);
-	}
-}
