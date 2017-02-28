@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="edu.nju.hw.model.Order"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="edu.nju.hw.service.VipService"/>
 <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
 <fullyQualifiedTypeName name="java.lang.Double"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Finance"/>
+<fullyQualifiedTypeName name="edu.nju.hw.service.VipService"/>
+<fullyQualifiedTypeName name="edu.nju.hw.model.Order"/>
+<fullyQualifiedTypeName name="edu.nju.hw.model.Hed"/>
 </qualifiedTypeNameHistroy>

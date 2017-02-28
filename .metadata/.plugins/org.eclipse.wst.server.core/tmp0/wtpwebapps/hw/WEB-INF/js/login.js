@@ -26,6 +26,7 @@ function checkLogin() {
 	               data: $("#login").serialize(),
 	               success: function(data){
 //	            	   alert("data");
+//	            	   alert(data+"!!");
 	            	   if(data=="no")
 	            		   toastr.warning('用户名或密码错误');
 	            	   else{

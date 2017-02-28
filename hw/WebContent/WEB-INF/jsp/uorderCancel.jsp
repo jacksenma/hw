@@ -81,6 +81,10 @@ $("#orderCancel").addClass("active");
             					<input type="submit" id="sub" style="display:none">
             					<input type="text" id="vid" name="vid" value="${o.vid }" style="display:none">
             					<input type="text" id="cancelPrice" name="cancelPrice" value="${o.price }" style="display:none">
+            					<input type="text" id="cancelHname" name="cancelHname" value="${o.hname }" style="display:none">
+            					<input type="text" id="cancelHaddress" name="cancelHaddress" value="${o.haddress }" style="display:none">
+            					<input type="text" id="cancelStartDate" name="cancelStartDate" value="${o.startDate }" style="display:none">
+            					<input type="text" id="cancelEndDate" name="cancelEndDate" value="${o.endDate }" style="display:none">
             					<button type="button" id="rs" class="btn btn-default" data-dismiss="modal">取消</button>
             				</form>
             				</div>

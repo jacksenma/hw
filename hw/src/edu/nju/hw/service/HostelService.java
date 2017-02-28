@@ -2,6 +2,7 @@ package edu.nju.hw.service;
 
 import java.util.List;
 
+import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
 
 public interface HostelService {
@@ -48,7 +49,7 @@ public interface HostelService {
 			double total);
 
 	//判断要登记离店信息的住客是否登记过入店且尚未登记离店信息
-	public boolean findEnterUser(String hid, String name, String idCard);
+	public Hed findEnterUser(String hid, String name, String idCard);
 
 	public void updateHostelBankBalance(String hid, double bankBalance);
 
@@ -57,6 +58,8 @@ public interface HostelService {
 
 	public void updatePlanBedNum(int num, String hid, String planStartDate, String planEndDate, String myBed,
 			int planNum, double planPrice);
+
+	public long getSinglePrice(String hid, String bed);
 
 	
 	

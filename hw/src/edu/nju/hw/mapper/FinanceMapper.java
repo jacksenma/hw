@@ -9,5 +9,5 @@ public interface FinanceMapper {
 
 	public void updateFinance(String vid, double double2, String date);
 
-	public void insertVipFinance(String vid, double price, String time, String remark);
+	public void insertVipFinance(String vid, double price, String time, String remark, int state);
 }

@@ -9,4 +9,5 @@ public interface PlanMapper {
 			double p1, double p2, String level, String key);
 	void updatePlanBedNum(int num, String hid, String planStartDate, String planEndDate, String myBed, int planNum,
 			double planPrice);
+	long getPriceByHidAndBed(String hid, String bed);
 }

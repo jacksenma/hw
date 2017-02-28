@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.hw.model.Order;
 import edu.nju.hw.model.Vip;
 
 
@@ -46,6 +47,10 @@ public interface VipService {
 
 	void updateFinance(String vid, double double2);
 
-	void updateVipFinance(String vid, double price, String remark, String nowTime);
+	void updateVipFinance(String vid, double price, String remark, String nowTime, int i);
+
+	Order getOrderByVidAndHid(String vid, String hid, int i);
+
+	void updateOrderState(String vipId, String hid, int origin_state, int now_state);
 
 }

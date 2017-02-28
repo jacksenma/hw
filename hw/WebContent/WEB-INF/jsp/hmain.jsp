@@ -72,21 +72,36 @@
     </nav>
 <div class="container" style="margin-top:50px">
 	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
-		<form class="form" action="henter" method="post" id="henter">
-		    <span>入店时间:</span><input id="date-range13-2" name="enterDate" class="form-control" size="30" value="" placeholder="填写入店时间">
-            <br/>
+	
+	<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#yesVip" data-toggle="tab">
+                            会员入住
+        </a>
+    </li>
+    <li>
+    	<a href="#notVip" data-toggle="tab">
+    	非会员入住
+    	</a>
+    </li>
+    
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="yesVip">
+       <form class="form" action="henter" method="post" id="henter">
+		    <span>会员编号:</span>
+		    <input type="text" id="vipId" name="vipId" class="form-control" placeholder="填写会员编号">
+            <span>会员密码:</span>
+            <input type="password" id="vipPassword" name="vipPassword" class="form-control" onchange='getOrder("${hostelInfo.id }")' placeholder="填写会员密码">
             <span>住客姓名:</span>
             <input type="text" id="uname" name="uname" class="form-control" placeholder="填写住客姓名">
             <br/>
-            <span>身份证号码:</span>
-            <input type="text" id="idCard" name="idCard" class="form-control" placeholder="填写住客身份证号码">
-            <br/>
 			<span>房间类型:</span>
 				<select class="form-control" id="bed" name="bed" >
-      			<option >标准单人房</option>
-      			<option >标准双人房</option>
-      			<option >豪华单人房</option>
-      			<option >豪华双人房</option>
+      			<option id="b1">标准单人房</option>
+      			<option id="b2">标准双人房</option>
+      			<option id="b3">豪华单人房</option>
+      			<option id="b4">豪华双人房</option>
       			</select><br/>
 			<span>房间数量:</span><input type="text" class="form-control" id="num" name="num" placeholder="请输入房间数量" ><br/>
             <input type="text" id="hid" name="hid" value="${hostelInfo.id }" style="display:none">
@@ -94,6 +109,32 @@
             <input type="submit" id="sub" value="submit" style="display:none">
             <input type="reset" id="rs" value="reset" style="display:none">
          </form>
+    </div>
+    <div class="tab-pane fade" id="notVip">
+        <form class="form" action="henterNotVip" method="post" id="henterNotVip">
+            <span>住客姓名:</span>
+            <input type="text" id="nuname" name="nuname" class="form-control" placeholder="填写住客姓名">
+            <br/>
+            <span>身份证号码:</span>
+            <input type="text" id="nidCard" name="nidCard" class="form-control" placeholder="填写住客身份证号码">
+            <br/>
+			<span>房间类型:</span>
+				<select class="form-control" id="nbed" name="nbed" >
+      			<option >标准单人房</option>
+      			<option >标准双人房</option>
+      			<option >豪华单人房</option>
+      			<option >豪华双人房</option>
+      			</select><br/>
+			<span>房间数量:</span><input type="text" class="form-control" id="nnum" name="nnum" placeholder="请输入房间数量" ><br/>
+            <input type="text" id="nhid" name="nhid" value="${hostelInfo.id }" style="display:none">
+            <button type="button" id="ned" class="btn btn-primary btn-lg btn-block" onclick="checkFormNotVip()">保存</button>
+            <input type="submit" id="nsub" value="submit" style="display:none">
+            <input type="reset" id="nrs" value="reset" style="display:none">
+         </form>
+    </div>
+    
+</div>
+		
 	</div>
 </div>    
 

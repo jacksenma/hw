@@ -12,4 +12,5 @@ public interface UserService {
 	public User getUserInfo(String name,String psd);
 	void setVip(int uid);
 	void cancelVip(int uid);
+	boolean isVip(String vid, String psd);
 }

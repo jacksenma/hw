@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.hw.mapper.UserMapper;
+import edu.nju.hw.mapper.VipMapper;
 import edu.nju.hw.model.User;
 import edu.nju.hw.service.UserService;
 
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Resource
 	public UserMapper userMapper;
+	
+	@Resource
+	public VipMapper vipMapper;
 	
 	@Override
 	public List<User> findAllUser() {
@@ -68,6 +72,16 @@ public class UserServiceImpl implements UserService{
 	public void cancelVip(int uid) {
 		// TODO Auto-generated method stub
 		userMapper.updateUserCancelVip(uid);
+	}
+	@Override
+	public boolean isVip(String vid, String psd) {
+		// TODO Auto-generated method stub
+//		vipMapper.selectVipById(vid).getUid();
+		User u=userMapper.selectUserByID(vipMapper.selectVipById(vid).getUid());
+		if(u.getPassword().equals(psd)&&u.role==1)
+			return true;
+		else
+			return false;
 	}
 
 }

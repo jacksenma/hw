@@ -1,10 +1,4 @@
-$('#date-range13-2').dateRangePicker(
-	{
-		autoClose: true,
-		singleDate : true,
-		showShortcuts: false,
-		singleMonth: true
-	});
+
 toastr.options = {
 		  "closeButton": false,
 		  "debug": false,
@@ -34,54 +28,148 @@ toastr.options = {
 
 
 
-function tmhide() {
-	
-	
-	if($("#tm").css("display")!="none"){
-//		alert("no");
-		$("#tm").css("display","none");
-	}
-		
-	else{
-//		alert("yes");
-		$("#tm").css("display","");
-	}
-		
+//function tmhide() {
+//	
+//	
+//	if($("#tm").css("display")!="none"){
+////		alert("no");
+//		$("#tm").css("display","none");
+//	}
+//		
+//	else{
+////		alert("yes");
+//		$("#tm").css("display","");
+//	}
+//		
+//
+//}
 
+
+function getOrder(hid){
+	var vid=$("#vipId").val();
+	var psd=$("#vipPassword").val();
+	$.ajax({
+        type: "POST",
+        url: "http://localhost:8080/hw/henterAjax",
+        data: "vid="+vid+"&hid="+hid+"&psd="+psd,
+        success: function(data){
+     	   if(data=="noVip"){
+     		  toastr.warning('会员编号或密码错误');
+     	   } 
+     	   else if(data=="noOrder")
+     		  toastr.warning('此会员未预定');
+     	   else{
+     		   //自动填写
+     		  var arr = data.split('@');
+     		  var name=arr[0];
+     		  var bed=arr[1];
+     		  var num=arr[2];
+     		  $("#uname").val(arr[0]);
+     		  if(bed=="标准单人房")
+     			  $("#b1").attr("selected",true);
+     		  else if(bed=="标准双人房")
+    			  $("#b2").attr("selected",true);
+     		  else if(bed=="豪华单人房")
+    			  $("#b3").attr("selected",true);
+     		  else if(bed=="豪华双人房"){
+     			 $("#b4").attr("selected",true);
+     			  
+     		  }
+    			 
+     		  
+     		  $("#num").val(num);
+     		  
+     		  toastr.success('预订信息填充完毕');
+     		   
+     	   }
+           }
+     });
 }
 
 
 function checkForm(){
+//TODO增加对手机号和银行卡号的格式校验
+if($("#vipId").val()==""||$("#vipPassword").val()==""
+	||$("#uname").val()==""||$("#num").val()=="")
+	toastr.warning('请填写完整信息');
+else{
+		$.ajax({
+               type: "POST",
+               url: "http://localhost:8080/hw/hleave",
+               data: $("#hleave").serialize(),
+               success: function(data){
+            	   if(data=="ok"){
+            		   toastr.success('保存成功');
+            		   $("#rs").click();
+            	   }
+            		   
+            	   else{
+            		   toastr.warning('开始日期不能早于当前日期');
+            		   
+            	   }
+                  }
+            });
 	
+}
+}
 
+//获得之前填写的非会员信息并计算总价
+function getEnterNotVip(hid){
+//	alert(hid);
+	var name=$("#nuname").val();
+	var idCard=$("#nidCard").val();
+	$.ajax({
+        type: "POST",
+        url: "http://localhost:8080/hw/hleaveAjax",
+        data: "nuname="+name+"&hid="+hid+"&nidCard="+idCard,
+        success: function(data){
+     	   if(data=="no"){
+     		  toastr.warning('请仔细核对姓名和身份证号');
+     	   } 
+     	   else{
+     		   //自动填写
+     		  var arr = data.split('@');
+     		  var total=arr[0];
+     		  var bed=arr[1];
+     		  var num=arr[2];
+     		  
+     		  if(bed=="标准单人房")
+     			  $("#nb1").attr("selected",true);
+     		  else if(bed=="标准双人房")
+    			  $("#nb2").attr("selected",true);
+     		  else if(bed=="豪华单人房")
+    			  $("#nb3").attr("selected",true);
+     		  else if(bed=="豪华双人房"){
+     			 $("#nb4").attr("selected",true);
+     			  
+     		  }
+     		
+    			 
+     		  
+     		  $("#nnum").val(num);
+     		 $("#total").val(arr[0]);
+     		  
+     		  toastr.success('预订信息填充完毕');
+     		   
+     	   }
+           }
+     });
+}
+
+function checkFormNotVip(){
 	//TODO增加对手机号和银行卡号的格式校验
-	//alert($("#hregister").serialize());
-	if($("#date-range13-2").val()==""
-		||$("#uname").val()==""||$("#idCard").val()=="")
+	if($("#nidCard").val()==""
+		||$("#nuname").val()==""||$("#nnum").val()=="")
 		toastr.warning('请填写完整信息');
-	else if($("#identity").val()=="非会员"&&$("#mode").val()=="会员卡")
-		toastr.warning('住客身份与付款方式不匹配');
-	else if($("#mode").val()=="现金"&&$("#total").val()=="")
-		toastr.warning('请填写总计付款数');
 	else{
-//		$("#sub").click();
-//		toastr.success('保存成功');
 			$.ajax({
 	               type: "POST",
-	               url: "http://localhost:8080/hw/hleave",
-	               data: $("#hleave").serialize(),
+	               url: "http://localhost:8080/hw/hleaveNotVip",
+	               data: $("#hleaveNotVip").serialize(),
 	               success: function(data){
 	            	   if(data=="ok"){
 	            		   toastr.success('保存成功');
-//	            		   $("#rs").click();
-	            		   $("#date-range13-2").val("");
-	            		   $("#uname").val("");
-	            		   $("#idCard").val("");
-	            		   $("#total").val("");
-	            		   
-	            	   }
-	            	   else if(data=="no"){
-	            		   toastr.warning('请仔细核对姓名和身份证信息');
+	            		   $("#nrs").click();
 	            	   }
 	            		   
 	            	   else{

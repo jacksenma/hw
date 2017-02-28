@@ -3,6 +3,7 @@ package edu.nju.hw.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
+import edu.nju.hw.model.Order;
 import edu.nju.hw.model.OrderHostel;
 import edu.nju.hw.service.HostelService;
 import edu.nju.hw.service.UserService;
+import edu.nju.hw.service.VipService;
 
 @Controller
 //@RequestMapping("/hostel")
@@ -33,6 +37,9 @@ public class HostelController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private VipService vipService;
 	
 //	@RequestMapping("/hregister")
 //	public String register(HttpServletRequest request,@ModelAttribute Test test, BindingResult bindResult,Model model){
@@ -286,45 +293,182 @@ public class HostelController {
 	//入店登记
 	
 	@RequestMapping("/henter")
-	public void henter(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	public void henter(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
 		System.out.println("enter");
 		
 		String name=request.getParameter("uname");
-		String enterDate=request.getParameter("enterDate");
-		String idCard=request.getParameter("idCard");
+		String enterDate=getNowTime();
+		String vipId=request.getParameter("vipId");
 		String bed=request.getParameter("bed");
 		String num=request.getParameter("num");
 		String hid=request.getParameter("hid");
-		hostelService.enterHostel(hid,enterDate,name,idCard,bed,num);
+		Hostel h=(Hostel)session.getAttribute("hostelInfo");
+		String haddress=h.getProvince()+h.getCity()+h.getDistrict();
+		String hname=h.getName();
+		//增加住店登记
+		hostelService.enterHostel(hid,enterDate,name,vipId,bed,num);
+		//将订单状态改为state2(入住)
+		vipService.updateOrderState(vipId,hid,1,2);
+		//增加会员记录
+		vipService.updateVipFinance(vipId, 0, "入住了位于"+haddress+"的"+hname, enterDate, 2);
 		PrintWriter out;
         out = response.getWriter();
         out.write("ok");
         out.close();
 		}
 	
-	//离店登记
+	@RequestMapping("/henterAjax")
+	public void henterAjax(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		System.out.println("enterAjax");
+		
+		String vid=request.getParameter("vid");
+		String psd=request.getParameter("psd");
+		PrintWriter out;
+		out = response.getWriter();
+		//检查会员真实性
+		if(userService.isVip(vid,psd)==false){
+			out.write("noVip");
+			out.close();
+			return;
+		}
+			 
+		//提取预订信息
+		String hid=request.getParameter("hid");
+		Order o=(Order)vipService.getOrderByVidAndHid(vid,hid,1);
+		if(o==null){
+			out.write("noOrder");
+			out.close();
+			return;
+		}else{
+			String name=o.getName();
+			String bed=o.getBed();
+			int num=o.getNum();
+			out.write(name+"@"+bed+"@"+num);
+			out.close();
+			return;
+		}
+
+		
+        
+       
+        
+		}
+	
+	
+	@RequestMapping("/henterNotVip")
+	public void henterNotVip(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		System.out.println("enterNotVip");
+		
+		String name=request.getParameter("nuname");
+		String enterDate=getNowTime();
+		String idCard=request.getParameter("nidCard");
+		String bed=request.getParameter("nbed");
+		String num=request.getParameter("nnum");
+		String hid=request.getParameter("nhid");
+		System.out.println("hid==="+hid);
+		//增加住店登记
+		hostelService.enterHostel(hid,enterDate,name,idCard,bed,num);
+		
+		
+		PrintWriter out;
+        out = response.getWriter();
+        out.write("ok");
+        out.close();
+		}
+	//离店登记(会员)
 	@RequestMapping("/hleave")
-	public void hleave(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	public void hleave(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		String name=request.getParameter("uname");
+		String leaveDate=getNowTime();
+		String vipId=request.getParameter("vipId");
+		String bed=request.getParameter("bed");
+		String num=request.getParameter("num");
+		String hid=request.getParameter("hid");
+		
+		//增加离店记录
+		Order o=(Order)vipService.getOrderByVidAndHid(vipId,hid,2);
+		hostelService.leaveHostel(hid,name,vipId,leaveDate,"会员","会员卡",o.getPrice());
+		
+		//将订单状态改为state3(退房)
+		vipService.updateOrderState(vipId,hid,2,3);
+		//增加会员记录
+		Hostel h=(Hostel)session.getAttribute("hostelInfo");
+		String haddress=h.getProvince()+h.getCity()+h.getDistrict();
+		String hname=h.getName();
+		vipService.updateVipFinance(vipId, 0, "从位于"+haddress+"的"+hname+"退房", leaveDate, 3);
+	}
+	
+	
+	@RequestMapping("/hleaveAjax")
+	public void hleaveAjax(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		System.out.println("leaveAjax");
+		
+		String name=request.getParameter("nuname");
+		String idCard=request.getParameter("nidCard");
+		String hid=request.getParameter("hid");
+		System.out.println(name+idCard+hid);
+		PrintWriter out;
+		out = response.getWriter();
+		//检查住店信息
+		Hed hed=hostelService.findEnterUser(hid,name,idCard);
+		System.out.println(hed==null);
+		if(hed==null){
+			out.write("no");
+			out.close();
+			return;
+		}
+		String bed=hed.getBed();
+		String num=hed.getNum();
+		double singlePrice=(double)hostelService.getSinglePrice(hid,bed);
+		System.out.println(singlePrice+"单价");
+		String startDate=hed.getEnterDate();
+		int days=getDayDistance(startDate, getNowTime());
+		double total=singlePrice*days;
+		out.write(total+"@"+bed+"@"+num);
+		out.close();
+		return;
+//			 
+//		//提取预订信息
+//		String hid=request.getParameter("hid");
+//		Order o=(Order)vipService.getOrderByVidAndHid(vid,hid,1);
+//		if(o==null){
+//			out.write("noOrder");
+//			out.close();
+//			return;
+//		}else{
+//			String name=o.getName();
+//			String bed=o.getBed();
+//			int num=o.getNum();
+//			out.write(name+"@"+bed+"@"+num);
+//			out.close();
+//			return;
+//		}
+	}
+	
+	//离店登记(非会员)
+	@RequestMapping("/hleaveNotVip")
+	public void hleaveNotVip(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		System.out.println("leave");
 		
-		String name=request.getParameter("uname");
-		String leaveDate=request.getParameter("leaveDate");
-		String idCard=request.getParameter("idCard");
-		String identity=request.getParameter("identity");
-		String mode=request.getParameter("mode");
-		String hid=request.getParameter("hid");
+		String name=request.getParameter("nuname");
+		String leaveDate=getNowTime();
+		String idCard=request.getParameter("nidCard");
+		String bed=request.getParameter("nbed");
+		String num=request.getParameter("nnum");
+		String hid=request.getParameter("nhid");
 		String t=request.getParameter("total");
-		double total=0;
-		if(t!="")
-			total=Double.parseDouble(t);
+		double total=Double.parseDouble(t);
 		PrintWriter out;
-		if(hostelService.findEnterUser(hid,name,idCard)){
+		if(hostelService.findEnterUser(hid,name,idCard)!=null){
 			//记录离店
-			hostelService.leaveHostel(hid,name,idCard,leaveDate,identity,mode,total);
+			hostelService.leaveHostel(hid,name,idCard,leaveDate,"非会员","现金",total);
 			//现金支付给客栈银行卡上打钱
 			double bb=hostelService.getHostelInfo(hid).getBankBalance();
 			double bankBalance=bb+total;
 			hostelService.updateHostelBankBalance(hid,bankBalance);
+			//客栈财务记录
+			vipService.updateFinance(hid, total);
+			
 			out = response.getWriter();
 	        out.write("ok");
 	        out.close();
@@ -333,14 +477,9 @@ public class HostelController {
 	        out.write("no");
 	        out.close();
 		}
-		
-//		System.out.println("a"+total+"a");
-//		System.out.println(Double.parseDouble());
-//		double total=0;
-//		hostelService.enterHostel(hid,enterDate,name,idCard,bed,num);
-		
-        
 		}
+	
+	
 	
 	
 	
@@ -411,5 +550,38 @@ public class HostelController {
 		return "umain";
 		
 	}
+	
+	
+	public static String getNowTime(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	     System.out.println("当前时间：" + sdf.format(d));
+	     return sdf.format(d);
+	}
+	
+	public static int getDayDistance(String str1,String str2){
+		 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+	        Date one;  
+	        Date two;  
+	        long days=0;  
+	        try {  
+	            one = df.parse(str1);  
+	            two = df.parse(str2);  
+	            long time1 = one.getTime();  
+	            long time2 = two.getTime();  
+	            long diff ;  
+	            if(time1<time2) {  
+	                diff = time2 - time1;  
+	            } else {  
+	                diff = time1 - time2;  
+	            }  
+	            days = diff / (1000 * 60 * 60 * 24);  
+	        } catch (ParseException e) {  
+	            e.printStackTrace();  
+	        }  
+	        System.out.println((int)days);
+	        return (int)days;
+	}
+	
 
 }

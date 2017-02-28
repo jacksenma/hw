@@ -13,6 +13,7 @@ import edu.nju.hw.mapper.FinanceMapper;
 import edu.nju.hw.mapper.OrderMapper;
 import edu.nju.hw.mapper.VipMapper;
 import edu.nju.hw.model.Finance;
+import edu.nju.hw.model.Order;
 import edu.nju.hw.model.Vip;
 import edu.nju.hw.service.VipService;
 
@@ -167,10 +168,23 @@ public class VipServiceImpl implements VipService {
 	}
 
 	@Override
-	public void updateVipFinance(String vid, double price, String remark,String nowTime) {
+	public void updateVipFinance(String vid, double price, String remark,String nowTime,int state) {
 		// TODO Auto-generated method stub
-		financeMapper.insertVipFinance(vid,price,nowTime,remark);
+		financeMapper.insertVipFinance(vid,price,nowTime,remark,state);
 	}
 
+	@Override
+	public Order getOrderByVidAndHid(String vid, String hid,int state) {
+		// TODO Auto-generated method stub
+		return orderMapper.getOrderByVidAndHid(vid,hid,state);
+	}
+
+	@Override
+	public void updateOrderState(String vipId, String hid, int origin_state, int now_state) {
+		// TODO Auto-generated method stub
+		orderMapper.updateOrderState(vipId,hid,origin_state,now_state);
+	}
+
+	
 	
 }

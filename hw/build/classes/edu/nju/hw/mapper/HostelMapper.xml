@@ -108,8 +108,8 @@
      </update>
      
       <!-- 根据住客克信息和leaveDate查找是否存在此hid-->
- 	<select id="getEnterUser" resultType="String">
- 		select hid from hed where hid = #{0} and name=#{1} and idCard=#{2} and leaveDate is null
+ 	<select id="getEnterUser" resultType="Hed">
+ 		select * from hed where hid = #{0} and name=#{1} and idCard=#{2} and leaveDate is null
  	</select>
  	
  	<!-- 更新银行卡余额-->

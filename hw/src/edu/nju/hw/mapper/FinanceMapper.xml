@@ -20,7 +20,7 @@
  	
  	<!-- insert一条Vip财务记录 -->
  	<insert id="insertVipFinance">
- 		insert into finance (roleId,money,date,remark) values(#{0},#{1},#{2},#{3})
+ 		insert into finance (roleId,money,date,remark,state) values(#{0},#{1},#{2},#{3},#{4})
  	</insert>
 
 </mapper>

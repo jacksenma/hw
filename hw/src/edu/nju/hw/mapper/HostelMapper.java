@@ -2,6 +2,7 @@ package edu.nju.hw.mapper;
 
 import java.util.List;
 
+import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
 
 public interface HostelMapper {
@@ -25,7 +26,7 @@ public interface HostelMapper {
 	public void addEnter(String hid, String enterDate, String name, String idCard, String bed, String num);
 	public void addLeave(String hid, String name, String idCard, String leaveDate, String identity, String mode,
 			double total);
-	public String getEnterUser(String hid, String name, String idCard);
+	public Hed getEnterUser(String hid, String name, String idCard);
 	
 	//更新客栈的银行卡钱
 	public void updateBankBlanceById(String hid, double bankBalance);

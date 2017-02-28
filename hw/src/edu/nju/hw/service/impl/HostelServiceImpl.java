@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.hw.mapper.HostelMapper;
 import edu.nju.hw.mapper.PlanMapper;
+import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
 import edu.nju.hw.service.HostelService;
 
@@ -159,17 +160,18 @@ public class HostelServiceImpl implements HostelService {
 	}
 
 	@Override
-	public boolean findEnterUser(String hid, String name, String idCard) {
+	public Hed findEnterUser(String hid, String name, String idCard) {
 		// TODO Auto-generated method stub
 		
 		System.out.println(hostelMapper.getEnterUser(hid,name,idCard));
-		if(hostelMapper.getEnterUser(hid,name,idCard)==null){
-			
-			return false;
-		}
-			
-		else
-			return true;
+		return hostelMapper.getEnterUser(hid,name,idCard);
+//		if(hostelMapper.getEnterUser(hid,name,idCard)==null){
+//			
+//			return false;
+//		}
+//			
+//		else
+//			return true;
 	}
 
 	@Override
@@ -193,6 +195,12 @@ public class HostelServiceImpl implements HostelService {
 			int planNum, double planPrice) {
 		// TODO Auto-generated method stub
 		planMapper.updatePlanBedNum(num,hid,planStartDate,planEndDate,myBed,planNum,planPrice);
+	}
+
+	@Override
+	public long getSinglePrice(String hid, String bed) {
+		// TODO Auto-generated method stub
+		return planMapper.getPriceByHidAndBed(hid,bed);
 	}
 
 	

@@ -102,6 +102,7 @@ public class LoginController {
 		String name=request.getParameter("loginName");
 		String psd=request.getParameter("loginPsd");
 		System.out.println(name+" loginAjax "+psd);
+		
 		if(userService.canLogin(name,psd)==false){
 			try {
 			out = response.getWriter();
