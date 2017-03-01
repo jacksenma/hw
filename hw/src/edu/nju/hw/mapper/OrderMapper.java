@@ -13,8 +13,8 @@ public interface OrderMapper {
 
 	void updateOrderCancel(int oid, String nowTime);
 
-	public Order getOrderByVidAndHid(String vid, String hid, int state);
+	public List getOrderByVidAndHid(String vid, String hid, int state);
 
-	public void updateOrderState(String vipId, String hid, int origin_state, int now_state);
+	public void updateOrderState(String vipId, String hid, String orderDate, int origin_state, int now_state);
 
 }

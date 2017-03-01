@@ -97,14 +97,14 @@
     
     <!-- 增加一个入店登记 -->  
     <insert id="addEnter"> 
-        insert into hed(hid,enterDate,name,idCard,bed,num) 
-        values(#{0},#{1},#{2},#{3},#{4},#{5})  
+        insert into hed(hid,enterDate,name,idCard,bed,num,orderDate) 
+        values(#{0},#{1},#{2},#{3},#{4},#{5},#{6})  
      </insert>
      
      <!-- 将离店信息更新进去-->
  	<update id="addLeave"> 
         update hed set leaveDate = #{3} , identity = #{4}
- 		, mode = #{5} , total = #{6}  where hid = #{0} and name=#{1}  and idCard=#{2}
+ 		, mode = #{5} , total = #{6}  where hid = #{0} and name=#{1}  and idCard=#{2} and orderDate=#{7}
      </update>
      
       <!-- 根据住客克信息和leaveDate查找是否存在此hid-->

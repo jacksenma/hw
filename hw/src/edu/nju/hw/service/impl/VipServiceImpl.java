@@ -174,15 +174,21 @@ public class VipServiceImpl implements VipService {
 	}
 
 	@Override
-	public Order getOrderByVidAndHid(String vid, String hid,int state) {
+	public List getOrderByVidAndHid(String vid, String hid,int state) {
 		// TODO Auto-generated method stub
 		return orderMapper.getOrderByVidAndHid(vid,hid,state);
 	}
 
 	@Override
-	public void updateOrderState(String vipId, String hid, int origin_state, int now_state) {
+	public void updateOrderState(String vipId, String hid,String orderDate, int origin_state, int now_state) {
 		// TODO Auto-generated method stub
-		orderMapper.updateOrderState(vipId,hid,origin_state,now_state);
+		orderMapper.updateOrderState(vipId,hid,orderDate,origin_state,now_state);
+	}
+
+	@Override
+	public List getFinanceByRoleId(String id) {
+		// TODO Auto-generated method stub
+		return financeMapper.getFinanceByRoleId(id);
 	}
 
 	

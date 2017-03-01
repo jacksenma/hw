@@ -30,4 +30,14 @@
     <select id="getPriceByHidAndBed" resultType="long">
     	select price from plan where hid=#{0} and bed=#{1}
     </select>
+    
+    <!-- 根据hid和bed查找num -->
+    <select id="getNumByHidAndBed" resultType="int">
+    	select num from plan where hid=#{0} and bed=#{1}
+    </select>
+    
+    <!-- 直接更新num -->
+    <update id="updateNum">
+    	update plan set num=#{0} where hid=#{1} and bed=#{2}
+    </update>
 </mapper>

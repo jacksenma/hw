@@ -23,9 +23,9 @@ public interface HostelMapper {
 			String city, String district, String imgUrl, String id);
 	public void deleteHostelChangeById(String id);
 	public void setState1(String id);
-	public void addEnter(String hid, String enterDate, String name, String idCard, String bed, String num);
+	public void addEnter(String hid, String enterDate, String name, String idCard, String bed, String num, String orderDate);
 	public void addLeave(String hid, String name, String idCard, String leaveDate, String identity, String mode,
-			double total);
+			double total, String orderDate);
 	public Hed getEnterUser(String hid, String name, String idCard);
 	
 	//更新客栈的银行卡钱

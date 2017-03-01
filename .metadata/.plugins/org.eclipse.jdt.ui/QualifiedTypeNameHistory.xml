@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
 <fullyQualifiedTypeName name="java.lang.Double"/>
@@ -9,4 +8,5 @@
 <fullyQualifiedTypeName name="edu.nju.hw.service.VipService"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Order"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Hed"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

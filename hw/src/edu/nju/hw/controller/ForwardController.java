@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Hostel;
 import edu.nju.hw.model.Order;
 import edu.nju.hw.model.Vip;
@@ -103,11 +104,21 @@ public class ForwardController {
 	
 	@RequestMapping("/fustatistics")
 	public String fustatistics(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+//		Vip  v=(Vip)session.getAttribute("vipInfo");
+//		List<Order> myOrders=new ArrayList<Order>();
+//		myOrders=vipService.getMyOrders(v.getId());
+//		System.out.println(myOrders.get(0).getHlevel());
+//		session.setAttribute("orderTimeLine", myOrders);
 		Vip  v=(Vip)session.getAttribute("vipInfo");
-		List<Order> myOrders=new ArrayList<Order>();
-		myOrders=vipService.getMyOrders(v.getId());
-		System.out.println(myOrders.get(0).getHlevel());
-		session.setAttribute("orderTimeLine", myOrders);
+		List<Finance> finances=new ArrayList<Finance>();
+		finances=vipService.getFinanceByRoleId(v.getId());
+		double total=0;
+		for(Finance f:finances){
+			total+=f.getMoney();
+		}
+//		System.out.println(finances.get(2).getRemark());
+		session.setAttribute("FinanceTimeLine", finances);
+		session.setAttribute("totalFinance", total*(-1));
 		return "ustatistics";
 	}
 	

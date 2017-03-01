@@ -11,6 +11,7 @@ public class Hed {
 	private double total;
 	private String identity;
 	private String mode;
+	private String orderDate;
 	
 	public String getHid(){
 		return hid;
@@ -53,6 +54,10 @@ public class Hed {
 	
 	public String getMode(){
 		return mode;
+	}
+	
+	public String getOrderDate(){
+		return orderDate;
 	}
 	
 }

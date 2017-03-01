@@ -87,7 +87,7 @@
 		    <span>会员编号:</span>
 		    <input type="text" id="vipId" name="vipId" class="form-control" placeholder="填写会员编号">
             <span>会员密码:</span>
-            <input type="password" id="vipPassword" name="vipPassword" class="form-control" onchange='getOrder("${hostelInfo.id }")' placeholder="填写会员密码">
+            <input type="password" id="vipPassword" name="vipPassword" class="form-control" onchange='getOrderVip("${hostelInfo.id }")' placeholder="填写会员密码">
             <span>住客姓名:</span>
             <input type="text" id="uname" name="uname" class="form-control" placeholder="填写住客姓名">
             <br/>

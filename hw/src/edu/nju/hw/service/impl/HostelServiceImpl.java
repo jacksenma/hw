@@ -147,16 +147,16 @@ public class HostelServiceImpl implements HostelService {
 	}
 
 	@Override
-	public void enterHostel(String hid, String enterDate, String name, String idCard, String bed, String num) {
+	public void enterHostel(String hid, String enterDate, String name, String idCard, String bed, String num,String orderDate) {
 		// TODO Auto-generated method stub
-		hostelMapper.addEnter(hid,enterDate,name,idCard,bed,num);
+		hostelMapper.addEnter(hid,enterDate,name,idCard,bed,num,orderDate);
 	}
 
 	@Override
 	public void leaveHostel(String hid, String name, String idCard, String leaveDate, String identity, String mode,
-			double total) {
+			double total,String orderDate) {
 		// TODO Auto-generated method stub
-		hostelMapper.addLeave(hid,name,idCard,leaveDate,identity,mode,total);
+		hostelMapper.addLeave(hid,name,idCard,leaveDate,identity,mode,total,orderDate);
 	}
 
 	@Override
@@ -201,6 +201,13 @@ public class HostelServiceImpl implements HostelService {
 	public long getSinglePrice(String hid, String bed) {
 		// TODO Auto-generated method stub
 		return planMapper.getPriceByHidAndBed(hid,bed);
+	}
+
+	@Override
+	public void backPlanNum(int num, String hid, String bed) {
+		// TODO Auto-generated method stub
+		int pnum=planMapper.getNumByHidAndBed(hid,bed);
+		planMapper.updateNum(pnum+num,hid,bed);
 	}
 
 	

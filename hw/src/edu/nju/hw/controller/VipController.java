@@ -338,6 +338,13 @@ public class VipController {
 		String nowTime=getNowTime();
 		vipService.updateOrderCancel(oid,nowTime);
 		
+		//plan房间数回退
+		String hid=request.getParameter("cancelHid");
+		String bed=request.getParameter("cancelHbed");
+		int num=Integer.parseInt(request.getParameter("cancelHnum"));
+		hostelService.backPlanNum(num,hid,bed);
+		
+		
 		//hw账号金额记录变化(同一天的变化合并)
 		vipService.updateFinance("HW",getDouble2(price*0.8)*(-1));
 		//vip财务记录增加一笔

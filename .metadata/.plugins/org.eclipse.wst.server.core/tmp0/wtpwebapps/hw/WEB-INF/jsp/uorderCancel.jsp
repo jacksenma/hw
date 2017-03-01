@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -85,6 +85,9 @@ $("#orderCancel").addClass("active");
             					<input type="text" id="cancelHaddress" name="cancelHaddress" value="${o.haddress }" style="display:none">
             					<input type="text" id="cancelStartDate" name="cancelStartDate" value="${o.startDate }" style="display:none">
             					<input type="text" id="cancelEndDate" name="cancelEndDate" value="${o.endDate }" style="display:none">
+            					<input type="text" id="cancelHid" name="cancelHid" value="${o.hid }" style="display:none">
+            					<input type="text" id="cancelHbed" name="cancelHbed" value="${o.bed }" style="display:none">
+            					<input type="text" id="cancelHnum" name="cancelHnum" value="${o.num }" style="display:none">
             					<button type="button" id="rs" class="btn btn-default" data-dismiss="modal">取消</button>
             				</form>
             				</div>

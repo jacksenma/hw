@@ -45,12 +45,12 @@ toastr.options = {
 //}
 
 
-function getOrder(hid){
+function getOrderVip(hid){
 	var vid=$("#vipId").val();
 	var psd=$("#vipPassword").val();
 	$.ajax({
         type: "POST",
-        url: "http://localhost:8080/hw/henterAjax",
+        url: "http://localhost:8080/hw/hleaveAjaxVip",
         data: "vid="+vid+"&hid="+hid+"&psd="+psd,
         success: function(data){
      	   if(data=="noVip"){
@@ -104,7 +104,7 @@ else{
             	   }
             		   
             	   else{
-            		   toastr.warning('开始日期不能早于当前日期');
+            		   toastr.warning('保存出错');
             		   
             	   }
                   }

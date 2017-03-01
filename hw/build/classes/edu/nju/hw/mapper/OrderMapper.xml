@@ -41,12 +41,12 @@
 	<!-- 查找预定信息 -->
 	<!-- 查找vid的所有订单 -->
      <select id="getOrderByVidAndHid" resultType="Order">
-     	select * from myorder where vid=#{0} and hid=#{1} and state=#{2}
+     	select * from myorder where vid=#{0} and hid=#{1} and state=#{2} 
      </select>
      
      <!-- 更新订单状态 -->
 	<update id="updateOrderState">
-		update myorder set state=#{3} where vid=#{0} and hid=#{1} and state=#{2}
+		update myorder set state=#{4} where vid=#{0} and hid=#{1} and state=#{3} and orderDate=#{2}
 	</update>
 
 </mapper>

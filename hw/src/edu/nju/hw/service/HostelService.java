@@ -43,10 +43,10 @@ public interface HostelService {
 
 	public void addPlan(String hid, String startDate, String endDate, String bed, String num, double price);
 
-	public void enterHostel(String hid, String enterDate, String name, String idCard, String bed, String num);
+	public void enterHostel(String hid, String enterDate, String name, String idCard, String bed, String num, String orderDate);
 
 	public void leaveHostel(String hid, String name, String idCard, String leaveDate, String identity, String mode,
-			double total);
+			double total, String orderDate);
 
 	//判断要登记离店信息的住客是否登记过入店且尚未登记离店信息
 	public Hed findEnterUser(String hid, String name, String idCard);
@@ -60,6 +60,8 @@ public interface HostelService {
 			int planNum, double planPrice);
 
 	public long getSinglePrice(String hid, String bed);
+
+	public void backPlanNum(int num, String hid, String bed);
 
 	
 	

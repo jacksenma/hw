@@ -297,7 +297,8 @@ public class HostelController {
 		System.out.println("enter");
 		
 		String name=request.getParameter("uname");
-		String enterDate=getNowTime();
+//		String enterDate=getNowTime();
+		String enterDate=getNowDate();
 		String vipId=request.getParameter("vipId");
 		String bed=request.getParameter("bed");
 		String num=request.getParameter("num");
@@ -305,12 +306,16 @@ public class HostelController {
 		Hostel h=(Hostel)session.getAttribute("hostelInfo");
 		String haddress=h.getProvince()+h.getCity()+h.getDistrict();
 		String hname=h.getName();
-		//增加住店登记
-		hostelService.enterHostel(hid,enterDate,name,vipId,bed,num);
+		
 		//将订单状态改为state2(入住)
-		vipService.updateOrderState(vipId,hid,1,2);
+		List<Order> os=new ArrayList<Order>();
+		os=vipService.getOrderByVidAndHid(vipId,hid,1);
+		String orderDate=os.get(0).getOrderDate();
+		vipService.updateOrderState(vipId,hid,orderDate,1,2);
+		//增加住店登记
+		hostelService.enterHostel(hid,enterDate,name,vipId,bed,num,orderDate);
 		//增加会员记录
-		vipService.updateVipFinance(vipId, 0, "入住了位于"+haddress+"的"+hname, enterDate, 2);
+		vipService.updateVipFinance(vipId, 0, "入住了位于"+haddress+"的"+hname, getNowTime(), 2);
 		PrintWriter out;
         out = response.getWriter();
         out.write("ok");
@@ -334,12 +339,15 @@ public class HostelController {
 			 
 		//提取预订信息
 		String hid=request.getParameter("hid");
-		Order o=(Order)vipService.getOrderByVidAndHid(vid,hid,1);
-		if(o==null){
+		List<Order> os=new ArrayList<Order>();
+		os=vipService.getOrderByVidAndHid(vid,hid,1);
+		
+		if(os.isEmpty()){
 			out.write("noOrder");
 			out.close();
 			return;
 		}else{
+			Order o=os.get(0);
 			String name=o.getName();
 			String bed=o.getBed();
 			int num=o.getNum();
@@ -360,14 +368,15 @@ public class HostelController {
 		System.out.println("enterNotVip");
 		
 		String name=request.getParameter("nuname");
-		String enterDate=getNowTime();
+//		String enterDate=getNowTime();
+		String enterDate=getNowDate();
 		String idCard=request.getParameter("nidCard");
 		String bed=request.getParameter("nbed");
 		String num=request.getParameter("nnum");
 		String hid=request.getParameter("nhid");
 		System.out.println("hid==="+hid);
 		//增加住店登记
-		hostelService.enterHostel(hid,enterDate,name,idCard,bed,num);
+		hostelService.enterHostel(hid,enterDate,name,idCard,bed,num,getNowTime());
 		
 		
 		PrintWriter out;
@@ -377,27 +386,70 @@ public class HostelController {
 		}
 	//离店登记(会员)
 	@RequestMapping("/hleave")
-	public void hleave(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+	public void hleave(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
 		String name=request.getParameter("uname");
-		String leaveDate=getNowTime();
+//		String leaveDate=getNowTime();
+		String leaveDate=getNowDate();
 		String vipId=request.getParameter("vipId");
 		String bed=request.getParameter("bed");
 		String num=request.getParameter("num");
 		String hid=request.getParameter("hid");
 		
 		//增加离店记录
-		Order o=(Order)vipService.getOrderByVidAndHid(vipId,hid,2);
-		hostelService.leaveHostel(hid,name,vipId,leaveDate,"会员","会员卡",o.getPrice());
-		
+//		Order o=(Order)vipService.getOrderByVidAndHid(vipId,hid,2);
+		List<Order> os=new ArrayList<Order>();
+		os=vipService.getOrderByVidAndHid(vipId,hid,2);
+		Order o=os.get(0);
+		hostelService.leaveHostel(hid,name,vipId,leaveDate,"会员","会员卡",o.getPrice(),o.getOrderDate());
+		String orderDate=o.getOrderDate();
 		//将订单状态改为state3(退房)
-		vipService.updateOrderState(vipId,hid,2,3);
+		vipService.updateOrderState(vipId,hid,orderDate,2,3);
 		//增加会员记录
 		Hostel h=(Hostel)session.getAttribute("hostelInfo");
 		String haddress=h.getProvince()+h.getCity()+h.getDistrict();
 		String hname=h.getName();
-		vipService.updateVipFinance(vipId, 0, "从位于"+haddress+"的"+hname+"退房", leaveDate, 3);
+		vipService.updateVipFinance(vipId, 0, "从位于"+haddress+"的"+hname+"退房", getNowTime(), 3);
+		PrintWriter out;
+		out = response.getWriter();
+		out.write("ok");
+		out.close();
+		return;
 	}
 	
+	@RequestMapping("/hleaveAjaxVip")
+	public void hleaveAjaxVip(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		System.out.println("enterAjax");
+		
+		String vid=request.getParameter("vid");
+		String psd=request.getParameter("psd");
+		PrintWriter out;
+		out = response.getWriter();
+		//检查会员真实性
+		if(userService.isVip(vid,psd)==false){
+			out.write("noVip");
+			out.close();
+			return;
+		}
+			 
+		//提取预订信息
+		String hid=request.getParameter("hid");
+		List<Order> os=new ArrayList<Order>();
+		os=vipService.getOrderByVidAndHid(vid,hid,2);
+		
+		if(os.isEmpty()){
+			out.write("noOrder");
+			out.close();
+			return;
+		}else{
+			Order o=os.get(0);
+			String name=o.getName();
+			String bed=o.getBed();
+			int num=o.getNum();
+			out.write(name+"@"+bed+"@"+num);
+			out.close();
+			return;
+		}
+	}
 	
 	@RequestMapping("/hleaveAjax")
 	public void hleaveAjax(HttpServletRequest request,HttpServletResponse response) throws IOException{
@@ -451,7 +503,8 @@ public class HostelController {
 		System.out.println("leave");
 		
 		String name=request.getParameter("nuname");
-		String leaveDate=getNowTime();
+//		String leaveDate=getNowTime();
+		String leaveDate=getNowDate();
 		String idCard=request.getParameter("nidCard");
 		String bed=request.getParameter("nbed");
 		String num=request.getParameter("nnum");
@@ -459,9 +512,10 @@ public class HostelController {
 		String t=request.getParameter("total");
 		double total=Double.parseDouble(t);
 		PrintWriter out;
-		if(hostelService.findEnterUser(hid,name,idCard)!=null){
+		Hed h=hostelService.findEnterUser(hid,name,idCard);
+		if(h!=null){
 			//记录离店
-			hostelService.leaveHostel(hid,name,idCard,leaveDate,"非会员","现金",total);
+			hostelService.leaveHostel(hid,name,idCard,leaveDate,"非会员","现金",total,h.getOrderDate());
 			//现金支付给客栈银行卡上打钱
 			double bb=hostelService.getHostelInfo(hid).getBankBalance();
 			double bankBalance=bb+total;
@@ -551,7 +605,12 @@ public class HostelController {
 		
 	}
 	
-	
+	public static String getNowDate(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     System.out.println("当前日期：" + sdf.format(d));
+	     return sdf.format(d);
+	}
 	public static String getNowTime(){
 		 Date d = new Date();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

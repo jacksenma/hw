@@ -22,5 +22,11 @@
  	<insert id="insertVipFinance">
  		insert into finance (roleId,money,date,remark,state) values(#{0},#{1},#{2},#{3},#{4})
  	</insert>
+ 	
+ 	<!-- 财务记录 -->
+ 	<select id="getFinanceByRoleId" resultType="Finance">
+     	select * from finance where roleId=#{0}
+     </select>
+    
 
 </mapper>
