@@ -295,7 +295,8 @@ public class VipController {
 		
 		//step5:vip记录一笔
 		vipService.updateVipFinance(vid,myTotalPrice*(-1),"预定于"+myStartDate+" 至 "+myEndDate+"期间入住位于"+haddress+"的"+hname,getNowTime(),1);
-
+		//step6:记录客栈预定数目
+		hostelService.updateOrderNum(hid,getNowDate(),roomNum);
 		
 		//得到预订信息返回我的预定界面
 		List<Order> myOrders=new ArrayList<Order>();
@@ -347,6 +348,9 @@ public class VipController {
 		
 		//hw账号金额记录变化(同一天的变化合并)
 		vipService.updateFinance("HW",getDouble2(price*0.8)*(-1));
+		
+		//记录客栈取消预定数目
+		hostelService.updateCancelNum(hid,getNowDate(),num);
 		//vip财务记录增加一笔
 		String hname=request.getParameter("cancelHname");
 		String haddress=request.getParameter("cancelHaddress");

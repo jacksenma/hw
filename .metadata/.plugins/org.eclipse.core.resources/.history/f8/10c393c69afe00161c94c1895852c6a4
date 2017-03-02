@@ -1,0 +1,13 @@
+package edu.nju.hw.mapper;
+
+import edu.nju.hw.model.Hcheck;
+
+public interface HcheckMapper {
+
+	Hcheck getHcheck(String hid, String nowDate);
+
+	void insertOrder(String hid, String nowDate);
+
+	void updateOrder(String hid, String nowDate);
+	
+}

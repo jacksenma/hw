@@ -44,10 +44,20 @@
         <div id="navbar" class="navbar-collapse collapse">
         
         	<ul class="nav navbar-nav">
-                <li class="op active" id="plan"><a href="#h_plan" data-toggle="tab">发布计划</a></li>
-                <li class="op" id="register"><a href="#" data-toggle="tab">入离登记</a></li>
-                <li class="op" id="statistics"><a href="#" data-toggle="tab">统计信息</a></li>
-                <li class="op" id="change"><a href="#h_change" data-toggle="tab">修改信息</a></li>
+        		<li class="dropdown" id="enterAndLeave">
+                	<a href="#" id="showdrop" class="dropdown-toggle op" data-toggle="dropdown">
+                   	住客登记<b class="caret"></b>
+                	</a>
+                	<ul class="dropdown-menu">
+                    	 <li class="op" id="enter"><a href="fhenter">入住登记</a></li>
+                    	 <li class="op" id="leave"><a href="fhleave">退房登记</a></li>
+                    </ul>
+           	 	</li>
+                <li class="op " id="plan"><a href="fhplan" >发布计划</a></li>
+               
+                
+                <li class="op" id="statistics"><a href="fhstatistics">统计信息</a></li>
+                <li class="op" id="change"><a href="fhchange" >修改信息</a></li>
         	</ul>
             <ul class="nav navbar-nav navbar-right"> 
             	<li><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
@@ -57,36 +67,14 @@
     </nav>
 </body>
 <script type="text/javascript">
-	$(document).ready(function(){
-
-		$("#plan").click(function(){
-		    $("#plan").addClass("active");
-		    $("#register").removeClass("active");
-		    $("#statistics").removeClass("active");
-		    $("#change").removeClass("active");
-		  });
-		
-		$("#register").click(function(){
-		    $("#register").addClass("active");
-		    $("#plan").removeClass("active");
-		    $("#statistics").removeClass("active");
-		    $("#change").removeClass("active");
-		  });
-		
-		$("#statistics").click(function(){
-		    $("#statistics").addClass("active");
-		    $("#register").removeClass("active");
-		    $("#plan").removeClass("active");
-		    $("#change").removeClass("active");
-		  });
-		
-		$("#change").click(function(){
-		    $("#change").addClass("active");
-		    $("#register").removeClass("active");
-		    $("#statistics").removeClass("active");
-		    $("#plan").removeClass("active");
-		  });
-
-		});
-	</script>
+$(document).ready(function() { 
+ $('#enterAndLeave').hover(function() {
+  $('ul', this).slideDown(200);
+  $(this).children('a:first').addClass("hov");
+ }, function() {
+  $('ul', this).slideUp(100);
+  $(this).children('a:first').removeClass("hov");  
+ });
+});
+</script>
 </html> 

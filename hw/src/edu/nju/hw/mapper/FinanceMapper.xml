@@ -25,7 +25,7 @@
  	
  	<!-- 财务记录 -->
  	<select id="getFinanceByRoleId" resultType="Finance">
-     	select * from finance where roleId=#{0}
+     	select * from finance where roleId=#{0} order by date
      </select>
     
 

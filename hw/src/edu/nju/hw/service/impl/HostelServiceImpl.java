@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.nju.hw.mapper.FinanceMapper;
+import edu.nju.hw.mapper.HcheckMapper;
 import edu.nju.hw.mapper.HostelMapper;
 import edu.nju.hw.mapper.PlanMapper;
 import edu.nju.hw.model.Hed;
@@ -22,6 +24,12 @@ public class HostelServiceImpl implements HostelService {
 	
 	@Resource
 	public PlanMapper planMapper;
+	
+	@Resource
+	public HcheckMapper hcheckMapper;
+	
+	@Resource
+	public FinanceMapper financeMapper;
 
 	@Override
 	public boolean isExisted(String name, String phone, String level, String bankCard, String province, String city,
@@ -208,6 +216,62 @@ public class HostelServiceImpl implements HostelService {
 		// TODO Auto-generated method stub
 		int pnum=planMapper.getNumByHidAndBed(hid,bed);
 		planMapper.updateNum(pnum+num,hid,bed);
+	}
+
+	@Override
+	public void updateOrderNum(String hid, String nowDate,int rootNum) {
+		// TODO Auto-generated method stub
+		if(hcheckMapper.getHcheck(hid,nowDate)==null){
+			hcheckMapper.insertOrderNum(hid,nowDate,rootNum);
+		}else{
+			hcheckMapper.updateOrderNum(hid,nowDate,rootNum);
+		}
+	}
+	
+	@Override
+	public void updateCancelNum(String hid, String nowDate,int rootNum) {
+		// TODO Auto-generated method stub
+		if(hcheckMapper.getHcheck(hid,nowDate)==null){
+			hcheckMapper.insertCancelNum(hid,nowDate,rootNum);
+		}else{
+			hcheckMapper.updateCancelNum(hid,nowDate,rootNum);
+		}
+	}
+	
+	@Override
+	public void updateEnterNum(String hid, String nowDate,int rootNum) {
+		// TODO Auto-generated method stub
+		if(hcheckMapper.getHcheck(hid,nowDate)==null){
+			System.out.println("Èë×¡");
+			hcheckMapper.insertEnterNum(hid,nowDate,rootNum);
+		}else{
+			System.out.println(hid+nowDate+rootNum);
+			hcheckMapper.updateEnterNum(hid,nowDate,rootNum);
+		}
+	}
+	
+	@Override
+	public void updateLeaveNum(String hid, String nowDate,int rootNum) {
+		// TODO Auto-generated method stub
+		if(hcheckMapper.getHcheck(hid,nowDate)==null){
+			System.out.println("ÍË·¿");
+			hcheckMapper.insertLeaveNum(hid,nowDate,rootNum);
+			
+		}else{
+			hcheckMapper.updateLeaveNum(hid,nowDate,rootNum);
+		}
+	}
+
+	@Override
+	public List getHcheck(String hid) {
+		// TODO Auto-generated method stub
+		return hcheckMapper.getAllHcheckByHid(hid);
+	}
+
+	@Override
+	public List getHFinance(String hid) {
+		// TODO Auto-generated method stub
+		return financeMapper.getFinanceByRoleId(hid);
 	}
 
 	

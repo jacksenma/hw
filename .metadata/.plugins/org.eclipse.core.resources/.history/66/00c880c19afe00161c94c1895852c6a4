@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nju.hw.mapper.HcheckMapper">
+	<!-- 查找hid,nowdate记录 -->
+	<select id="getHcheck" resultType="Hcheck">
+		select * from hcheck where hid=#{0} and date=#{1}
+	</select>
+	
+	<!-- 插入OrderNum -->
+	<insert id="insertOrder">
+		insert into hcheck (hid,date,orderNum) values(#{0},#{1},1)
+	</insert>
+
+
+</mapper>

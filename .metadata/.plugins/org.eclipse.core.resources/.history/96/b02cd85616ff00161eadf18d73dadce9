@@ -1,0 +1,32 @@
+function test(){
+	$.ajax({
+        type: "get",
+        url: "http://localhost:8080/hw/getAllHchecks",
+      
+        success: function(data){
+        	alert(data);
+//        	alert(eval("("+data+")"));
+//        	var json=data;
+//        	alert(eval("({"+data+"})"));
+//        	var d=eval("("+data+")");
+        	var d=eval("("+data+")");
+        	alert(d.checks[1].date);
+        	for(var o in d[0]){  
+                alert(o);  
+                alert(d[o]);  
+                alert("text:"+d[o].date);  
+              }  
+//        	json = eval(json.p)  
+        	  for(var i=0; i<4; i++)  
+        	  {  
+        	     alert(d.checks[i].date+" " + d.checks[i].orderNum+" "+d.checks[i].cancelNum+" " + d.checks[i].enterNum+" "+d.checks[i].leaveNum)  
+        	  }  
+//        	}  
+//     	   if(data=="yes")
+//     		   toastr.warning('用户名已存在');
+//     	   else{
+//     		   $("#sub").click();
+//     	   }
+           }
+     });
+}

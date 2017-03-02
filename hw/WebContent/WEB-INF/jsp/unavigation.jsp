@@ -75,4 +75,15 @@
     </div>
     </nav>
 </body>
+<script type="text/javascript">
+$(document).ready(function() { 
+ $('#me').hover(function() {
+  $('ul', this).slideDown(200);
+  $(this).children('a:first').addClass("hov");
+ }, function() {
+  $('ul', this).slideUp(100);
+  $(this).children('a:first').removeClass("hov");  
+ });
+});
+</script>
 </html> 

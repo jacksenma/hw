@@ -58,6 +58,8 @@ public class ForwardController {
 		}
 	}
 	
+	
+	
 	@RequestMapping("/fhenter")
 	public String henter(){
 		return "hmain";

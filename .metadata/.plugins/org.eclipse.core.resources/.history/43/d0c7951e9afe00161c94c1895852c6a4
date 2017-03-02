@@ -1,0 +1,11 @@
+package edu.nju.hw.mapper;
+
+import edu.nju.hw.model.Hcheck;
+
+public interface HcheckMapper {
+
+	Hcheck isExsited(String hid, String nowDate);
+
+	void insertOrder(String hid, String nowDate);
+	
+}

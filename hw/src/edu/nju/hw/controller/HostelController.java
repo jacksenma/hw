@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.nju.hw.model.Finance;
+import edu.nju.hw.model.Hcheck;
 import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
 import edu.nju.hw.model.Order;
@@ -316,6 +318,10 @@ public class HostelController {
 		hostelService.enterHostel(hid,enterDate,name,vipId,bed,num,orderDate);
 		//增加会员记录
 		vipService.updateVipFinance(vipId, 0, "入住了位于"+haddress+"的"+hname, getNowTime(), 2);
+		
+		//记录客栈入店数目
+		hostelService.updateEnterNum(hid,getNowDate(),Integer.parseInt(num));
+				
 		PrintWriter out;
         out = response.getWriter();
         out.write("ok");
@@ -378,7 +384,9 @@ public class HostelController {
 		//增加住店登记
 		hostelService.enterHostel(hid,enterDate,name,idCard,bed,num,getNowTime());
 		
-		
+		//记录客栈入店数目
+		hostelService.updateEnterNum(hid,getNowDate(),Integer.parseInt(num));
+				
 		PrintWriter out;
         out = response.getWriter();
         out.write("ok");
@@ -404,6 +412,10 @@ public class HostelController {
 		String orderDate=o.getOrderDate();
 		//将订单状态改为state3(退房)
 		vipService.updateOrderState(vipId,hid,orderDate,2,3);
+		
+		//记录客栈退房数目
+		hostelService.updateLeaveNum(hid,getNowDate(),Integer.parseInt(num));
+				
 		//增加会员记录
 		Hostel h=(Hostel)session.getAttribute("hostelInfo");
 		String haddress=h.getProvince()+h.getCity()+h.getDistrict();
@@ -474,7 +486,7 @@ public class HostelController {
 		double singlePrice=(double)hostelService.getSinglePrice(hid,bed);
 		System.out.println(singlePrice+"单价");
 		String startDate=hed.getEnterDate();
-		int days=getDayDistance(startDate, getNowTime());
+		int days=getDayDistance(startDate, getNowDate());
 		double total=singlePrice*days;
 		out.write(total+"@"+bed+"@"+num);
 		out.close();
@@ -522,6 +534,9 @@ public class HostelController {
 			hostelService.updateHostelBankBalance(hid,bankBalance);
 			//客栈财务记录
 			vipService.updateFinance(hid, total);
+			
+			//记录客栈退房数目
+			hostelService.updateLeaveNum(hid,getNowDate(),Integer.parseInt(num));
 			
 			out = response.getWriter();
 	        out.write("ok");
@@ -605,6 +620,50 @@ public class HostelController {
 		
 	}
 	
+	@RequestMapping("/getAllHchecks")
+	public void getOandC(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
+		String hid=((Hostel) session.getAttribute("hostelInfo")).getId();
+		List<Hcheck> checks=new ArrayList<Hcheck>();
+		checks=hostelService.getHcheck(hid);
+		PrintWriter out;
+		out = response.getWriter();
+		out.write("{checks:[");
+		for (int i=0;i<checks.size();i++){
+			out.write("{date:\""+checks.get(i).getDate()+"\",");
+			out.write("orderNum:\""+checks.get(i).getOrderNum()+"\",");
+			out.write("cancelNum:\""+checks.get(i).getCancelNum()+"\",");
+			out.write("enterNum:\""+checks.get(i).getEnterNum()+"\",");
+			out.write("leaveNum:\""+checks.get(i).getLeaveNum()+"\"}");
+			if(i!=(checks.size()-1))
+				out.write(",");
+			
+		}
+        out.write("]}");
+        out.close();
+//        return "/data";
+		
+	}
+	
+	@RequestMapping("/getHostelFinance")
+	public void getHostelFinance(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
+		String hid=((Hostel) session.getAttribute("hostelInfo")).getId();
+		List<Finance> f=new ArrayList<Finance>();
+		f=hostelService.getHFinance(hid);
+		PrintWriter out;
+		out = response.getWriter();
+		out.write("{finance:[");
+		for (int i=0;i<f.size();i++){
+			out.write("{date:\""+f.get(i).getDate()+"\",");
+			out.write("money:\""+f.get(i).getMoney()+"\"}");
+			
+			if(i!=(f.size()-1))
+				out.write(",");
+			
+		}
+        out.write("]}");
+        out.close();
+	}
+	
 	public static String getNowDate(){
 		 Date d = new Date();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -619,7 +678,8 @@ public class HostelController {
 	}
 	
 	public static int getDayDistance(String str1,String str2){
-		 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+//		 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");  
 	        Date one;  
 	        Date two;  
 	        long days=0;  

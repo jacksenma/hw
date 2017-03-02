@@ -30,37 +30,10 @@
 修改信息
 </head>
 <body>
-<!-- 顶部导航栏 -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" >
-    <div class="container">
-        <div class="navbar-header">
-
-            <a class="navbar-brand" href="#">Hostel World</a>
-
-            <!-- 分辨率低时显示的弹出顶部导航栏的按钮 <a class="navbar-brand" href="#home" data-toggle="tab">Hostel World</a>-->
-            <button type="button" class="navbar-toggle collapsed"
-                data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span> <span
-                    class="icon-bar"></span> <span class="icon-bar"></span> <span
-                    class="icon-bar"></span>
-            </button>
-
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-        
-        	<ul class="nav navbar-nav">
-                <li class="op " id="plan"><a href="hplan" >发布计划</a></li>
-                <li class="op" id="register"><a href="hed">入离登记</a></li>
-                <li class="op" id="statistics"><a href="hstatistics">统计信息</a></li>
-                <li class="op active" id="change"><a href="hchange" >修改信息</a></li>
-        	</ul>
-            <ul class="nav navbar-nav navbar-right"> 
-            	<li><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
-            </ul>
-        </div>
-    </div>
-    </nav>
+<%@ include file="/WEB-INF/jsp/hnavigation.jsp"%>
+<script type="text/javascript">
+$("#change").addClass("active");
+</script>
     
     <!-- 主题form -->
     <div class="container" style="margin-top:50px">

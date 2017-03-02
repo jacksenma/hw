@@ -2,6 +2,8 @@ package edu.nju.hw.service;
 
 import java.util.List;
 
+import edu.nju.hw.model.Finance;
+import edu.nju.hw.model.Hcheck;
 import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
 
@@ -62,6 +64,22 @@ public interface HostelService {
 	public long getSinglePrice(String hid, String bed);
 
 	public void backPlanNum(int num, String hid, String bed);
+
+	//更新客栈当日预定房间数
+	public void updateOrderNum(String hid, String nowDate, int roomNum);
+	
+	//更新客栈当日取消预订房间数
+	public void updateCancelNum(String hid, String nowDate, int rootNum);
+
+	//更新客栈当日入住房间数
+	public void updateEnterNum(String hid, String nowDate, int roomNum);
+	
+	//更新客栈当日退房房间数
+	public void updateLeaveNum(String hid, String nowDate, int roomNum);
+
+	public List getHcheck(String hid);
+
+	public List getHFinance(String hid);
 
 	
 	
