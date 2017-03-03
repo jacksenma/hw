@@ -6,6 +6,7 @@ import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Hcheck;
 import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
+import edu.nju.hw.model.Page;
 
 public interface HostelService {
 	public boolean isExisted(String name,String phone,String level,String bankCard,String province,
@@ -80,6 +81,11 @@ public interface HostelService {
 	public List getHcheck(String hid);
 
 	public List getHFinance(String hid);
+	
+	//∑÷“≥≤È’“hostel
+	public Page<Hostel> findAllHostelsByPage(int currentPageId,int numPerPage);
+
+	public int getTotalPage();
 
 	
 	

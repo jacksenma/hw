@@ -32,7 +32,9 @@ public interface HostelMapper {
 	public void updateBankBlanceById(String hid, double bankBalance);
 	
 	
-	//入离登记
+	//分页查找客栈(需要从num处往后查numPerpage个记录)
+	public List findAllHostelsByPage(int startNum,int numPerPage);
+	public int getSumOfHostel();
 	
 	
 }

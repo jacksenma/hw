@@ -1,0 +1,106 @@
+$(document).ready(function() {
+	page();
+});
+
+function page(){
+	clear();
+	var id=parseInt($("#pageId").val());
+	var total=parseInt($("#total").val());
+	if(id==1)
+		$(".previous").addClass("disabled");
+	else if(id==total){
+		$(".next").addClass("disabled");
+	}
+	else if(id!=1){
+		$(".previous").removeClass("disabled");
+	}
+	else if(id!=total){
+		$(".next").removeClass("disabled");
+	}
+	
+	
+	$.ajax({
+        type: "get",
+        url: "getHostelConditionPage",
+        data: "pageId="+id,
+        success: function(data){
+        	var d=eval("("+data+")");
+        	var tbody=$("tbody");
+        	for(var i=0;i<d.length;i++){
+        		tbody.append(item((id-1)*10+i+1,d[i].id,d[i].name,d[i].province+d[i].city+d[i].district,d[i].phone));
+        	}
+//        	tbody.append(item());
+//        	var da=eval("("+data+")");
+//        	for(var i=0;i<da.checks.length;i++){
+//        		date[i]=da.checks[i].date;
+//        		orderNum[i]=da.checks[i].orderNum;
+//        		cancelNum[i]=da.checks[i].cancelNum;
+//        		enterNum[i]=da.checks[i].enterNum;
+//        		leaveNum[i]=da.checks[i].leaveNum;
+//        		
+//        	}
+        	
+
+           }
+     });
+}
+//id,imgUrl,hid,name,address,phone
+function item(id,hid,name,address,phone){
+	
+	
+	var tr=$("<tr id='"+hid+"'></tr");
+	var idtd=$("<td>"+id+"</td>");
+//	var imgclass="col-lg-2  col-sm-4  col-xs-4";
+//	var pimgtd=$("<td class="+imgclass+"></td>");
+//	var pimg=$("<img src="+imgUrl+" class="+imgclass+">");
+	var hidtd=$("<td>"+hid+"</td>");
+	var nametd=$("<td>"+name+"</td>");
+	var addresstd=$("<td>"+address+"</td>");
+	var phonetd=$("<td>"+phone+"</td>");
+	
+	var look=$("<td><button id="+hid+" onclick='showid(this.id)'>"+"查看"+"</button></td>");
+	
+	tr.append(idtd);
+//	tr.append(pimgtd);
+//	pimgtd.append(pimg);
+	tr.append(hidtd);
+	tr.append(nametd);
+	tr.append(addresstd);
+	tr.append(phonetd);
+	tr.append(look);
+	return tr;
+}
+
+function clear(){
+	var tbody=$("tbody");
+	tbody.children().remove();
+//	var length=$('tbody').children('tr').length;
+//	for(var i=0;i<length;i++){
+//		tbody.children().remove();
+//		tbody.remove($('tbody').children()[0]);
+//	}
+}
+
+function previous(){
+	var id=parseInt($("#pageId").val())-1;
+	if(id>0){
+		$("#pageId").val(id);
+		page();
+	}
+	
+}
+
+function next(){
+	var id=parseInt($("#pageId").val())+1;
+	var total=parseFloat($("#total").text());
+	alert(id);
+	alert(total);
+	if(id<=total){
+		$("#pageId").val(id);
+		page();
+	}
+}
+function showid(id){
+	
+	alert(id);
+}

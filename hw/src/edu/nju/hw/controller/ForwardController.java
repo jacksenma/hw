@@ -1,5 +1,7 @@
 package edu.nju.hw.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Hostel;
 import edu.nju.hw.model.Order;
+import edu.nju.hw.model.Page;
 import edu.nju.hw.model.Vip;
+import edu.nju.hw.service.HostelService;
 import edu.nju.hw.service.VipService;
+import net.sf.json.JSONArray;
 
 @Controller
 public class ForwardController {
 	
 	@Autowired
 	private VipService vipService;
+	
+	@Autowired
+	private HostelService hostelService;
 
 	@RequestMapping("/fasettleHostel")
 	public String settle1(){
@@ -32,6 +40,10 @@ public class ForwardController {
 	public String settle2(){
 		return "asettleChange";
 	}
+	
+	
+	
+	
 	@RequestMapping("/fhplan")
 	public String hplan(){
 		return "hplan";
@@ -46,6 +58,59 @@ public class ForwardController {
 	public String astatistics(){
 		return "astatistics";
 	}
+	
+	@RequestMapping("/faHostelCondition")
+	public String faHostelCondition(HttpSession session){
+		int totalPage=hostelService.getTotalPage();
+		session.setAttribute("totalPage", totalPage);
+		return "aHostelCondition";
+	}
+	
+	@RequestMapping("/faVipCondition")
+	public String faVipCondition(){
+		return "aVipCondition";
+	}
+	
+	@RequestMapping("/getHostelConditionPage")
+	public void fahostelCondition(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		int currentPageId=Integer.parseInt(request.getParameter("pageId"));
+		System.out.println(currentPageId);
+		//numPerPage留给以后扩展让用户自己选择每页多少条数据
+		int numPerPage=10;
+		Page<Hostel> page=hostelService.findAllHostelsByPage(currentPageId, numPerPage);
+		
+		List<Hostel> l=page.getObj();
+		JSONArray thisPage=JSONArray.fromObject(l);
+		PrintWriter out;
+		out = response.getWriter();
+		out.print(thisPage);
+		out.close();
+		
+//		return thisPage;
+	}
+	
+	
+	
+	@RequestMapping("/getHWFinance")
+	public void getHWFinance(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		
+		List<Finance> f=new ArrayList<Finance>();
+		f=hostelService.getHFinance("HW");
+		PrintWriter out;
+		out = response.getWriter();
+		out.write("{finance:[");
+		for (int i=0;i<f.size();i++){
+			out.write("{date:\""+f.get(i).getDate()+"\",");
+			out.write("money:\""+f.get(i).getMoney()+"\"}");
+			
+			if(i!=(f.size()-1))
+				out.write(",");
+			
+		}
+        out.write("]}");
+        out.close();
+	}
+	
 	
 	
 	@RequestMapping("/fhchange")

@@ -95,7 +95,7 @@ public class VipController {
 		String ic=request.getParameter("idCard");
 		int uid=Integer.parseInt(request.getParameter("uid"));
 		String id=giveId7ToVip();
-		vipService.addVip(phone,bc,ic,uid,id);
+		vipService.addVip(phone,bc,ic,uid,id,getNowDate());
 			//将用户的role设成1
 		userService.setVip(uid);
 			
@@ -131,6 +131,10 @@ public class VipController {
 		//更新hw账户
 		double b=(double)vipService.getHW(1);
 		vipService.updateHW(money+b);
+		
+		//finance更新一笔
+		vipService.updateFinance("HW",money);
+		
 		return "vipRecharge";
 	}
 	
@@ -297,6 +301,9 @@ public class VipController {
 		vipService.updateVipFinance(vid,myTotalPrice*(-1),"预定于"+myStartDate+" 至 "+myEndDate+"期间入住位于"+haddress+"的"+hname,getNowTime(),1);
 		//step6:记录客栈预定数目
 		hostelService.updateOrderNum(hid,getNowDate(),roomNum);
+		
+		//step7:finance更新一笔
+		vipService.updateFinance("HW",myTotalPrice);
 		
 		//得到预订信息返回我的预定界面
 		List<Order> myOrders=new ArrayList<Order>();

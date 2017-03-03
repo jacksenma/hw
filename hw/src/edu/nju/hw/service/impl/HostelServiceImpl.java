@@ -13,6 +13,7 @@ import edu.nju.hw.mapper.HostelMapper;
 import edu.nju.hw.mapper.PlanMapper;
 import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
+import edu.nju.hw.model.Page;
 import edu.nju.hw.service.HostelService;
 
 @Service
@@ -272,6 +273,31 @@ public class HostelServiceImpl implements HostelService {
 	public List getHFinance(String hid) {
 		// TODO Auto-generated method stub
 		return financeMapper.getFinanceByRoleId(hid);
+	}
+
+	@Override
+	public Page<Hostel> findAllHostelsByPage(int currentPageId, int numPerPage) {
+		// TODO Auto-generated method stub
+		Page<Hostel> page=new Page<Hostel>();
+		int startNum=(currentPageId-1)*numPerPage;
+		List<Hostel> pageObj=hostelMapper.findAllHostelsByPage(startNum, numPerPage);
+//		int totalNum=hostelMapper.getSumOfHostel();
+//		int totalPage=totalNum/numPerPage+1;
+		page.setPageNum(currentPageId);
+		page.setNumPerPage(numPerPage);
+		page.setObj(pageObj);
+//		page.setTotalNum(totalNum);
+//		page.setTotalPage(totalPage);
+		System.out.println(page.getObj().get(0).getName());
+		return page;
+	}
+
+	@Override
+	public int getTotalPage() {
+		// TODO Auto-generated method stub
+		int totalNum=hostelMapper.getSumOfHostel();
+		int totalPage=totalNum/10+1;
+		return totalPage;
 	}
 
 	

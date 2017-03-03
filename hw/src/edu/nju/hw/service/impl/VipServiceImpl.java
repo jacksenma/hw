@@ -49,9 +49,9 @@ public class VipServiceImpl implements VipService {
 	}
 
 	@Override
-	public void addVip(String phone, String bc, String ic, int uid, String id) {
+	public void addVip(String phone, String bc, String ic, int uid, String id,String ddl) {
 		// TODO Auto-generated method stub
-		vipMapper.addVip(phone,bc,ic,uid,id);
+		vipMapper.addVip(phone,bc,ic,uid,id,ddl);
 	}
 
 	@Override
@@ -145,9 +145,12 @@ public class VipServiceImpl implements VipService {
 //		System.out.println("id:"+financeMapper.getFinanceByDate(getNowDate()));
 		String date=getNowDate();
 		Finance f=financeMapper.getFinanceByDate(date,vid);
+		System.out.println(double2+"³äÖµÔª");
 		if(f==null){
+			System.out.println("null");
 			financeMapper.insertFinance(vid,double2,date);
 		}else{
+			System.out.println("not null");
 			double2+=f.getMoney();
 			financeMapper.updateFinance(vid,double2,date);
 		}

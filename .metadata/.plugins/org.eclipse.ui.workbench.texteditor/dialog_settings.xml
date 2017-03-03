@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="data" key="selection"/>
+		<item value="total" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="totalPage"/>
+			<item value="write"/>
+			<item value="settle"/>
+			<item value="getFinanceByRoleId"/>
 			<item value="dd"/>
 			<item value="d[i]"/>
 			<item value="hed"/>
 			<item value="highlight"/>
-			<item value="cls"/>
-			<item value="img"/>
-			<item value="bg"/>
-			<item value="HW"/>
 		</list>
 		<list key="replacehistory">
+			<item value="total"/>
 			<item value="data"/>
 			<item value="d.checks[i]"/>
 		</list>

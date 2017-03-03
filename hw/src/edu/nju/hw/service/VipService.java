@@ -16,7 +16,7 @@ public interface VipService {
 
 	boolean canId7Use(String id);
 
-	void addVip(String phone, String bc, String ic, int uid, String id);
+	void addVip(String phone, String bc, String ic, int uid, String id,String ddl);
 
 	Vip getVipInfo(int id);
 

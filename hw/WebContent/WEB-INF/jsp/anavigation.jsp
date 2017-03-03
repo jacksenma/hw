@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -55,7 +55,17 @@
            	 	</li>
         		
                 <li class="op" id="pay"><a href="fapay">结算支付</a></li>
-                <li class="op" id="statistics"><a href="fastatistics">统计信息</a></li>
+                <li class="dropdown" id="statistics">
+                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                   	 统计信息<b class="caret"></b>
+                	</a>
+                	<ul class="dropdown-menu">
+                    	<li><a href="fastatistics">财务情况</a></li>
+                    	<li><a href="faHostelCondition">客栈情况</a></li>
+                    	<li><a href="faVipCondition">会员情况</a></li>
+                	</ul>
+           	 	</li>
+                
         	</ul>
             <ul class="nav navbar-nav navbar-right"> 
             	<li><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
@@ -73,6 +83,13 @@ $(document).ready(function() {
   $('ul', this).slideUp(100);
   $(this).children('a:first').removeClass("hov");  
  });
+ $('#statistics').hover(function() {
+	  $('ul', this).slideDown(200);
+	  $(this).children('a:first').addClass("hov");
+	 }, function() {
+	  $('ul', this).slideUp(100);
+	  $(this).children('a:first').removeClass("hov");  
+	 });
 });
 </script>
 </html>

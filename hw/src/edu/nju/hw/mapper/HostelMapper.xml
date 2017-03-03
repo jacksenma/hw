@@ -117,6 +117,13 @@
         update hostel set bankBalance = #{1} where id = #{0}
      </update>
      
+     <!-- 分页查找Hostel -->
+     <select id="findAllHostelsByPage" resultType="Hostel">
+     	select * from hostel where state!=0 limit #{0},#{1}
+     </select>
      
-
+     <!-- 查找hostel总数 -->
+	 <select id="getSumOfHostel" resultType="int">
+	 	select count(*) as num from hostel where state!=0
+	 </select>
 </mapper>

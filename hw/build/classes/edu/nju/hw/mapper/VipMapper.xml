@@ -14,7 +14,7 @@
  	
  	<!-- 增加一个Vip -->  
     <insert id="addVip"> 
-        insert into vip(phone,bankCard,idCard,uid,id) values(#{0},#{1},#{2},#{3},#{4})  
+        insert into vip(phone,bankCard,idCard,uid,id,ddl) values(#{0},#{1},#{2},#{3},#{4},#{5})  
      </insert>
      
      <!-- 会员充值与激活 -->  

@@ -7,7 +7,7 @@ public interface VipMapper {
 
 	public Vip selectVipById(String id);
 
-	public void addVip(String phone, String bc, String ic, int uid, String id);
+	public void addVip(String phone, String bc, String ic, int uid, String id, String ddl);
 
 	public void updateVipByVid(double vipBalance, double vipBankBalance, String vid);
 

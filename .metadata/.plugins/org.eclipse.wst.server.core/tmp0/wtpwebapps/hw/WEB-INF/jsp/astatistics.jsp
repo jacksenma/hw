@@ -27,5 +27,11 @@
 <script type="text/javascript">
 $("#statistics").addClass("active");
 </script>
+
+<div class="container" style="margin-top:50px">
+	<div id="Finance" style="width: 600px;height:400px;"></div>
+</div>
 </body>
+<script src="http://cdn.bootcss.com/echarts/3.4.0/echarts.min.js"></script>
+<script src="./js/astatistics.js"></script>
 </html>

@@ -2,13 +2,15 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
 <fullyQualifiedTypeName name="java.lang.Double"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="edu.nju.hw.model.Finance"/>
 <fullyQualifiedTypeName name="edu.nju.hw.service.VipService"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Order"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Hed"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
 <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
+<fullyQualifiedTypeName name="edu.nju.hw.model.Finance"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
+<fullyQualifiedTypeName name="net.sf.json.JSONArray"/>
 </qualifiedTypeNameHistroy>
