@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+body{
+	
+	font-family:微软雅黑;
+	
+}
+
+#container{
+	background-color:#F5F6EB;
+	margin-top:50px;
+}
+#search{
+	margin-top:10px;
+	padding:20px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}
+
+#showPage1{
+	margin-top:10px;
+	padding:20px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}
+
+#show{
+	float:right;
+}
+
+ul {	
+	list-style:none;
+}
+
+#search >div{
+	margin-bottom:50px;
+}
+
+

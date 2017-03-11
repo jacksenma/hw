@@ -106,21 +106,23 @@ public class LoginController {
 			
 			List<Hostel> hostels=new ArrayList<Hostel>();
 			hostels=hostelService.getAllHostelsUnsettled();
-			if(hostels!=null)
+			if(hostels.isEmpty()!=true)
 				session.setAttribute("hostelUnsettled",hostels);
+			else{
+				session.setAttribute("hostelUnsettled",null);
+			}
 			
 			List<Hostel> hostelChange=new ArrayList<Hostel>();
 			hostelChange=hostelService.getAllHostelsChange();
-			System.out.println("hostel:"+hostelChange);
-//			System.out.println("name:"+hostelChange.get(0).getName());
+			
 			if(hostelChange.isEmpty()!=true){
 				System.out.println("change");
 				session.setAttribute("hostelChange",hostelChange);
 			}
 				
 			else{
-//				session.setAttribute("hostelChange",null);
 				System.out.println("nochange");
+				session.setAttribute("hostelChange",null);
 			}
 //			for(Hostel s:hostels){
 //				System.out.println(s.getBankCard());

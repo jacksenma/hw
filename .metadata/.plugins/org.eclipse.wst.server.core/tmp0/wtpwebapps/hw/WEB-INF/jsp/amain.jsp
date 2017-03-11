@@ -24,13 +24,13 @@
 <link href="css/toastr.css" rel="stylesheet"/>
 <title>审批开店信息</title>
 </head>
-<body>
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/anavigation.jsp"%>
 <script type="text/javascript">
-$("#approve").addClass("active");
+$("#approve").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 
-
+ <c:if test="${hostelUnsettled!=null }">
 <div class="table-responsive" style="margin-top:50px" >
   <table class="table table-striped">
     <caption>待审批开店信息</caption>
@@ -80,6 +80,12 @@ $("#approve").addClass("active");
   </table>
   
 </div>
+</c:if>
+<c:if test="${hostelUnsettled==null }">
+<div style="margin-top:50px;text-align:center">
+<img style="margin-top:200px"  class="col-lg-8 col-lg-offset-4 col-sm-8 col-sm-offset-4 col-xs-8 col-xs-offset-4" alt="" src="./img/noHostel.png">
+</div>
+</c:if>
 </body>
 <script src="./js/toastr.js"></script>
 <script src="./js/amain.js"></script>

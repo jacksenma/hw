@@ -1,16 +1,50 @@
 @CHARSET "UTF-8";
+body{
+	
+	font-family:微软雅黑;
+	
+}
+
+#container{
+	background-color:#F5F6EB;
+	margin-top:50px;
+}
 #search{
-	background: #C0C0C0;
-	float:left;
+	margin-top:10px;
+	padding:20px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}
+#result{
+	font-family:微软雅黑;
+	font-weight:800;
+	font-size:18px;
+	color:rgb(242,159,63);
+	margin:5px;
+}
+#showPage1{
+	margin-top:10px;
+	padding:20px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
 }
 
 #show{
 	float:right;
 }
 
+.table-hover > tbody > tr:hover > th{
+  background-color: blue;
+}
+
 ul {	
 	list-style:none;
 }
-tr:hover > th {
-  background-color: #f5f5f5;
+
+#search >div{
+	margin-bottom:50px;
 }
+
+

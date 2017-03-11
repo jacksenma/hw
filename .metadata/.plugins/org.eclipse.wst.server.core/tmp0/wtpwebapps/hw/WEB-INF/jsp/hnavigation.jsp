@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./css/unavigation.css">
 <title>客栈</title>
 </head>
 <body>
@@ -60,7 +61,7 @@
                 <li class="op" id="change"><a href="fhchange" >修改信息</a></li>
         	</ul>
             <ul class="nav navbar-nav navbar-right"> 
-            	<li><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
+            	<li class="op1"><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
             </ul>
         </div>
     </div>

@@ -23,21 +23,21 @@
 <link href="./css/toastr.css" rel="stylesheet"/>
 <title>用户</title>
 </head>
-<body style="font-family:微软雅黑;">
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
 
 $("#orderCancel").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 <div  style="margin-top:50px">
-<div style="margin: 0 auto;background: url(img/webp);background-size:100%;background-position:0 -840px;height:200px">
+<div style="margin: 0 auto;background: url(img/webp);background-size:100%;background-position:0 -700px;height:200px">
 	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
 	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;我的订单</b></div>
 	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
 	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;查看订单或取消预订</b></div>
 </div>
-<table class="table table-striped">
-    <caption>我的订单</caption>
+<table class="table table-striped table-hover">
+    <!-- <caption>我的订单</caption> -->
     <thead>
       <tr>
       	<th>住客姓名</th>
@@ -65,7 +65,7 @@ $("#orderCancel").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,
     			<td>${o.hphone}</td>
     			<td>${o.bed}</td>
     			<td>${o.num}</td>
-    			<td>${o.price}</td>
+    			<td>${o.price}元</td>
     			<td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#${o.id}">取消预订</button></td>
     			<!-- 模态框（Modal） -->
     			<div class="modal fade" id="${o.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -76,7 +76,7 @@ $("#orderCancel").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,
                 				<h4 class="modal-title" id="myModalLabel">取消预订</h4>
             				</div>
             				<div class="modal-body">
-            					<h3>此操作将取消本次预定，只返还总计房费80%,并将从您的会员卡上扣除本次预定的积分收益,是否确定?</h3>
+            					<h3>此操作将取消本次预订，只返还总计房费80%,并将从您的会员卡上扣除本次预定的积分收益,是否确定?</h3>
             				</div>
             				<div class="modal-footer">
             				<form action="orderCancel" method="post" id="form${o.id }">

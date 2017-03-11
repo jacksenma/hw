@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- 可选的Bootstrap主题文件（一般不用引入） -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -23,19 +23,37 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!-- tostr -->
-<link href="./css/register.css" rel="stylesheet"/>
+<link href="./css/uregister.css" rel="stylesheet"/>
 <link href="./css/toastr.css" rel="stylesheet"/>
 <title>Register</title>
 </head>
-<body>
+<body style="font-family:微软雅黑;">
 
 <div class="container">
-	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+	<div id="uregisterBox" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+		<span id="loginSpan">用户注册</span>
+		
 		<form action="uregister" method="post" id="register">
-			<span>用户名:</span><input type="text" class="form-control" id="uname" name="uname" placeholder="请输入用户名"><br/>
-			<span>密码:</span><input type="password" class="form-control" id="upsd" name="upsd" placeholder="请输入密码(6~12位)"><br/>
-			<span>确认密码:</span><input type="password" class="form-control" id="upsd2" name="upsd2" placeholder="请再次输入密码"><br/>
-			<button type="button" id="register" class="btn btn-primary btn-lg btn-block" onclick="checkForm()">立即注册</button>
+			<div class="input-group input-group-lg">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>  
+                <input type="text" class="form-control" id="uname" name="uname" placeholder="请输入用户名">
+            </div><br> 
+			
+			<div class="input-group input-group-lg">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>  
+                <input type="password" class="form-control" id="upsd" name="upsd" placeholder="请输入密码(6~12位)">
+            </div><br>
+            
+            <div class="input-group input-group-lg">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>  
+                <input type="password" class="form-control" id="upsd2" name="upsd2" placeholder="请再次输入密码">
+            </div>
+			
+			
+			
+			
+			
+			<button type="button" id="register1" class="btn btn-primary btn-lg btn-block" onclick="checkForm()">立即注册</button>
 			<input type="submit" id="sub" value="submit" >
 		</form>
 	</div>

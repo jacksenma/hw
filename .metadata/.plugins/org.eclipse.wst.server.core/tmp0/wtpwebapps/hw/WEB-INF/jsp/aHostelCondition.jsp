@@ -25,14 +25,14 @@
 <link href="css/toastr.css" rel="stylesheet"/>
 <title>审批开店信息</title>
 </head>
-<body>
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/anavigation.jsp"%>
 <script type="text/javascript">
-$("#statistics").addClass("active");
+$("#statistics").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 <div class="container" style="margin-top:50px">
 <div id="showPage">
-<table class="table table-striped">
+<table class="table table-striped table-hover">
     <caption>查看客栈入住/退房情况</caption>
     <thead>
       <tr>

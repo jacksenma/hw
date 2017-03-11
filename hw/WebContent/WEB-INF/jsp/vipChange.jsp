@@ -24,10 +24,10 @@
 <!-- tostr -->
 
 <link href="./css/toastr.css" rel="stylesheet"/>
-
+<link href="./css/vipChange.css" rel="stylesheet"/>
 <title>修改信息</title>
 </head>
-<body style="font-family:微软雅黑;">
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
 	$("#me").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
@@ -41,7 +41,7 @@
 	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
 	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;修改会员卡信息(手机号或银行卡号)</b></div>
 	</div>
-	<div style="margin-top: 50px" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+	<div id="changeDIV" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
 		<form class="form" action="vchange" method="post" enctype="multipart/form-data" id="vipchange">
             <span>会员卡编号:</span><span style="font-weight: 800">${vipInfo.id}</span><br/>
             <span>会员卡状态:</span>
@@ -56,9 +56,9 @@
             <span>会员卡余额:</span><span style="font-weight:800;font-size:20px;color: rgb(242, 117, 63);">${vipInfo.balance}</span>&nbsp;元<br/>
             <span>会员卡等级:</span><span>${vipInfo.level}</span><br/>
             <span>会员卡积分:</span><span style="font-weight:800;font-size:20px;color: rgb(25, 148, 117);">${vipInfo.point}</span>&nbsp;分<br/>
-            <span>身份证信息:</span><span>${vipInfo.idCard}</span><br/>
-            <span>手机号码:</span><input type="text" class="form-control" id="phone" name="phone" value="${vipInfo.phone }" placeholder="请输入本手机号码" <c:if test="${vipInfo.state==3}">disabled</c:if>><br/>
-            <span>银行卡号:</span><input type="text" class="form-control" id="bc" name="bc" value="${vipInfo.bankCard }" placeholder="请输入要绑定的银行卡号" <c:if test="${vipInfo.state==3}">disabled</c:if>><br/>
+            <span>身份证号码:</span><span>${vipInfo.idCard}</span><br/>
+            <span>手机号码:</span><input type="text" class="form-control" id="phone" name="phone" value="${vipInfo.phone }" placeholder="请输入本手机号码" <c:if test="${vipInfo.state==3}">disabled</c:if>>
+            <span>银行卡号:</span><input type="text" class="form-control" id="bc" name="bc" value="${vipInfo.bankCard }" placeholder="请输入要绑定的银行卡号" <c:if test="${vipInfo.state==3}">disabled</c:if>><br>
             <button type="button" id="recharge" class="btn btn-primary btn-lg btn-block" onclick='checkForm()' <c:if test="${vipInfo.state==3}">disabled</c:if>>确认修改</button>
             <input type="text" id="vid" name="vid" value="${vipInfo.id }" style="display:none">
             <input type="text" id="vstate" name="vstate" value="${vipInfo.state }" style="display:none">
@@ -94,7 +94,7 @@
 </div>
 
 
-
+</div>
 
 </body>
 <script src="./js/toastr.js"></script>

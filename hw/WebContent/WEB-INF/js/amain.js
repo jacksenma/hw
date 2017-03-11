@@ -27,6 +27,7 @@ function pass(n,lev,pro,city,dist,phone,bc){
      	   if(data=="ok"){
      		  toastr.success('操作成功');
      		  $(id).remove();
+     		  showNothing();
      	   }
            }
      });
@@ -41,9 +42,15 @@ function notPass(n,lev,pro,city,dist,phone,bc){
      	   if(data=="delete"){
      		  toastr.error('操作成功');
      		  $(id).remove();
+     		  showNothing();
      	   }
            }
      });
+}
+
+function showNothing(){
+	if($("tbody").children().length==0)
+		window.location.reload();
 }
 //function test(a,b){
 //	alert(a);

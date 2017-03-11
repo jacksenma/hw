@@ -104,7 +104,7 @@ public class HostelController {
 			                     // 设置存放图片文件的路径
 //			path=realPath+/*System.getProperty("file.separator")+*/trueFileName;
 //			path="D:/j2ee/hw/WebContent/WEB-INF/img/"+trueFileName;
-			path="C:/Users/user/Desktop/新建文件夹 (2)/hw/WebContent/WEB-INF/img/"+trueFileName;
+			path="C:/Users/user/Desktop/hwhw/hw/WebContent/WEB-INF/img/"+trueFileName;
 			System.out.println("存放图片文件的路径:"+path);
 //			file.transferTo(new File(path));
 			file.transferTo(new File(path));
@@ -216,7 +216,7 @@ public class HostelController {
 			String trueFileName=String.valueOf(System.currentTimeMillis())+fileName;
 			                     // 设置存放图片文件的路径
 //			path=realPath+/*System.getProperty("file.separator")+*/trueFileName;
-			path="D:/j2ee/hw/WebContent/WEB-INF/img/"+trueFileName;
+			path="C:/Users/user/Desktop/hwhw/hw/WebContent/WEB-INF/img/"+trueFileName;
 			System.out.println("存放图片文件的路径:"+path);
 //			file.transferTo(new File(path));
 			file.transferTo(new File(path));

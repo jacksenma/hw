@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+#rechargeDIV{
+	margin-top:10px;
+	padding:20px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}

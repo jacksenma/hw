@@ -239,9 +239,13 @@ function next(){
 		var saddress=$("<p>地址:<span style='font-size:16px;'>"+address+"</span></p>");
 		var slevel=$("<p>级别:<span style='font-size:16px;'>"+level+"</span></p>");
 		var order=$("<td><button onclick=mustVip('"+vid+"','"+preHid+"','"+preStartDate+"','"+preEndDate+"','"+bed+"','"+price+"','"+preNum+"','"+planStartDate+"','"+planEndDate+"','"+name+"','"+address+"','"+level+"','"+phone+"'"+") class='btn btn-info' >"+"马上预定"+"</button></td>");
+		var th=$("<th></th>");
+//		tr.append(th);
 		tr.append(pimgtd);
+//		th.append(pimgtd);
 		pimgtd.append(pimg);
 		tr.append(texttd);
+//		th.append(texttd);
 		texttd.append(p1);
 		p1.append(sbed);
 		p1.append(sprice);

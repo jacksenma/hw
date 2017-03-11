@@ -32,12 +32,33 @@ public class ForwardController {
 	private HostelService hostelService;
 
 	@RequestMapping("/fasettleHostel")
-	public String settle1(){
+	public String settle1(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		List<Hostel> hostels=new ArrayList<Hostel>();
+		hostels=hostelService.getAllHostelsUnsettled();
+		if(hostels.isEmpty()!=true)
+			session.setAttribute("hostelUnsettled",hostels);
+		else{
+			session.setAttribute("hostelUnsettled",null);
+		}
+		
 		return "amain";
 	}
 	
 	@RequestMapping("/fasettleChange")
-	public String settle2(){
+	public String settle2(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		List<Hostel> hostelChange=new ArrayList<Hostel>();
+		hostelChange=hostelService.getAllHostelsChange();
+		
+		if(hostelChange.isEmpty()!=true){
+			System.out.println("change");
+			session.setAttribute("hostelChange",hostelChange);
+		}
+			
+		else{
+			System.out.println("nochange");
+			session.setAttribute("hostelChange",null);
+		}
+		
 		return "asettleChange";
 	}
 	

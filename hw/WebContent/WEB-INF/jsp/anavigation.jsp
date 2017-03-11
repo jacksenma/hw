@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./css/unavigation.css">
 <title>总经理</title>
 </head>
 <body>
@@ -44,7 +45,7 @@
         <div id="navbar" class="navbar-collapse collapse">
         
         	<ul class="nav navbar-nav">
-        		<li class="dropdown" id="approve">
+        		<li class="op dropdown" id="approve">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    	 审批申请<b class="caret"></b>
                 	</a>
@@ -55,7 +56,7 @@
            	 	</li>
         		
                 <li class="op" id="pay"><a href="fapay">结算支付</a></li>
-                <li class="dropdown" id="statistics">
+                <li class="op dropdown" id="statistics">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    	 统计信息<b class="caret"></b>
                 	</a>
@@ -68,7 +69,7 @@
                 
         	</ul>
             <ul class="nav navbar-nav navbar-right"> 
-            	<li><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
+            	<li class="op1"><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
             </ul>
         </div>
     </div>

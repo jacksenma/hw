@@ -22,12 +22,13 @@
 
 <link href="./css/toastr.css" rel="stylesheet"/>
 <link rel="stylesheet" href="./css/daterangepicker.min.css">
+<link rel="stylesheet" href="./css/preOrder.css">
 <title>??</title>
 </head>
-<body style="font-family:微软雅黑;">
+<body style="font-family:微软雅黑;background-color:#F5F6EB;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
-	$("#order").addClass("active");
+	$("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 <div  style="margin-top:50px">
 <div style="margin: 0 auto;background: url(img/searchHostel.jpg);background-size:100%;background-position:0 -330px;height:200px">
@@ -37,7 +38,7 @@
 	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;填写房间数和住客姓名完成预定</b></div>
 	</div>
 	
-	<div id="preOrder" style="margin-top:50px" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+	<div id="preOrder"  class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
 		<form action="myOrder" id="myOrder" method="post">
 					<span>入离日期:&nbsp;&nbsp;<span style="font-weight:800" id="sd">${startDate }</span> 至  <span style="font-weight:800" id="ed">${endDate }</span>&nbsp;<span id="nights" style="color: rgb(235, 63, 47);font-weight:800px;float:right"></span>
             		
@@ -75,7 +76,7 @@
             		<span style="color:gray">所填姓名需与入住时所持证件一致</span>
             		<br/>
             		<br/>
-            		<button type="button" id="myOrder" class="btn btn-primary btn-lg btn-block" onclick="checkForm(${vipInfo.balance})">预订</button>
+            		<button type="button" id="myOrder" class="btn btn-primary btn-lg btn-block" onclick="checkForm(${vipInfo.balance})">确认预订</button>
 					<input type="submit" id="sub" value="submit" style="display:none">
 					<input type="text" id="myPoint" name="myPoint" style="display:none">
 					<input type="text" id="myTotalPrice" name="myTotalPrice" style="display:none">

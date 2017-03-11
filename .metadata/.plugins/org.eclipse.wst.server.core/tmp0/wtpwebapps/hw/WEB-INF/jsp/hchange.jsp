@@ -32,7 +32,7 @@
 <body>
 <%@ include file="/WEB-INF/jsp/hnavigation.jsp"%>
 <script type="text/javascript">
-$("#change").addClass("active");
+$("#change").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
     
     <!-- 主题form -->
@@ -63,7 +63,7 @@ $("#change").addClass("active");
                         language: 'zh',
                         showUpload: false,
                         maxFileCount: 1,
-                        mainClass: "input-group-lg",
+                        mainClass: "input-group",
                         
                         
                     });

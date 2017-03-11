@@ -27,6 +27,7 @@ function changepass(hid){
      	   if(data=="ok"){
      		  toastr.success('操作成功');
      		  $(id).remove();
+     		 showNothing();
      	   }
            }
      });
@@ -44,9 +45,14 @@ function changenotPass(hid){
      	   if(data=="delete"){
      		  toastr.success('操作成功');
      		  $(id).remove();
+     		 showNothing();
      	   }
            }
      });
 }
 
+function showNothing(){
+	if($("tbody").children().length==0)
+		window.location.reload();
+}
 

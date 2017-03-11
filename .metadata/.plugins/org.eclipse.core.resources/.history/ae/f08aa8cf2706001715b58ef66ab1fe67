@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+#sub{
+	display: none;
+}
+
+#loginBox
+{	
+	margin:0 auto;
+	padding:50px;
+	border-radius:25px;
+	box-shadow: 3px 3px 2px #888888;
+}
+body{
+	font-family:微软雅黑;
+	text-align:center;
+	
+}
+#loginSpan{
+	font-weight:800;
+	font-size:30px;
+	color:rgb(242,159,63);
+	margin-bottom:100px;
+}

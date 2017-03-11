@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -21,24 +21,24 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <link href="./css/toastr.css" rel="stylesheet"/>
-<link href="./css/umain.css" rel="stylesheet"/>
+
 <link rel="stylesheet" href="./css/daterangepicker.min.css">
 
 
 <link rel="stylesheet" href="./css/ladda-themeless.min.css">
 <link rel="stylesheet" href="./css/prism.css">
-
+<link href="./css/umain.css" rel="stylesheet"/>
 <title>预定客栈</title>
 
 </head>
-<body style="font-family:微软雅黑;">
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
 $("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 <!-- -->
 
-<div  style="margin-top:50px;">
+<div id="container" >
 	<div style="margin: 0 auto;background: url(img/searchHostel.jpg);background-size:100%;background-position:0 -330px;height:200px">
 	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
 	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;搜索客栈</b></div>
@@ -47,7 +47,7 @@ $("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87
 	</div>
 	<!-- 搜索框 -->
 	
-	<div id="search" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 " style="margin-right:50px">
+	<div id="search" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 " >
 		<form class="form" action="searchHostel" method="post"  id="orderSearch">
 		<span>目的地:</span>
 			<div data-toggle="distpicker">
@@ -55,15 +55,14 @@ $("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87
   				<select style="width:34%"class="form-control col-lg-2" id="city" name="city" data-city="${city }"></select>
   				<select style="width:33%"class="form-control col-lg-1" id="district" name="district" data-district="${district }"></select>
 			</div>
-		<br/>
-		<br/>
-		<br/>
+		
+		
 		<span>时间阶段:</span>
 		<div>
 			<span id="two-inputs"><input type="text" class="form-control" id="date-range200" name="startDate"  value="${startDate }" placeholder="入住时间" style="width:47.1%;display:inline"> to <input type="text" class="form-control" id="date-range201" name="endDate"  value="${endDate }" placeholder="退房时间" style="width:47.1%;display:inline"></span>
 		</div>
-		<br/>
-		<span>酒店级别</span>
+		
+		<span>酒店级别:</span>
 			<select class="form-control" id="level" name="level">
 				<option <c:if test="${level=='不限' }">selected</c:if>>不限</option>
       			<option <c:if test="${level=='五星级/豪华' }">selected</c:if>>五星级/豪华</option>
@@ -71,8 +70,8 @@ $("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87
       			<option <c:if test="${level=='三星级/舒适' }">selected</c:if>>三星级/舒适</option>
       			<option <c:if test="${level=='二星级及以下/经济' }">selected</c:if>>二星级及以下/经济</option>
       		</select>
-    	<br/>
-    	<span>房间价格</span>
+    	
+    	<span>每晚价格:</span>
     		<select class="form-control" id="price" name="price">
     			<option <c:if test="${price=='不限' }">selected</c:if>>不限</option>
       			<option <c:if test="${price=='150以下' }">selected</c:if>>150以下</option>
@@ -113,8 +112,9 @@ $("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87
 	
 	<!-- 展示框!!!!分页 -->
 <div id="showPage1" class="col-lg-6 col-lg-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" >
+<span id="result">搜索结果:</span>
 <div id="myDIV" style="display: block;text-align:center">
-	<table class="table table-striped" style="margin-top:20px " >
+	<table class="table table-striped table-hover" style="margin-top:20px " >
 
     	<tbody id="tb1">
 		</tbody>
@@ -195,6 +195,7 @@ $("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87
 
 </div>
 </body>
+
 <script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="./js/toastr.js"></script>
 <script src="./js/distpicker.data.js"></script>

@@ -25,12 +25,15 @@
 <link href="css/toastr.css" rel="stylesheet"/>
 <title>审批开店信息</title>
 </head>
-<body>
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/anavigation.jsp"%>
 <script type="text/javascript">
-$("#statistics").addClass("active");
+$("#statistics").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
-<div class="container" style="margin-top:50px">
+
+<div class="col-lg-6 col-lg-offset-2 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" style="margin-top:66px" >
+	
+
 	<ul id="myTab" class="nav nav-tabs">
     		<li class="active">
         		<a onclick="showVipOrder()" href="#showVipOrder" data-toggle="tab" id="tabVipOrder">
@@ -47,10 +50,10 @@ $("#statistics").addClass("active");
 		
 		<div id="myTabContent" class="tab-content">
     		<div class="tab-pane fade in active" id="showVipOrder">
-        		<div id="VipOrder" style="width: 600px;height:400px;"></div>
+        		<div id="VipOrder" style="width: 800px;height:500px;"></div>
     		</div>
     		<div class="tab-pane fade" id="showVipFinance">
-        		<div id="VipFinance" style="width: 600px;height:400px;"></div>
+        		<div id="VipFinance" style="width: 800px;height:500px;"></div>
     		</div>
     
 		</div>

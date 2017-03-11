@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -24,17 +24,46 @@
 <!-- tostr -->
 
 <link href="./css/toastr.css" rel="stylesheet"/>
-
+<link href="./css/vipRegister.css" rel="stylesheet"/>
 <title>会员注册</title>
 </head>
-<body>
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
-<div class="container" style="margin-top:50px">
-	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+<script type="text/javascript">
+	$("#me").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
+</script>
+<div  style="margin-top:50px">
+<div style="margin: 0 auto;background: url(img/vip.jpg);background-size:100%;background-position:0 -200px;height:200px">
+	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;注册会员</b></div>
+	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;
+	<span style="color: #EB3F2F">会员须知<br>会员享有预订客栈、消费记录及积分奖励等服务。有效期一年,到期后或卡上<br>费用不足将暂停记录,一旦支付,则恢复。暂停1年后未支付,会员卡永久失效。</span></b></div>
+</div>
+	<div id="registerDIV" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
 		<form class="form" action="vregisterTrue" method="post" enctype="multipart/form-data" id="vipregister">
-            <span>手机号码:</span><input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号"><br/>
-			<span>银行卡号:</span><input type="text" class="form-control" id="bankCard" name="bankCard" placeholder="请输入银行卡号"><br/>
-			<span>身份证:</span><input type="text" class="form-control" id="idCard" name="idCard" placeholder="请输入身份证号"><br/>
+            <div class="input-group ">  
+            <!-- <img alt="" src="./img/idCard.svg" style="width:15px;height:15px"> -->
+                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>  
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号">
+            </div><br>
+            
+            <div class="input-group ">  
+            <!-- <img alt="" src="./img/idCard.svg" style="width:15px;height:15px"> -->
+                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>  
+                <input type="text" class="form-control" id="bankCard" name="bankCard" placeholder="请输入银行卡号">
+            </div><br>
+            
+            <div class="input-group ">  
+            <!-- <img alt="" src="./img/idCard.svg" style="width:15px;height:15px"> -->
+                <span class="input-group-addon"><img alt="" src="./img/idCard.svg" style="width:15px;height:15px"></span>  
+                <input type="text" class="form-control" id="idCard" name="idCard" placeholder="请输入身份证号">
+            </div><br>
+            
+            
+            
+			
+			
             <button type="button" id="register" class="btn btn-primary btn-lg btn-block" onclick="checkForm()">立即注册</button>
             <input type="text" id="uid" name="uid" value="${userInfo.id }" style="display:none">
             <input type="submit" id="sub" value="submit" style="display:none">

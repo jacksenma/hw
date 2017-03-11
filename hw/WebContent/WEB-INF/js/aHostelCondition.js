@@ -97,7 +97,7 @@ function item(id,hid,name,address,phone){
 	
 	var modalid=hid;
 	
-	var look=$("<td><button onclick=showEandL('"+modalid+"') class="+lookclass+" data-toggle="+lookdatatoggle+" data-target="+lookdatatarget+">"+"查看"+"</button></td>");
+	var look=$("<td><button onclick=showEandL('"+modalid+"') class='btn btn-info btn-xs' data-toggle="+lookdatatoggle+" data-target="+lookdatatarget+">"+"查看"+"</button></td>");
 	
 	tr.append(idtd);
 //	tr.append(pimgtd);

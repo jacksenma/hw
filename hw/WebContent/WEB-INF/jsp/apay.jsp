@@ -25,7 +25,7 @@
 <body>
 <%@ include file="/WEB-INF/jsp/anavigation.jsp"%>
 <script type="text/javascript">
-$("#pay").addClass("active");
+$("#pay").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 </body>
 </html>

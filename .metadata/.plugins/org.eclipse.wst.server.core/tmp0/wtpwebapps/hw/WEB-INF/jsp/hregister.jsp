@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -30,26 +30,56 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <div class="container">
-	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+	<div id="hregisterBox" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+	
+		<span id="loginSpan">客栈注册</span>
 		<form class="form" action="hregister" method="post" enctype="multipart/form-data" id="hregister">
-            <span>客栈名称:</span><input type="text" class="form-control" id="hname" name="hname" placeholder="请输入用户名"><br/>
-			<span>客栈级别:</span>
-				<select class="form-control" id="level" name="level">
+            <div class="input-group ">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>  
+                <input type="text" class="form-control" id="hname" name="hname" placeholder="请输入客栈名称"><br/>
+            </div><br>
+            
+           
+            
+            <div class="input-group ">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-star"></i></span>  
+               <select class="form-control" id="level" name="level">
       			<option>五星级/豪华</option>
       			<option>四星级/高档</option>
       			<option>三星级/舒适</option>
       			<option>二星级及以下/经济</option>
-    			</select><br/>
-			<span>客栈地址:</span>
-			<div data-toggle="distpicker">
+    			</select>  
+            </div><br>
+            
+             <div class="input-group ">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>  
+                <div data-toggle="distpicker">
   				<select style="width:33%" class="form-control col-lg-1" id="province" name="province"></select>
   				<select style="width:34%"class="form-control col-lg-2" id="city" name="city"></select>
   				<select style="width:33%"class="form-control col-lg-1" id="district" name="district"></select>
-			</div><br/>
-			<span>手机号码:</span><input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号"><br/>
-			<span>银行卡号:</span><input type="text" class="form-control" id="bankCard" name="bankCard" placeholder="请输入银行卡号"><br/>
-            <span>客栈图片:</span><input id="input-1" name="file" type="file" multiple class="file-loading" accept="image/*"/><br/>
+			</div>  
+            </div><br>
+            
+            <div class="input-group ">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>  
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号">
+            </div><br>
+            
+            <div class="input-group ">  
+            <!-- <img alt="" src="./img/idCard.svg" style="width:15px;height:15px"> -->
+                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>  
+                <input type="text" class="form-control" id="bankCard" name="bankCard" placeholder="请输入银行卡号">
+            </div><br>
+            <div class="input-group ">  
+                <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>  
+                 <input id="input-1" style="display:inline" class="form-control" name="file" type="file" multiple class="file-loading" accept="image/*"/>
+                 
+            </div><span style="color:gray">选择一张能真实反映您客栈外观的图片</span><br>
+            
+            
+           
             <script>
                 $(document).on('ready', function() {
                     $("#input-1").fileinput({
@@ -57,7 +87,7 @@
                         language: 'zh',
                         showUpload: false,
                         maxFileCount: 1,
-                        mainClass: "input-group-lg"
+                        mainClass: "input-group"
                     });
                 });
             </script>

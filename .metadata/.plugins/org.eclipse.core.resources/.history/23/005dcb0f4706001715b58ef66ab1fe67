@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+#preOrder{
+	padding:60px;
+	margin-top:100px;
+	padding:50px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}

@@ -24,10 +24,10 @@
 <!-- tostr -->
 
 <link href="./css/toastr.css" rel="stylesheet"/>
-
-<title>会员注册</title>
+<link href="./css/vipRecharge.css" rel="stylesheet"/>
+<title>会员充值</title>
 </head>
-<body style="font-family:微软雅黑;">
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
 	$("#me").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
@@ -42,7 +42,7 @@
 	
 </div>
 	
-	<div style="margin-top:50px " class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+	<div id="rechargeDIV" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
 		<span>会员卡余额:</span><span style="font-weight:800;font-size:20px;color: rgb(242, 117, 63);">${vipInfo.balance}</span>&nbsp;元<br/>
 		<span>会员卡积分:</span><span style="font-weight:800;font-size:20px;color: rgb(25, 148, 117);">${vipInfo.point}</span>&nbsp;分<br/>
 <br>

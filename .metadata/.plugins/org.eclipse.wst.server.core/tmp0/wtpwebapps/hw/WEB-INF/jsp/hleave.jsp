@@ -28,7 +28,7 @@
 <body>
 <%@ include file="/WEB-INF/jsp/hnavigation.jsp"%>
 <script type="text/javascript">
-$("#enterAndLeave").addClass("active");
+$("#enterAndLeave").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 <div class="container" style="margin-top:50px">
 	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >

@@ -25,7 +25,7 @@
 <body>
 <%@ include file="/WEB-INF/jsp/hnavigation.jsp"%>
 <script type="text/javascript">
-$("#statistics").addClass("active");
+$("#statistics").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 	<div class="container" style="margin-top:50px">
     	<ul id="myTab" class="nav nav-tabs">

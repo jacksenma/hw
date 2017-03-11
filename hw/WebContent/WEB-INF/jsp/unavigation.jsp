@@ -55,7 +55,7 @@
         	</ul>
         	
             <ul class="nav navbar-nav navbar-right"> 
-            	<li><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
+            	<li class="op1"><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
             </ul>
             <ul class="nav navbar-nav navbar-right"> 
             	 <li class="op dropdown" id="me">
