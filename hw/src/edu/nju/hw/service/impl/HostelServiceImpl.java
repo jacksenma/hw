@@ -190,12 +190,20 @@ public class HostelServiceImpl implements HostelService {
 	}
 
 	@Override
+	public int searchHostelsPageNum(String province, String city, String district, String startDate, String endDate,
+			double p1, double p2, String level, String key) {
+		// TODO Auto-generated method stub
+		return planMapper.selectHostelsNum(province, city, district, startDate, endDate, p1, p2, level, key);
+	}
+	@Override
 	public List searchHostels(String province, String city, String district, String startDate, String endDate,
-			double p1,double p2, String level,String key) {
+			double p1,double p2, String level,String key,int pageId) {
 		// TODO Auto-generated method stub
 		System.out.println("level:"+level);
 		System.out.println("key:"+key);
-	    return planMapper.selectAllHostels(province,city,district,startDate,endDate,p1,p2,level,key);
+		int startNum=(pageId-1)*10;
+		
+	    return planMapper.selectAllHostels(province,city,district,startDate,endDate,p1,p2,level,key,startNum,10);
 		
 	}
 
@@ -299,6 +307,8 @@ public class HostelServiceImpl implements HostelService {
 		int totalPage=totalNum/10+1;
 		return totalPage;
 	}
+
+	
 
 	
 

@@ -1,7 +1,0 @@
-function checkForm(fid) {
-	//TODO增加对手机号和银行卡号的格式校验
-	alert(fid);
-	alert($("#"+fid).serialize());
-
-	
-}

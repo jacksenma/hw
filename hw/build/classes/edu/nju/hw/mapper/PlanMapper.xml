@@ -7,6 +7,14 @@
         insert into plan(hid,startDate,endDate,bed,num,price) values(#{0},#{1},#{2},#{3},#{4},#{5})  
      </insert>
      
+     <!-- 查询符合条件的一共有多少个 -->
+     <select id="selectHostelsNum" resultType="int">
+       select count(*) from hostel h,plan p where  
+       h.id=p.hid 
+       and h.province=#{0} and h.city=#{1} and h.district=#{2}
+       and #{3} >= p.startDate and p.endDate >= #{4}
+       and p.price between #{5} and #{6} and p.num!=0
+     </select>
      
      <!-- 根据条件搜索客栈信息 -->  
     <select id="selectAllHostels"  resultType="OrderHostel">
@@ -14,7 +22,7 @@
        h.id=p.hid 
        and h.province=#{0} and h.city=#{1} and h.district=#{2}
        and #{3} >= p.startDate and p.endDate >= #{4}
-       and p.price between #{5} and #{6} and p.num!=0
+       and p.price between #{5} and #{6} and p.num!=0 limit #{9},#{10}
       
        
     </select>

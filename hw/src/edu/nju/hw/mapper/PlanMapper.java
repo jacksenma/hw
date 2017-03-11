@@ -6,10 +6,12 @@ public interface PlanMapper {
 
 	void addPlan(String hid, String startDate, String endDate, String bed, String num, double price);
 	public List selectAllHostels(String province, String city, String district, String startDate, String endDate,
-			double p1, double p2, String level, String key);
+			double p1, double p2, String level, String key, int startNum, int i);
 	void updatePlanBedNum(int num, String hid, String planStartDate, String planEndDate, String myBed, int planNum,
 			double planPrice);
 	long getPriceByHidAndBed(String hid, String bed);
 	int getNumByHidAndBed(String hid, String bed);
 	void updateNum(int i, String hid, String bed);
+	int selectHostelsNum(String province, String city, String district, String startDate, String endDate, double p1,
+			double p2, String level, String key);
 }

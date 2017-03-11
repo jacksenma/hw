@@ -23,12 +23,19 @@
 <link href="./css/toastr.css" rel="stylesheet"/>
 <title>用户</title>
 </head>
-<body>
+<body style="font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
-$("#orderCancel").addClass("active");
+
+$("#orderCancel").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
-<div class="container" style="margin-top:50px">
+<div  style="margin-top:50px">
+<div style="margin: 0 auto;background: url(img/webp);background-size:100%;background-position:0 -840px;height:200px">
+	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;我的订单</b></div>
+	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;查看订单或取消预订</b></div>
+</div>
 <table class="table table-striped">
     <caption>我的订单</caption>
     <thead>
@@ -106,4 +113,5 @@ $("#orderCancel").addClass("active");
 <script src="./js/toastr.js"></script>
 <script src="./js/toastrInit.js"></script>
 <script src="./js/uorderCancel.js"></script>
+<link href="./css/unavigation.css" rel="stylesheet"/>
 </html>

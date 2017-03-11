@@ -3,6 +3,8 @@ package edu.nju.hw.mapper;
 import java.util.List;
 
 import edu.nju.hw.model.Hcheck;
+import edu.nju.hw.model.VipFinance;
+import edu.nju.hw.model.VipOrderNum;
 
 public interface HcheckMapper {
 
@@ -25,5 +27,9 @@ public interface HcheckMapper {
 	void insertLeaveNum(String hid, String nowDate, int rootNum);
 
 	void updateLeaveNum(String hid, String nowDate, int rootNum);
+	
+	List<VipOrderNum> findVipOrderNumByDate();
+
+	
 	
 }

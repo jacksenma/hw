@@ -1,7 +1,7 @@
 function checkForm(fid,trid,modalid) {
 	//TODO增加对手机号和银行卡号的格式校验
 //	alert(trid);
-	alert(modalid);
+//	alert(modalid);
 	$.ajax({
         type: "POST",
         url: "http://localhost:8080/hw/orderCancel",

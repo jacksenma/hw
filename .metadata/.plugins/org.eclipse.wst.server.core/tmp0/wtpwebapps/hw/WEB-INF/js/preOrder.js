@@ -40,7 +40,7 @@ function checkForm(vb){
 		toastr.warning('会员卡余额不足');
 	}
 	else{
-		alert($("#myOrder").serialize());
+//		alert($("#myOrder").serialize());
 		$("#sub").click();
 	}
 		

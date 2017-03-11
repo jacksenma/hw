@@ -171,11 +171,7 @@ public class ForwardController {
 	
 	@RequestMapping("/fustatistics")
 	public String fustatistics(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-//		Vip  v=(Vip)session.getAttribute("vipInfo");
-//		List<Order> myOrders=new ArrayList<Order>();
-//		myOrders=vipService.getMyOrders(v.getId());
-//		System.out.println(myOrders.get(0).getHlevel());
-//		session.setAttribute("orderTimeLine", myOrders);
+
 		Vip  v=(Vip)session.getAttribute("vipInfo");
 		List<Finance> finances=new ArrayList<Finance>();
 		finances=vipService.getFinanceByRoleId(v.getId());

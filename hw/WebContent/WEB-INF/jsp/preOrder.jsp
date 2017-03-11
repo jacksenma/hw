@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -24,25 +24,29 @@
 <link rel="stylesheet" href="./css/daterangepicker.min.css">
 <title>??</title>
 </head>
-<body>
+<body style="font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
 	$("#order").addClass("active");
 </script>
-<div class="container" style="margin-top:50px">
-	<div id="preOrder" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+<div  style="margin-top:50px">
+<div style="margin: 0 auto;background: url(img/searchHostel.jpg);background-size:100%;background-position:0 -330px;height:200px">
+	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;预定客栈</b></div>
+	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;填写房间数和住客姓名完成预定</b></div>
+	</div>
 	
-	
-
-				<form action="myOrder" id="myOrder" method="post">
-					<span>入离日期:&nbsp;&nbsp;<span id="sd">${startDate }</span> 至  <span id="ed">${endDate }</span>&nbsp;<span id="nights" style="float:right"></span>
+	<div id="preOrder" style="margin-top:50px" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+		<form action="myOrder" id="myOrder" method="post">
+					<span>入离日期:&nbsp;&nbsp;<span style="font-weight:800" id="sd">${startDate }</span> 至  <span style="font-weight:800" id="ed">${endDate }</span>&nbsp;<span id="nights" style="color: rgb(235, 63, 47);font-weight:800px;float:right"></span>
             		
             		<br/>
             		<br/>
-            		房间类型:&nbsp;&nbsp;<span>${preBed }</span>
+            		房间类型:&nbsp;&nbsp;<span style="font-weight:800"><font size="3" >${preBed }</font></span>
             		<br/>
             		<br/>
-            		会员等级:&nbsp;&nbsp;<span>${vipInfo.level } (可享受${vipInfo.level*3 }%的优惠)</span>
+            		会员等级:&nbsp;&nbsp;<span>${vipInfo.level } (可享受<span style="font-weight:800"> ${vipInfo.level*3 } </span>%的优惠)</span>
             		<br/>
             		<br/>
             		房间数量:&nbsp;
@@ -55,8 +59,8 @@
             		
             		
             	
-            		<span>&nbsp;&nbsp;&nbsp;房费:<span id="totalPrice"></span></span>
-            		<span >&nbsp;&nbsp;&nbsp;&nbsp;可得积分:<span id="point"></span></span>
+            		<span>&nbsp;&nbsp;&nbsp;房费:<span style="color: orange;font-size:20px" id="totalPrice"></span></span>
+            		<span >&nbsp;&nbsp;&nbsp;&nbsp;可得积分:<span style="font-weight:800" id="point"></span></span>
             		<script type="text/javascript">
             			$(document).ready(function(){
             				getTotalPrice($("#roomNum").val(), ${prePrice},${vipInfo.level*3 });

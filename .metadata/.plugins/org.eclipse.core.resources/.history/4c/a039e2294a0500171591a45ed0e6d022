@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+#search{
+	background: #C0C0C0;
+	float:left;
+}
+
+#show{
+	float:right;
+}
+
+ul {	
+	list-style:none;
+}
+tr:hover > th {
+  background-color: #f5f5f5;
+}
+#orderCancel{
+	background-color:rgb(242, 117, 63);
+}

@@ -21,7 +21,7 @@ function changepass(hid){
 	var id="#tr"+hid;
 	$.ajax({
         type: "POST",
-        url: "http://localhost:8080/hw/hostel/hostelChangePass",
+        url: "http://localhost:8080/hw/hostelChangePass",
         data: "id="+hid,
         success: function(data){
      	   if(data=="ok"){
@@ -38,7 +38,7 @@ function changenotPass(hid){
 	var id="#tr"+hid;
 	$.ajax({
         type: "POST",
-        url: "http://localhost:8080/hw/hostel/hostelChangeNotPass",
+        url: "http://localhost:8080/hw/hostelChangeNotPass",
         data: "id="+hid,
         success: function(data){
      	   if(data=="delete"){

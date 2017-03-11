@@ -5,12 +5,17 @@
 <fullyQualifiedTypeName name="edu.nju.hw.service.VipService"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Order"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Hed"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
 <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Finance"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="edu.nju.hw.service.impl.VipServiceImpl"/>
+<fullyQualifiedTypeName name="edu.nju.hw.mapper.HcheckMapper"/>
 <fullyQualifiedTypeName name="net.sf.json.JSONArray"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="edu.nju.hw.model.VipOrderNum"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 </qualifiedTypeNameHistroy>

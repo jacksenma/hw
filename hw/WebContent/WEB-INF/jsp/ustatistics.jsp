@@ -30,7 +30,7 @@
 
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
-$("#statistics").addClass("active");
+$("#statistics").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
 <body>
 

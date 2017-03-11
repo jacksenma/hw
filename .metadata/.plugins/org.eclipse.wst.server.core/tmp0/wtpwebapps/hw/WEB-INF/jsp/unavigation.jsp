@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -22,6 +22,8 @@
 	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link href="./css/unavigation.css" rel="stylesheet"/>
 <title>取消预订</title>
 </head>
 <body>
@@ -46,15 +48,17 @@
         
         	<ul class="nav navbar-nav">
         		<li class="op" id="order"><a href="fuorder">预定客栈</a></li>
-        		<li class="op" id="orderCancel"><a href="fuorderCancel">取消预定</a></li>
-                <li class="op" id="statistics"><a href="fustatistics">统计信息</a></li>
+        		 <c:if test="${vipInfo!=null }">
+        			<li class="op" id="orderCancel"><a href="fuorderCancel">我的订单</a></li>
+                	<li class="op" id="statistics"><a href="fustatistics">统计信息</a></li>
+        		</c:if>
         	</ul>
         	
             <ul class="nav navbar-nav navbar-right"> 
             	<li><a href="index.jsp"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li> 
             </ul>
             <ul class="nav navbar-nav navbar-right"> 
-            	 <li class="dropdown" id="me">
+            	 <li class="op dropdown" id="me">
                 	<a href="#" class="dropdown-toggle"  data-toggle="dropdown">
                 	<c:if test="${userInfo.role==0 }">个人信息</c:if>
                 	<c:if test="${userInfo.role==1 }">会员中心</c:if>
@@ -66,6 +70,8 @@
                     	<c:if test="${userInfo.role==1 }">
                     	<li><a href="fvipRecharge">会员充值</a></li>
                     	<li><a href="fvipChange">修改信息</a></li>
+                    	<li><a href="#" data-toggle="modal" data-target="#vipCancel">取消资格</a></li>
+                    	
                         </c:if>
                     	
                 	</ul>
@@ -74,6 +80,29 @@
         </div>
     </div>
     </nav>
+    <div class="modal fade" id="vipCancel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">取消会员资格</h4>
+            </div>
+            <div class="modal-body">
+            	<h3>此操作将取消你的会员资格，您将无法再享受相应的会员特权，是否确定?</h3>
+            	</div>
+            <div class="modal-footer">
+            <form action="vipCancel">
+            		<input type="text" id="vid" name="vid" value="${vipInfo.id }" style="display:none">
+            		<input type="text" id="uid" name="uid" value="${vipInfo.uid }" style="display:none">
+            		<!-- <button type="button" onclick='vCancel' class="btn btn-primary">确定</button>
+            		<input type="submit" style="display:none" id="subCancel"> -->
+            		<input type="submit" class="btn btn-primary" value="确定">
+            		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            	</form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 </body>
 <script type="text/javascript">
 $(document).ready(function() { 

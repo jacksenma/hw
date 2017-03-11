@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,17 +44,55 @@ public class LoginController {
 		System.out.println(name+" login "+psd);
 		User user=userService.getUserInfo(name,psd);
 		System.out.println(user);
+		Cookie cookie1 = new Cookie("vid","");
+		cookie1.setPath("/");
+		response.addCookie(cookie1);
 //		request.setAttribute("user", user);
 //		System.out.println(user.getId()+user.getName());
 //		model.addAttribute("user",user);
 		session.setAttribute("userInfo",user);
 		//普通用户
-		if(user.getRole()==0)
+		if(user.getRole()==0){
+			Cookie cookie2 = new Cookie("vid","");
+			cookie2.setPath("/");
+			response.addCookie(cookie2);
+			session.setAttribute("vipInfo",null);
+//			Cookie cookie = new Cookie("vid",vip.getId(
+//			Cookie[] cookies = request.getCookies();
+//			for(Cookie cookie : cookies){
+//                if(cookie.getName().equals("vid")){
+//                    System.out.println("原值为:"+cookie.getValue());
+//                    cookie.setValue("");
+//                    cookie.setPath("/");
+//                    System.out.println("被修改的cookie名字为:"+cookie.getName()+",新值为:"+cookie.getValue());
+//                    response.addCookie(cookie);
+//                    break;
+//                }
+//            }
+			
+			System.out.println("user1");
 			return "umain";
+		}
+			
 		//会员用户
 		else if(user.getRole()==1){
+			System.out.println("vip");
 			Vip vip=vipService.getVipInfo(user.getId());
 			session.setAttribute("vipInfo",vip);
+			Cookie cookie = new Cookie("vid",vip.getId());
+			cookie.setPath("/");
+			response.addCookie(cookie);
+//			Cookie[] cookies = request.getCookies();
+//			for(Cookie cookie : cookies){
+//                if(cookie.getName().equals("vid")){
+//                    System.out.println("原值为:"+cookie.getValue());
+//                    cookie.setValue(vip.getId());
+//                    cookie.setPath("/");
+//                    System.out.println("被修改的cookie名字为:"+cookie.getName()+",新值为:"+cookie.getValue());
+//                    response.addCookie(cookie);
+//                    break;
+//                }
+//			}
 			return "umain";
 		}
 			

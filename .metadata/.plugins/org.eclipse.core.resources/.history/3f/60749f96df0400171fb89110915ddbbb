@@ -1,0 +1,271 @@
+var vid=$.cookie("vid");
+var preStartDate=$.cookie("preStartDate");
+var preEndDate=$.cookie("preEndDate");
+toastr.options = {
+		  "closeButton": false,
+		  "debug": false,
+		  "newestOnTop": false,
+		  "progressBar": false,
+		  "positionClass": "toast-top-center",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "2500",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+$(document).ready(function() {
+	checkForm();
+});
+function checkForm(){
+	if($("#date-range200").val()==""
+		||$("#date-range201").val()==""||$("#province").val()==""
+			||$("#city").val()==""||$("#district").val()=="")
+		toastr.warning('请填写完整信息');
+	else{
+		
+//		$("#searchBtn").attr("value") = "搜索中";
+		var id=parseInt($("#pageId").val());
+		if(isNaN($('#pageId').val())==true||$('#pageId').val()==""){
+			toastr.warning('请输入数字');
+		}else{
+		
+		var id=parseInt($("#pageId").val());
+		var total=parseInt($("#total").text());
+		id=parseInt(id);
+		total=parseInt(total);
+		alert(id);
+		alert(total);
+//		 if(id>total){
+//			toastr.warning('不能超过总页数,为您跳转到尾页');
+//			$("#pageId").val(total);
+//			id=total;
+//		}
+//		else if(id<1){
+//			toastr.warning('不能小于第1页,为您跳转到首页');
+//			$("#pageId").val(1);
+//			id=1;
+//		}
+			
+		 if(id==1&&id==total){
+			$(".previous").addClass("disabled");
+			$(".next").addClass("disabled");
+		}
+			
+		else if(id==total&&id!=1){
+			$(".next").addClass("disabled");
+			$(".previous").removeClass("disabled");
+		}
+		else if(id==1&&id!=total){
+			$(".next").removeClass("disabled");
+			$(".previous").addClass("disabled");
+		}
+		else if(id!=total&&id!=1){
+			$(".next").removeClass("disabled");
+			$(".previous").removeClass("disabled");
+		}
+		 clear();
+		$.ajax({
+	        type: "post",
+	        url: "searchHostel",
+	        data: $("#orderSearch").serialize()+"&pageId="+id,
+	        success: function(data){
+	        	clear();
+	        	preStartDate=$.cookie("preStartDate");
+	        	preEndDate=$.cookie("preEndDate");
+//	        	alert(data);
+	        	var d=eval("("+data+")");
+//	        	var tbody=$("#tb");
+	        	var tbody=$("#tb1");
+	        	
+//	        	var pc=$("#myDIV");
+	        	$("#total").val($.cookie("totalPage"));
+	        	$("#total").text($.cookie("totalPage"));
+	        	if(d.length==0){
+	        		$("#pageControl").attr("style","display:none");
+//	        		$("#sorry").attr("style","display:block");
+	        		toastr.warning('抱歉，未找到符合条件的客栈');
+	        	}else{
+	        		$("#pageControl").attr("style","display:block");
+//	        		$("#sorry").attr("style","display:none");
+	        	}
+	        	for(var i=0;i<d.length;i++){
+	        		tbody.append(createDIV((id-1)*10+i+1,d[i].imgUrl,d[i].name,d[i].level,d[i].province+d[i].city+d[i].district,d[i].bed,d[i].price,d[i].hid,
+	        				d[i].startDate,d[i].endDate,d[i].num,d[i].phone));
+//	        		tbody.append(item((id-1)*10+i+1,d[i].imgUrl,d[i].name,d[i].level,d[i].province+d[i].city+d[i].district,d[i].bed,d[i].price,d[i].hid,
+//	        				d[i].startDate,d[i].endDate,d[i].num,d[i].phone));
+	        	}
+	        }
+	     });
+//		$("#sub").click();
+	}
+}
+}
+
+function checkForm1(){
+	var id=parseInt($("#pageId").val());
+	var total=parseInt($("#total").text());
+	 if(id>total){
+		toastr.warning('不能超过总页数,为您跳转到尾页');
+		$("#pageId").val(total);
+		id=total;
+	}
+	else if(id<1){
+		toastr.warning('不能小于第1页,为您跳转到首页');
+		$("#pageId").val(1);
+		id=1;
+	}
+	 checkForm();
+}
+function mustVip(vid,preHid,preStartDate,preEndDate,preBed,prePrice,preNum,planStartDate,planEndDate,preHname,preAddress,preLevel,prePhone){
+//	alert(vid);
+	if(vid==""){
+		toastr.warning('只有会员才可预订哦');
+
+	}
+	else{
+//		,preAddress,preLevel,prePhone
+		$("#preHid").val(preHid);
+		$("#preStartDate").val(preStartDate);
+		$("#preEndDate").val(preEndDate);
+		$("#preBed").val(preBed);
+		$("#preNum").val(preNum);
+		$("#prePrice").val(prePrice);
+		$("#planStartDate").val(planStartDate);
+		$("#planEndDate").val(planEndDate);
+		$("#preHname").val(preHname);
+		$("#preAddress").val(preAddress);
+		$("#preLevel").val(preLevel);
+		$("#prePhone").val(prePhone);
+		
+		$("#thesub").click();
+	}
+//		alert(preEndDate);
+//		$("#thesub").click();
+}
+
+function item(id,imgUrl,name,level,address,bed,price,preHid,planStartDate,planEndDate,preNum,phone){
+	
+	
+//	var tr=$("<tr id='"+hid+"'></tr");
+	var tr=$("<tr></tr");
+	var idtd=$("<td>"+id+"</td>");
+	var imgclass="col-lg-6 col-sm-4 col-xs-4";
+//	var imgclass="";
+	var pimgtd=$("<td></td>")
+//	var pimgtd=$("<td class="+imgclass+"></td>");
+	var pimg=$("<img style='width:100%,height:100%;padding:0' src="+imgUrl+" class="+imgclass+">");
+	
+	
+//	var hidtd=$("<td>"+hid+"</td>");
+	var nametd=$("<td>"+name+"</td>");
+	var leveltd=$("<td>"+level+"</td>");
+	var addresstd=$("<td>"+address+"</td>");
+	var bedtd=$("<td>"+bed+"</td>");
+	var pricetd=$("<td>"+price+"</td>");
+//	<button type="button" onclick="mustVip('${vipInfo.id}')" class="btn btn-info btn-xs">点我预订</button>
+	
+	var order=$("<td><button onclick=mustVip('"+vid+"','"+preHid+"','"+preStartDate+"','"+preEndDate+"','"+bed+"','"+price+"','"+preNum+"','"+planStartDate+"','"+planEndDate+"','"+name+"','"+address+"','"+level+"','"+phone+"'"+") class=btn btn-info btn-xs>"+"预定"+"</button></td>");
+//	alert("<td><button onclick=mustVip('"+vid+"','"+preHid+"','"+preStartDate+"','"+preEndDate+"','"+bed+"','"+price+"','"+preNum+"','"+planStartDate+"','"+planEndDate+"','"+name+"','"+address+"','"+level+"','"+phone+"'"+") class=btn btn-info btn-xs>"+"预定"+"</button></td>");
+	tr.append(idtd);
+	tr.append(pimgtd);
+	pimgtd.append(pimg);
+	
+	tr.append(nametd);
+	tr.append(leveltd);
+	tr.append(addresstd);
+	tr.append(bedtd);
+	tr.append(pricetd);
+	tr.append(order);
+	return tr;
+}
+
+
+
+
+function clear(){
+	var tbody=$("#tb1");
+	tbody.children().remove();
+}
+
+function previous(){
+	var id=parseInt($("#pageId").val())-1;
+	if(id>0){
+		$("#pageId").val(id);
+		checkForm();
+	}
+	
+}
+
+function next(){
+	var id=parseInt($("#pageId").val())+1;
+	var total=parseInt($("#total").text());
+	if(id<=total){
+		$("#pageId").val(id);
+		checkForm();
+	}
+}	
+	function createDIV(id,imgUrl,name,level,address,bed,price,preHid,planStartDate,planEndDate,preNum,phone){
+		var tr=$("<tr></tr");
+//		var idtd=$("<td>"+id+"</td>");
+		var imgclass="col-lg-12 col-sm-12 col-xs-12";
+//		var imgclass="";
+		var pimgtd=$("<td style='width:50%'></td>")
+//		var pimgtd=$("<td class="+imgclass+"></td>");
+		var pimg=$("<img style='width:100%,height:100%;padding:0;float:right' src='"+imgUrl+"' class="+imgclass+">");
+		
+		var texttd=$("<td style='float:left;text-align:left;margin-left:20px'></td>")
+		var p1=$("<p></p>")
+		var sbed=$("<span style='font-size:25px;'>"+bed+"</span>");
+		var sprice=$("<span>&nbsp;&nbsp;&nbsp;&nbsp;<font size='6' color='orange'>￥"+price+"</font></span>"+"<span>/晚</span> ");
+		var sname=$("<p>名称:<span style='font-size:16px;'>"+name+"</span></p>");
+		var saddress=$("<p>地址:<span style='font-size:16px;'>"+address+"</span></p>");
+		var slevel=$("<p>级别:<span style='font-size:16px;'>"+level+"</span></p>");
+		var order=$("<td><button onclick=mustVip('"+vid+"','"+preHid+"','"+preStartDate+"','"+preEndDate+"','"+bed+"','"+price+"','"+preNum+"','"+planStartDate+"','"+planEndDate+"','"+name+"','"+address+"','"+level+"','"+phone+"'"+") class='btn btn-info' >"+"马上预定"+"</button></td>");
+		tr.append(pimgtd);
+		pimgtd.append(pimg);
+		tr.append(texttd);
+		texttd.append(p1);
+		p1.append(sbed);
+		p1.append(sprice);
+		texttd.append(sname);
+		texttd.append(slevel);
+		texttd.append(saddress);
+		texttd.append(order);
+		tr.append("<br>");
+		return tr;
+		
+//		var li=$("<li></li>")
+//		
+//		var maindiv=$("<div style='height:80px;display:block;margin:10px'></div");
+//		var imgdiv=$("<div style='height:100%;width:100px;float:left;'></div");
+//		var textdiv=$("<div style='width:50%;float:left;magin:150px'></div");
+//		var img=$("<img style='width:100%,height:100%;margin:0px' src="+imgUrl+">");
+//		var p1=$("<p style='display:block'></p>");
+//		var sbed=$("<p>"+bed+"</p>");
+//		var sprice=$("<p>"+price+"</p>"+" /晚");
+//		var p2=$("<p style='display:block'></p>");
+//		var sname=$("<p>"+name+"</p>");
+//		var slevel=$("<p>"+level+"</p>"+" /晚");
+//		var p3=$("<p style='display:block'>"+address+"</p>");
+//		var order=$("<td><button onclick=mustVip('"+vid+"','"+preHid+"','"+preStartDate+"','"+preEndDate+"','"+bed+"','"+price+"','"+preNum+"','"+planStartDate+"','"+planEndDate+"','"+name+"','"+address+"','"+level+"','"+phone+"'"+") class=btn btn-info btn-xs>"+"预定"+"</button></td>");
+//		li.append(maindiv);
+//		maindiv.append(imgdiv);
+//		maindiv.append(textdiv);
+//		imgdiv.append(img);
+//		textdiv.append(p1);
+//		textdiv.append(p2);
+//		textdiv.append(p3);
+//		textdiv.append(order);
+//		p1.append(sbed);
+//		p1.append(sprice);
+//		p2.append(sname);
+//		p2.append(slevel);
+////		maindiv.append("<br>")
+//		return maindiv;
+	}
+

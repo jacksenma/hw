@@ -1,0 +1,14 @@
+package edu.nju.hw.model;
+
+public class VipFinance {
+	private double money;
+	private String date;
+	
+	public double getFinance(){
+		return money;
+	}
+	
+	public String getDate(){
+		return date;
+	}
+}

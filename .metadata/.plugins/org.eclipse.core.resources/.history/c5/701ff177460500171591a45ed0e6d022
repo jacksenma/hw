@@ -1,0 +1,136 @@
+package edu.nju.hw.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import edu.nju.hw.model.Hostel;
+import edu.nju.hw.model.User;
+import edu.nju.hw.model.Vip;
+import edu.nju.hw.service.HostelService;
+import edu.nju.hw.service.UserService;
+import edu.nju.hw.service.VipService;
+
+@Controller
+
+public class LoginController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private HostelService hostelService;
+	
+	@Autowired
+	private VipService vipService;
+	
+//	ForwardController fc=new ForwardController();
+	
+	@RequestMapping("/login")
+	public String login(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+		System.out.println("login 换");
+		String name=request.getParameter("loginName");
+		String psd=request.getParameter("loginPsd");
+		System.out.println(name+" login "+psd);
+		User user=userService.getUserInfo(name,psd);
+		System.out.println(user);
+		Cookie cookie1 = new Cookie("vid","");
+		cookie1.setPath("/");
+		response.addCookie(cookie1);
+//		request.setAttribute("user", user);
+//		System.out.println(user.getId()+user.getName());
+//		model.addAttribute("user",user);
+		session.setAttribute("userInfo",user);
+		//普通用户
+		if(user.getRole()==0){
+			Cookie cookie2 = new Cookie("vid","");
+			cookie2.setPath("/");
+			response.addCookie(cookie2);
+			System.out.println("user1");
+			return "umain";
+		}
+			
+		//会员用户
+		else if(user.getRole()==1){
+			System.out.println("vip");
+			Vip vip=vipService.getVipInfo(user.getId());
+			session.setAttribute("vipInfo",vip);
+			Cookie cookie = new Cookie("vid",vip.getId());
+			cookie.setPath("/");
+			response.addCookie(cookie);
+			return "umain";
+		}
+			
+		//客栈
+		else if(user.getRole()==2){
+			Hostel hostel=hostelService.getHostelInfo(name);
+			session.setAttribute("hostelInfo",hostel);
+			return "hmain";
+		}
+		else{
+			
+			List<Hostel> hostels=new ArrayList<Hostel>();
+			hostels=hostelService.getAllHostelsUnsettled();
+			if(hostels!=null)
+				session.setAttribute("hostelUnsettled",hostels);
+			
+			List<Hostel> hostelChange=new ArrayList<Hostel>();
+			hostelChange=hostelService.getAllHostelsChange();
+			System.out.println("hostel:"+hostelChange);
+//			System.out.println("name:"+hostelChange.get(0).getName());
+			if(hostelChange.isEmpty()!=true){
+				System.out.println("change");
+				session.setAttribute("hostelChange",hostelChange);
+			}
+				
+			else{
+//				session.setAttribute("hostelChange",null);
+				System.out.println("nochange");
+			}
+//			for(Hostel s:hostels){
+//				System.out.println(s.getBankCard());
+//			}
+//			return "redirect:/forward/settle1";
+			return "amain";
+//			fc.settle1();
+		}
+			
+		
+	}
+	
+	@RequestMapping("/loginAjax")
+	public void loginAjax(HttpServletRequest request,HttpServletResponse response){
+		System.out.println("xin");
+		System.out.println("loginAjax");
+		PrintWriter out;
+		String name=request.getParameter("loginName");
+		String psd=request.getParameter("loginPsd");
+		System.out.println(name+" loginAjax "+psd);
+		
+		if(userService.canLogin(name,psd)==false){
+			try {
+			out = response.getWriter();
+			out.write("no");
+            out.close();
+            
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	}
+	
+	
+	
+}

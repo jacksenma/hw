@@ -10,11 +10,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.nju.hw.mapper.FinanceMapper;
+import edu.nju.hw.mapper.HcheckMapper;
 import edu.nju.hw.mapper.OrderMapper;
 import edu.nju.hw.mapper.VipMapper;
 import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Order;
 import edu.nju.hw.model.Vip;
+import edu.nju.hw.model.VipFinance;
+import edu.nju.hw.model.VipOrderNum;
 import edu.nju.hw.service.VipService;
 
 @Service
@@ -29,6 +32,9 @@ public class VipServiceImpl implements VipService {
 	
 	@Resource
 	public FinanceMapper financeMapper;
+	
+	@Resource
+	public HcheckMapper hcheckMapper;
 
 	@Override
 	public boolean isRegistered(int uid) {
@@ -192,6 +198,18 @@ public class VipServiceImpl implements VipService {
 	public List getFinanceByRoleId(String id) {
 		// TODO Auto-generated method stub
 		return financeMapper.getFinanceByRoleId(id);
+	}
+
+	@Override
+	public List<VipOrderNum> findVipOrderNumByDate() {
+		// TODO Auto-generated method stub
+		return hcheckMapper.findVipOrderNumByDate();
+	}
+
+	@Override
+	public List<VipFinance> findVipFinanceByDate() {
+		// TODO Auto-generated method stub
+		return financeMapper.findVipFinanceByDate();
 	}
 
 	

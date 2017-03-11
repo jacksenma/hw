@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,7 @@ import edu.nju.hw.model.OrderHostel;
 import edu.nju.hw.service.HostelService;
 import edu.nju.hw.service.UserService;
 import edu.nju.hw.service.VipService;
+import net.sf.json.JSONArray;
 
 @Controller
 //@RequestMapping("/hostel")
@@ -554,10 +556,11 @@ public class HostelController {
 	
 	//根据条件搜索客栈
 	@RequestMapping("/searchHostel")
-	public String searchHostel(HttpServletRequest request,HttpServletResponse response,HttpSession session){
+	public void searchHostel(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
 		String province=request.getParameter("province");
 		String city=request.getParameter("city");
 		String district=request.getParameter("district");
+//		int pageId=1;
 //		String level=null;
 //		if(request.getParameter("level").equals("不限")==false){
 			String level=request.getParameter("level");
@@ -565,6 +568,15 @@ public class HostelController {
 		String startDate=request.getParameter("startDate");
 		String endDate=request.getParameter("endDate");
 		String price=request.getParameter("price");
+		
+		Cookie cookie = new Cookie("preStartDate",startDate);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		
+		Cookie cookie2= new Cookie("preEndDate",endDate);
+		cookie.setPath("/");
+		response.addCookie(cookie2);
+		
 		session.setAttribute("province", province);
 		session.setAttribute("city", city);
 		session.setAttribute("district", district);
@@ -596,6 +608,8 @@ public class HostelController {
 			p1=0;
 			p2=10000;
 		}
+		int pageId=Integer.parseInt(request.getParameter("pageId"));
+		System.out.println("pageId="+pageId);
 			
 //		double price=Double.parseDouble(request.getParameter("price"));
 		System.out.println("this level:"+level);
@@ -604,25 +618,60 @@ public class HostelController {
 			key="";
 		session.setAttribute("key", key);
 		List<OrderHostel> os=new ArrayList<OrderHostel>();
-		os=hostelService.searchHostels(province,city,district,startDate,endDate,p1,p2,level,key);
+		os=hostelService.searchHostels(province,city,district,startDate,endDate,p1,p2,level,key,pageId);
 		session.setAttribute("OrderHostelInfo", os);
 		
-//		List<Hostel> os=new ArrayList<Hostel>();
-//		os=hostelService.searchHostels(province,city,district,startDate,endDate,p1,p2,level,key);
-//		session.setAttribute("OrderHostelInfo", os);
+		int pageNum=hostelService.searchHostelsPageNum(province, city, district, startDate, endDate, p1, p2, level, key);
+//		System.out.println("pageNUm="+pageNum);
+		String totalPage="";
+		if(pageNum%10!=0){
+			totalPage=(pageNum/10+1)+"";
+		}else{
+			totalPage=(pageNum/10)+"";
+		}
 		
-//		System.out.println("size:"+hs.size());
-//		for(int i=0;i<hs.size();i++)
-//			System.out.println(hs.get(i).getHid()+"  "+hs.get(i).getPrice());
+		Cookie cookie1 = new Cookie("totalPage",totalPage);
+		cookie1.setPath("/");
+		response.addCookie(cookie1);
+//		session.setAttribute("totalPage", totalPage);
 		
-//		hostelService.searchHostels(province,city,district,startDate,endDate,price,key);
-		return "umain";
+		JSONArray thisPage=JSONArray.fromObject(os);
+		PrintWriter out;
+		out = response.getWriter();
+		out.print(thisPage);
+		out.close();
+//		return "umain";
 		
 	}
 	
 	@RequestMapping("/getAllHchecks")
 	public void getOandC(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
 		String hid=((Hostel) session.getAttribute("hostelInfo")).getId();
+		List<Hcheck> checks=new ArrayList<Hcheck>();
+		checks=hostelService.getHcheck(hid);
+		PrintWriter out;
+		out = response.getWriter();
+		out.write("{checks:[");
+		for (int i=0;i<checks.size();i++){
+			out.write("{date:\""+checks.get(i).getDate()+"\",");
+			out.write("orderNum:\""+checks.get(i).getOrderNum()+"\",");
+			out.write("cancelNum:\""+checks.get(i).getCancelNum()+"\",");
+			out.write("enterNum:\""+checks.get(i).getEnterNum()+"\",");
+			out.write("leaveNum:\""+checks.get(i).getLeaveNum()+"\"}");
+			if(i!=(checks.size()-1))
+				out.write(",");
+			
+		}
+        out.write("]}");
+        out.close();
+//        return "/data";
+		
+	}
+	
+	@RequestMapping("/getAllHchecksA")
+	public void getOandCA(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
+//		String hid=((Hostel) session.getAttribute("hostelInfo")).getId();
+		String hid=request.getParameter("hid");
 		List<Hcheck> checks=new ArrayList<Hcheck>();
 		checks=hostelService.getHcheck(hid);
 		PrintWriter out;

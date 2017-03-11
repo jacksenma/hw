@@ -58,7 +58,7 @@ $("#statistics").addClass("active");
         		<div id="Finance" style="width: 600px;height:400px;"></div>
     		</div>
     
-</div>
+		</div>
     
     
     

@@ -27,35 +27,11 @@
 
 </head>
 <body>
-<a href="fnew">aa</a>
-<a href="getOandC">test</a>
-<button onclick="test()">getOandC</button>
-
-<button onclick="page()">分页</button>
-<table class="table table-striped">
-    
-    <tbody>
-		
-			<!-- <tr id="">
-				<td class="col-lg-4  col-sm-4  col-xs-4">
-				<img src="${h.imgUrl }" class="col-lg-6  col-sm-6  col-xs-6">
-				</td>
-    			<td>${h.name}</td>
-    			<td>${h.level}</td>
-    			<td>${h.province}${h.city}${h.district}</td>
-    			<td>${h.bed}</td>
-    			<td>¥${h.price}</td>
-    			<td></td>
-    		
-    			
-			</tr> -->
-			
-			
-			
-		
-		
-	</tbody>
-</table>
+	<div style="background: url(img/searchHostel.jpg);background-size:100%;height:250px">
+	<div style="text-align: center;width:auto"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
+	<div style="text-align: center;width:auto"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;客房介绍</b></div>
+	<div style="text-align: center;width:auto"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
+	</div>
 </body>
 <script src="js/test1.js"></script>
 </html>

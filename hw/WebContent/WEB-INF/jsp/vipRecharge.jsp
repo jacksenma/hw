@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -27,16 +27,25 @@
 
 <title>会员注册</title>
 </head>
-<body>
+<body style="font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
-	$("#me").addClass("active");
+	$("#me").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script> 
-<div class="container" style="margin-top:50px">
-	<c:if test="${vipInfo.state==0}"><h3 style="margin:0 auto">首充必须1000元及以上方可激活会员卡</h3></c:if>
-	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
-		<span>会员卡余额:</span><span>${vipInfo.balance}</span>&nbsp;元<br/>
-		<span>会员卡积分:</span><span>${vipInfo.point}</span>&nbsp;分<br/>
+<div  style="margin-top:50px">
+<div style="margin: 0 auto;background: url(img/recharge.jpg);background-size:100%;background-position:0 0px;height:200px">
+	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;会员充值</b></div>
+	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;<c:if test="${vipInfo.state==0}">首充1000元及以上激活会员卡</c:if>
+	<c:if test="${vipInfo.state!=0}">网银或积分充值</c:if></b></div>
+	
+</div>
+	
+	<div style="margin-top:50px " class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+		<span>会员卡余额:</span><span style="font-weight:800;font-size:20px;color: rgb(242, 117, 63);">${vipInfo.balance}</span>&nbsp;元<br/>
+		<span>会员卡积分:</span><span style="font-weight:800;font-size:20px;color: rgb(25, 148, 117);">${vipInfo.point}</span>&nbsp;分<br/>
+<br>
 <ul id="myTab" class="nav nav-tabs">
     <li class="active">
         <a href="#bank" data-toggle="tab">

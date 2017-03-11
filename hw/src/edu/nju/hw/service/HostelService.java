@@ -57,7 +57,7 @@ public interface HostelService {
 	public void updateHostelBankBalance(String hid, double bankBalance);
 
 	public List searchHostels(String province, String city, String district, String startDate, String endDate,
-			double p1, double p2, String level, String key);
+			double p1, double p2, String level, String key, int pageId);
 
 	public void updatePlanBedNum(int num, String hid, String planStartDate, String planEndDate, String myBed,
 			int planNum, double planPrice);
@@ -86,6 +86,9 @@ public interface HostelService {
 	public Page<Hostel> findAllHostelsByPage(int currentPageId,int numPerPage);
 
 	public int getTotalPage();
+
+	public int searchHostelsPageNum(String province, String city, String district, String startDate, String endDate,
+			double p1, double p2, String level, String key);
 
 	
 	

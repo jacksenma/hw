@@ -1,7 +1,0 @@
-package edu.nju.hw.model;
-
-public class finance {
-	private String date;
-	private double money;//两位小数
-	
-}

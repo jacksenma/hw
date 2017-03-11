@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- ???Bootstrap???????????? -->
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
 
 <!-- jQuery??????bootstrap.min.js ???? -->
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -27,26 +27,35 @@
 
 <title>修改信息</title>
 </head>
-<body>
+<body style="font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
-	$("#me").addClass("active");
+	$("#me").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
-<div class="container" style="margin-top:50px">
-	
-	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+
+<div style="margin-top:50px">
+	<div  style="margin-top:50px;">
+	<div style="margin: 0 auto;background: url(img/change.jpg);background-size:100%;background-position:0 -400px;height:200px">
+	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;修改信息</b></div>
+	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;修改会员卡信息(手机号或银行卡号)</b></div>
+	</div>
+	<div style="margin-top: 50px" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
 		<form class="form" action="vchange" method="post" enctype="multipart/form-data" id="vipchange">
-            <span>会员卡编号:</span><span>${vipInfo.id}</span><br/>
+            <span>会员卡编号:</span><span style="font-weight: 800">${vipInfo.id}</span><br/>
             <span>会员卡状态:</span>
             <c:if test="${vipInfo.state==0}"><span style="color:gray">未激活</span></c:if>
             <c:if test="${vipInfo.state==1}"><span style="color:green">正常</span></c:if>
             <c:if test="${vipInfo.state==2}"><span style="color:orange">暂停记录</span></c:if>
             <c:if test="${vipInfo.state==3}"><span style="color:red">停止记录</span>(该会员卡不可用,请取消会员之后重新注册会员)</c:if>
-            <button type="button" style="float:right" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#vipCancel">取消会员资格</button>
+            <!--  
+            <button type="button" style="float:right" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#vipCancel1">取消会员资格</button>
+            -->
             <br/>
-            <span>会员卡余额:</span><span>${vipInfo.balance}</span>&nbsp;元<br/>
+            <span>会员卡余额:</span><span style="font-weight:800;font-size:20px;color: rgb(242, 117, 63);">${vipInfo.balance}</span>&nbsp;元<br/>
             <span>会员卡等级:</span><span>${vipInfo.level}</span><br/>
-            <span>会员卡积分:</span><span>${vipInfo.point}</span><br/>
+            <span>会员卡积分:</span><span style="font-weight:800;font-size:20px;color: rgb(25, 148, 117);">${vipInfo.point}</span>&nbsp;分<br/>
             <span>身份证信息:</span><span>${vipInfo.idCard}</span><br/>
             <span>手机号码:</span><input type="text" class="form-control" id="phone" name="phone" value="${vipInfo.phone }" placeholder="请输入本手机号码" <c:if test="${vipInfo.state==3}">disabled</c:if>><br/>
             <span>银行卡号:</span><input type="text" class="form-control" id="bc" name="bc" value="${vipInfo.bankCard }" placeholder="请输入要绑定的银行卡号" <c:if test="${vipInfo.state==3}">disabled</c:if>><br/>
@@ -58,7 +67,9 @@
 </form>
 	</div>
 </div>
-<div class="modal fade" id="vipCancel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<!--  -->
+<div class="modal fade" id="vipCancel1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

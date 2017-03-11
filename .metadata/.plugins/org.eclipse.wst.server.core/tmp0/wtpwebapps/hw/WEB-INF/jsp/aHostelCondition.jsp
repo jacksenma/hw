@@ -50,10 +50,10 @@ $("#statistics").addClass("active");
 </table>
 <div id="pageControl" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
 	<ul class="pager">
-    <li class="previous" ><a onclick="previous()">&larr; 上一页</a></li>
+    <li class="previous" onclick="previous()"><a href="#">&larr; 上一页</a></li>
     <span>第</span><input value="1" type="text" class="form-control" id="pageId" style="width: 15%;display:inline"><span>页/<span id="total" value="${totalPage }">${totalPage }</span>页</span>
     <button onclick="page()" class="btn btn-primary btn-sm ">前往</button>
-    <li class="next" ><a onclick="next()">下一页 &rarr;</a></li>
+    <li class="next" onclick="next()"><a href="#">下一页 &rarr;</a></li>
 	</ul>
 </div>
 
@@ -65,7 +65,7 @@ $("#statistics").addClass("active");
                 <h4 class="modal-title" id="myModalLabel">客栈入住/退房情况图</h4>
             </div>
             <div class="modal-body">
-            	<div id="OandC" style="width: 600px;height:400px;"></div>
+            	<div id="EandL" style="width: 550px;height:400px;"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -75,6 +75,7 @@ $("#statistics").addClass("active");
 </div>
 </div>
 </body>
+<script src="http://cdn.bootcss.com/echarts/3.4.0/echarts.min.js"></script>
 <script src="./js/toastr.js"></script>
 <script src="./js/aHostelCondition.js"></script>
 </html>

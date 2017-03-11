@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Order;
 import edu.nju.hw.model.Vip;
+import edu.nju.hw.model.VipFinance;
+import edu.nju.hw.model.VipOrderNum;
 
 
 public interface VipService {
@@ -55,5 +57,9 @@ public interface VipService {
 	void updateOrderState(String vipId, String hid, String orderDate, int origin_state, int now_state);
 
 	List getFinanceByRoleId(String id);
+
+	List<VipOrderNum> findVipOrderNumByDate();
+
+	List<VipFinance> findVipFinanceByDate();
 
 }

@@ -27,18 +27,27 @@
 
 <link rel="stylesheet" href="./css/ladda-themeless.min.css">
 <link rel="stylesheet" href="./css/prism.css">
+
 <title>预定客栈</title>
 
 </head>
-<body>
+<body style="font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>
 <script type="text/javascript">
-$("#order").addClass("active");
+$("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
+<!-- -->
 
-<div class="container" style="margin-top:50px">
+<div  style="margin-top:50px;">
+	<div style="margin: 0 auto;background: url(img/searchHostel.jpg);background-size:100%;background-position:0 -330px;height:200px">
+	<div style="text-align: center;margin: 0 auto;"><font color="#ffffff"><span style="font-size: 30px;">————————</span></font></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">&nbsp;搜索客栈</b></div>
+	<div style="text-align: center;margin: 0 auto;"><span style="color: rgb(255, 255, 255); font-size: 30px; background-color: transparent;">————————</span></div>
+	<div style="text-align: center;margin: 0 auto;"><b style="color: rgb(255, 255, 255); font-size: 18px; background-color: transparent;">&nbsp;填写查找条件搜索客栈</b></div>
+	</div>
 	<!-- 搜索框 -->
-	<div id="search" class="col-lg-4  col-sm-5  col-xs-6 ">
+	
+	<div id="search" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 " style="margin-right:50px">
 		<form class="form" action="searchHostel" method="post"  id="orderSearch">
 		<span>目的地:</span>
 			<div data-toggle="distpicker">
@@ -71,14 +80,14 @@ $("#order").addClass("active");
       			<option <c:if test="${price=='301-450' }">selected</c:if>>301-450</option>
       			<option <c:if test="${price=='450以上' }">selected</c:if>>450以上</option>
     		</select><br/>
-    	<span>关键词</span>
-    		<input type="text" class="form-control" id="key" name="key" placeholder="(选填)酒店名" value="${key }"><br/>
+    	<span style="display:none">关键词</span>
+    		<input type="text" class="form-control" id="key" name="key" placeholder="(选填)酒店名" value="${key }" style="display:none"><br/>
     		
     	
     	<input type="submit" id="sub" value="submit" style="display:none">
 		</form>
 		
-		<button class="btn btn-primary ladda-button" id="searchBtn"data-style="expand-right" onclick="checkForm()"><span class="ladda-label">expand-right</span></button>
+		<button style="margin-bottom: 10px" class="btn btn-primary btn-block ladda-button" id="searchBtn"data-style="expand-right" onclick="checkForm()"><span class="ladda-label" >搜索</span></button>
     
     <script src="./js/spin.min.js"></script>
 <script src="./js/ladda.min.js"></script>
@@ -99,63 +108,94 @@ $("#order").addClass("active");
 			}, 200 );
 		}
 	} );
-	// You can control loading explicitly using the JavaScript API
-	// as outlined below:
-	// var l = Ladda.create( document.querySelector( 'button' ) );
-	// l.start();
-	// l.stop();
-	// l.toggle();
-	// l.isLoading();
-	// l.setProgress( 0-1 );
 </script>
 	</div>
 	
-	<!-- 展示框 -->
-	
-	<div id="show" class="col-lg-8  col-sm-7  col-xs-6 ">
-	<table class="table table-striped">
-    
-    <tbody>
-		<c:forEach items="${OrderHostelInfo}" var="h">
-			<tr id="tr${h.hid}${h.bed}">
-				<td class="col-lg-4  col-sm-4  col-xs-4"><img src="${h.imgUrl }" class="col-lg-6  col-sm-6  col-xs-6"></td>
-    			<td>${h.name}</td>
-    			<td>${h.level}</td>
-    			<td>${h.province}${h.city}${h.district}</td>
-    			<td>${h.bed}</td>
-    			<td>¥${h.price}</td>
-    			
-    			<td><form action="preOrder" method="post">
-    			<input type="text" name="preHid" value="${h.hid }" style="display:none">
-    			<input type="text" name="preStartDate" value="${startDate }" style="display:none">
-    			<input type="text" name="preEndDate" value="${endDate }" style="display:none">
-    			<input type="text" name="preBed" value="${h.bed }" style="display:none">
-    			<input type="text" name="prePrice" value="${h.price }" style="display:none">
-    			<input type="text" name="preNum" value="${h.num }" style="display:none">
-    			<input type="text" name="planStartDate" value="${h.startDate }" style="display:none">
-    			<input type="text" name="planEndDate" value="${h.endDate }" style="display:none">
-    			<input type="text" name="preHname" value="${h.name }" style="display:none">
-    			<input type="text" name="preAddress" value="${h.province}${h.city}${h.district}" style="display:none">
-    			<input type="text" name="preLevel" value="${h.level }" style="display:none">
-    			<input type="text" name="prePhone" value="${h.phone }" style="display:none">
-    			<button type="submit" class="btn btn-info btn-xs">预订</a></td>
-    			</form>
-    			
-			</tr>
-			
-			
-			
-		
-		</c:forEach>
-	</tbody>
-</table>
-	</div>
-	
+	<!-- 展示框!!!!分页 -->
+<div id="showPage1" class="col-lg-6 col-lg-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" >
+<div id="myDIV" style="display: block;text-align:center">
+	<table class="table table-striped" style="margin-top:20px " >
 
-
+    	<tbody id="tb1">
+		</tbody>
+	</table>
 </div>
 
+<div id="info1">
+<div id="pageControl" style="display: none" >
+	<ul class="pager">
+    <li class="previous" onclick="previous()"><a href="#">&larr; 上一页</a></li>
+    <span>第</span><input value="1" type="text" class="form-control" id="pageId" style="width: 15%;display:inline"><span>页/<span id="total" value="${totalPage }"></span>页</span>
+    <button onclick="checkForm1()" class="btn btn-primary btn-sm ">前往</button>
+    <li class="next" onclick="next()"><a href="#">下一页 &rarr;</a></li>
+	</ul>
+</div> 
+<div id="sorry" style="display: none;margin:auto auto">抱歉，未找到符合条件的客栈</div>
+</div>
+</div>
+
+
+<!--  
+<div id="showPage" class="col-lg-12  col-sm-12  col-xs-12" >
+<div id="page"></div>
+
+
+<br>  
+<table class="table table-striped" style="margin-top:-20px " >
+
+     <thead>
+      <tr>
+        <th>序号</th>
+        <th>图片</th>
+        <th>名称</th>
+        <th>星级</th>
+        <th>地址</th>
+        <th>房型</th>
+        <th>价格/晚</th>
+        <th>预定</th>
+        
+      </tr>
+    </thead>
+    <tbody id="tb">
+	</tbody>
+</table>
+<div id="pageControl" >
+	<ul class="pager">
+    <li class="previous" onclick="previous()"><a href="#">&larr; 上一页</a></li>
+    <span>第</span><input value="1" type="text" class="form-control" id="pageId" style="width: 15%;display:inline"><span>页/<span id="total" value="${totalPage }"></span>页</span>
+    <button onclick="checkForm()" class="btn btn-primary btn-sm ">前往</button>
+    <li class="next" onclick="next()"><a href="#">下一页 &rarr;</a></li>
+	</ul>
+</div>
+
+</div>
+	
+-->	
+	
+	
+	<!--  
+
+	-->
+		<form action="preOrder" method="post" >
+    			<input type="text" id="preHid" name="preHid" style="display:none">
+    			<input type="text" id="preStartDate" name="preStartDate" style="display:none">
+    			<input type="text" id="preEndDate"  name="preEndDate" style="display:none">
+    			<input type="text" id="preBed" name="preBed"  style="display:none">
+    			<input type="text" id="prePrice" name="prePrice" style="display:none">
+    			<input type="text" id="preNum" name="preNum" style="display:none">
+    			<input type="text" id="planStartDate" name="planStartDate" style="display:none">
+    			<input type="text" id="planEndDate" name="planEndDate" style="display:none">
+    			<input type="text" id="preHname"  name="preHname" style="display:none">
+    			<input type="text" id="preAddress" name="preAddress"  style="display:none">
+    			<input type="text" id="preLevel"  name="preLevel" style="display:none">
+    			<input type="text"  id="prePhone" name="prePhone" style="display:none">
+    			<input type="submit" id="thesub"  style="display: none">
+    			</form>
+<!--</div>  -->
+
+</div>
 </body>
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="./js/toastr.js"></script>
 <script src="./js/distpicker.data.js"></script>
 <script src="./js/distpicker.js"></script>
