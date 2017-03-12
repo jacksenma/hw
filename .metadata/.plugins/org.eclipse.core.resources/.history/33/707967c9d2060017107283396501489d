@@ -1,0 +1,50 @@
+toastr.options = {
+		  "closeButton": false,
+		  "debug": false,
+		  "newestOnTop": false,
+		  "progressBar": false,
+		  "positionClass": "toast-top-center",
+		  "preventDuplicates": false,
+		  "onclick": null,
+		  "showDuration": "300",
+		  "hideDuration": "1000",
+		  "timeOut": "2500",
+		  "extendedTimeOut": "1000",
+		  "showEasing": "swing",
+		  "hideEasing": "linear",
+		  "showMethod": "fadeIn",
+		  "hideMethod": "fadeOut"
+		}
+
+
+function checkLogin() {
+	if($("#loginName").val()==""||$("#loginPsd").val()=="")
+		toastr.warning('请填写完整信息');
+	else{
+		
+			$.ajax({
+	               type: "POST",
+	               url: "http://localhost:8080/hw/loginAjax",
+	               data: $("#login").serialize(),
+	               success: function(data){
+//	            	   alert("data");
+//	            	   alert(data+"!!");
+	            	   if(data=="no")
+	            		   toastr.warning('用户名或密码错误');
+	            	   else{
+	            		   $("#sub").click();
+	            	   }
+	                  }
+	            });
+		
+			
+	}
+	
+}
+
+$(function(){ 
+	$(document).keydown(function(event){ 
+	if(event.keyCode==13){ 
+	$("#mouse").click(); 
+	} 
+	}); }

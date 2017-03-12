@@ -22,12 +22,12 @@
 <!-- tostr -->
 <title>统计信息</title>
 </head>
-<body>
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/hnavigation.jsp"%>
 <script type="text/javascript">
 $("#statistics").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
-	<div class="container" style="margin-top:50px">
+	<div id="container" class=" container col-lg-8 col-lg-offset-2 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" style="margin-top:50px;text-align:center">
     	<ul id="myTab" class="nav nav-tabs">
     		<li class="active">
         		<a href="#showOandC" data-toggle="tab" id="tabOandC">
@@ -47,15 +47,16 @@ $("#statistics").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,2
     
 		</ul>
 		
+		
 		<div id="myTabContent" class="tab-content">
     		<div class="tab-pane fade in active" id="showOandC">
-        		<div id="OandC" style="width: 600px;height:400px;"></div>
+        		<div id="OandC" style="width: 800px;height:500px;"></div>
     		</div>
     		<div class="tab-pane fade" id="showEandL">
-        		<div id="EandL" style="width: 600px;height:400px;"></div>
+        		<div id="EandL" style="width: 800px;height:500px;"></div>
     		</div>
     		<div class="tab-pane fade" id="showFinance">
-        		<div id="Finance" style="width: 600px;height:400px;"></div>
+        		<div id="Finance" style="width: 800px;height:500px;"></div>
     		</div>
     
 		</div>

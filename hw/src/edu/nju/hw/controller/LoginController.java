@@ -2,7 +2,9 @@ package edu.nju.hw.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -57,20 +59,9 @@ public class LoginController {
 			cookie2.setPath("/");
 			response.addCookie(cookie2);
 			session.setAttribute("vipInfo",null);
-//			Cookie cookie = new Cookie("vid",vip.getId(
-//			Cookie[] cookies = request.getCookies();
-//			for(Cookie cookie : cookies){
-//                if(cookie.getName().equals("vid")){
-//                    System.out.println("原值为:"+cookie.getValue());
-//                    cookie.setValue("");
-//                    cookie.setPath("/");
-//                    System.out.println("被修改的cookie名字为:"+cookie.getName()+",新值为:"+cookie.getValue());
-//                    response.addCookie(cookie);
-//                    break;
-//                }
-//            }
-			
-			System.out.println("user1");
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+			session.setAttribute("startDate", df.format(new Date()));
+			session.setAttribute("endDate", df.format(new Date()));// new Date()为获取当前系统时间
 			return "umain";
 		}
 			
@@ -82,6 +73,9 @@ public class LoginController {
 			Cookie cookie = new Cookie("vid",vip.getId());
 			cookie.setPath("/");
 			response.addCookie(cookie);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+			session.setAttribute("startDate", df.format(new Date()));
+			session.setAttribute("endDate", df.format(new Date()));
 //			Cookie[] cookies = request.getCookies();
 //			for(Cookie cookie : cookies){
 //                if(cookie.getName().equals("vid")){

@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+form > div{
+	margin-top:8px;
+}
+
+#container{
+	background-color:#F5F6EB;
+	margin-top:50px;
+}
+#planBox{
+	margin-top:30px;
+	padding:50px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}
+
+#planSpanDIV{
+	text-align:center;
+}
+#planSpan{
+	font-weight:800;
+	font-size:30px;
+	color:rgb(242,159,63);
+	
+}
+hr{
+	height:2px;
+	margin-top:-50px
+}

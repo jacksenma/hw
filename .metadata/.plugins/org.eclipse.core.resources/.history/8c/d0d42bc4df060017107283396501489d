@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+form > div{
+	margin-top:8px;
+}
+
+#container{
+	background-color:#F5F6EB;
+	margin-top:50px;
+}
+#enterBox{
+	margin-top:10px;
+	padding:20px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}
+
+.tab .nav-tabs {
+border-bottom: 0 none;
+background: red;
+}
+

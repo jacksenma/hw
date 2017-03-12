@@ -2,3 +2,20 @@
 .nodisplay {
 	dispaly:none;
 }
+form > div{
+	margin-top:8px;
+}
+#phoneDIV{
+	margin-top:18px;
+}
+#container{
+	background-color:#F5F6EB;
+	margin-top:50px;
+}
+#changeBox{
+	margin-top:30px;
+	padding:50px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}

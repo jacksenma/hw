@@ -29,33 +29,47 @@
 
 修改信息
 </head>
-<body>
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/hnavigation.jsp"%>
 <script type="text/javascript">
 $("#change").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87)"});
 </script>
     
     <!-- 主题form -->
-    <div class="container" style="margin-top:50px">
-	<div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
+    <div id="container" >
+	<div id="changeBox" class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2" >
 		<form class="form" action="hchange" method="post" enctype="multipart/form-data" id="hregister">
-            <span>客栈名称:</span><input type="text" class="form-control" id="hname" name="hname" placeholder="请输入客栈名" value="${hostelInfo.name }"><br/>
+            <div>
+            <span>客栈名称:</span><input type="text" class="form-control" id="hname" name="hname" placeholder="请输入客栈名" value="${hostelInfo.name }">
+			</div>
+			<div>
 			<span>客栈级别:</span>
 				<select class="form-control" id="level" name="level" >
       			<option <c:if test="${hostelInfo.level=='五星级/豪华' }">selected</c:if> >五星级/豪华</option>
       			<option <c:if test="${hostelInfo.level=='四星级/高档' }">selected</c:if>>四星级/高档</option>
       			<option <c:if test="${hostelInfo.level=='三星级/舒适' }">selected</c:if>>三星级/舒适</option>
       			<option <c:if test="${hostelInfo.level=='二星级及以下/经济' }">selected</c:if>>二星级及以下/经济</option>
-    			</select><br/>
+    			</select>
+    			</div>
+    		<div>
 			<span>客栈地址:</span>
-			<div data-toggle="distpicker" class="nodisplay">
+			<div data-toggle="distpicker" >
   				<select style="width:33%" class="form-control col-lg-1" id="province" name="province" data-province="${hostelInfo.province }"></select>
   				<select style="width:34%"class="form-control col-lg-2" id="city" name="city" data-city="${hostelInfo.city }"></select>
   				<select style="width:33%"class="form-control col-lg-1" id="district" name="district" data-district="${hostelInfo.district }"></select>
-			</div><br/>
-			<span>手机号码:</span><input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号" value="${hostelInfo.phone }"><br/>
-			<span>银行卡号:</span><input type="text" class="form-control" id="bankCard" name="bankCard" placeholder="请输入银行卡号" value="${hostelInfo.bankCard }"><br/>
-            <span>客栈图片:</span><input id="input-1" name="file" type="file" multiple class="file-loading" accept="image/*"/><br/>
+			</div>
+			</div>
+			<br>
+			<div id="phoneDIV">
+			<span>手机号码:</span><input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号" value="${hostelInfo.phone }">
+			</div>
+			
+			<div>
+			<span>银行卡号:</span><input type="text" class="form-control" id="bankCard" name="bankCard" placeholder="请输入银行卡号" value="${hostelInfo.bankCard }">
+            </div>
+            <div>
+            <span>客栈图片:<span style="color:gray">(更改用来展示您客栈外观的图片)</span></span><input id="input-1" name="file" type="file" multiple class="file-loading" accept="image/*"/><br/>
+            </div>
             <script>
                 $(document).on('ready', function() {
                     $("#input-1").fileinput({
