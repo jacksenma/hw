@@ -21,7 +21,7 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <link href="./css/toastr.css" rel="stylesheet"/>
-<title>用户</title>
+<title>我的预订</title>
 </head>
 <body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>

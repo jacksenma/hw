@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="./css/daterangepicker.min.css">
 
 <link rel="stylesheet" href="./css/hmain.css">
-<title>发布计划</title>
+<title>住店登记</title>
 </head>
 
 <body style="background-color:#F5F6EB;font-family:微软雅黑;">

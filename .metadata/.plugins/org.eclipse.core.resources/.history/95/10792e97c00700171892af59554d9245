@@ -1,0 +1,15 @@
+package edu.nju.hw.model;
+
+public class adminPay {
+	
+	private double total;
+	private String vid;
+	
+	public double getTotal(){
+		return total;
+	}
+	
+	public String vid(){
+		return vid;
+	}
+}

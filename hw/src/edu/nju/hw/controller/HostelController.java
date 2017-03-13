@@ -21,12 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.nju.hw.mapper.VipMapper;
 import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Hcheck;
 import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
 import edu.nju.hw.model.Order;
 import edu.nju.hw.model.OrderHostel;
+import edu.nju.hw.model.Vip;
 import edu.nju.hw.service.HostelService;
 import edu.nju.hw.service.UserService;
 import edu.nju.hw.service.VipService;
@@ -423,6 +425,15 @@ public class HostelController {
 		String haddress=h.getProvince()+h.getCity()+h.getDistrict();
 		String hname=h.getName();
 		vipService.updateVipFinance(vipId, 0, "从位于"+haddress+"的"+hname+"退房", getNowTime(), 3);
+		
+		//根据经验值计算等级
+		Vip v=vipService.getVipInfoByVid(vipId);
+		int level=getLevel(v.getXp());
+		System.out.println(v.getXp());
+		System.out.println("level:"+level);
+		vipService.updateVipLevel(level,vipId);
+		
+		
 		PrintWriter out;
 		out = response.getWriter();
 		out.write("ok");
@@ -713,6 +724,18 @@ public class HostelController {
         out.close();
 	}
 	
+	@RequestMapping("/adminPay")
+	public void adminPay(HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException{
+		
+		PrintWriter out;
+		out = response.getWriter();
+		if(hostelService.adminPay())
+			out.write("ok");
+		else
+			out.write("sorry");
+        out.close();
+	}
+	
 	public static String getNowDate(){
 		 Date d = new Date();
 	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -749,6 +772,19 @@ public class HostelController {
 	        }  
 	        System.out.println((int)days);
 	        return (int)days;
+	}
+	
+	//表驱动根据经验值设置等级
+	public int getLevel(int xp){
+		
+		int[] xps={100,300,500,700,1300};
+		int i;
+		for(i=0;i<xps.length;i++){
+			if(xp<xps[i])
+				return i;
+		}
+		return i;
+		
 	}
 	
 

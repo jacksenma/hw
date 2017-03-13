@@ -15,7 +15,8 @@ toastr.options = {
 		  "showMethod": "fadeIn",
 		  "hideMethod": "fadeOut"
 		}
-
+var registerName=$.cookie("registerName");
+$("#loginName").val(registerName);
 
 function checkLogin() {
 	if($("#loginName").val()==""||$("#loginPsd").val()==""){

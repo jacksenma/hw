@@ -25,5 +25,9 @@ public interface VipMapper {
 
 	public void updateDDL(String ddl, String vid);
 
+	public void updateVipLevel(int level, String vid);
+
+	public void updateVipState(String id, int state);
+
 	
 }

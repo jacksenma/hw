@@ -62,4 +62,8 @@ public interface VipService {
 
 	List<VipFinance> findVipFinanceByDate();
 
+	void updateVipLevel(int level, String vipId);
+
+	void updateVipState(String id, int i);
+
 }

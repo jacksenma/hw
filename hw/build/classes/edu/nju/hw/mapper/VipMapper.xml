@@ -57,4 +57,13 @@
  	<select id="selectHWBalanceById"  resultType="double">
  		select balance from hw where id = #{0}
  	</select>
+ 	
+ 	<update id="updateVipLevel">
+ 		update vip set level=#{0} where id=#{1}
+ 	</update>
+ 	
+ 	<update id="updateVipState">
+ 		update vip set state=#{1} where id=#{0}
+ 	</update>
+ 	
 </mapper>

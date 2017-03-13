@@ -20,7 +20,7 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!-- tostr -->
-<title>Login</title>
+<title>结算</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/jsp/anavigation.jsp"%>

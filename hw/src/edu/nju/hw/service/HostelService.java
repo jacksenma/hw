@@ -90,6 +90,8 @@ public interface HostelService {
 	public int searchHostelsPageNum(String province, String city, String district, String startDate, String endDate,
 			double p1, double p2, String level, String key);
 
+	public boolean adminPay();
+
 	
 	
 }

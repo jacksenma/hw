@@ -212,6 +212,18 @@ public class VipServiceImpl implements VipService {
 		return financeMapper.findVipFinanceByDate();
 	}
 
+	@Override
+	public void updateVipLevel(int level,String vid) {
+		// TODO Auto-generated method stub
+		vipMapper.updateVipLevel(level,vid);
+	}
+
+	@Override
+	public void updateVipState(String id, int state) {
+		// TODO Auto-generated method stub
+		vipMapper.updateVipState(id,state);
+	}
+
 	
 	
 }

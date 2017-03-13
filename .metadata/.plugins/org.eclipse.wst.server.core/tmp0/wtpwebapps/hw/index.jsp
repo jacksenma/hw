@@ -24,7 +24,7 @@
 <!-- tostr -->
 <link href="css/login.css" rel="stylesheet"/>
 <link href="css/toastr.css" rel="stylesheet"/>
-<title>Login</title>
+<title>登录</title>
 </head>
 <body >
 	<div class="container">
@@ -52,6 +52,7 @@
 </div>
 
 </body>
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="js/toastr.js"></script>
 <script src="js/login.js"></script>
 </html>

@@ -14,8 +14,9 @@
 }
 body{
 	font-family:微软雅黑;
+	background:url("../img/logo.png") no-repeat #F5F6EB;
+	background-position:10px 90px;
 	
-	background-color:#F5F6EB;
 	
 }
 #loginSpan{

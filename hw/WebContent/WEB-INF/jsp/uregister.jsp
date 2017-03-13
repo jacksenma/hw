@@ -25,7 +25,7 @@
 <!-- tostr -->
 <link href="./css/uregister.css" rel="stylesheet"/>
 <link href="./css/toastr.css" rel="stylesheet"/>
-<title>Register</title>
+<title>用户注册</title>
 </head>
 <body style="font-family:微软雅黑;">
 
@@ -34,9 +34,9 @@
 		<span id="loginSpan">用户注册</span>
 		
 		<form action="uregister" method="post" id="register">
-			<div class="input-group input-group-lg">  
+			<div id="unameDIV" class="input-group input-group-lg">  
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>  
-                <input type="text" class="form-control" id="uname" name="uname" placeholder="请输入用户名">
+                <input type="text" class="form-control" id="uname" name="uname" onchange="isUser(this.value)" placeholder="请输入用户名">
             </div><br> 
 			
 			<div class="input-group input-group-lg">  

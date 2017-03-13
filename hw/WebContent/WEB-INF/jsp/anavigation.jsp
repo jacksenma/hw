@@ -55,7 +55,8 @@
                 	</ul>
            	 	</li>
         		
-                <li class="op" id="pay"><a href="fapay">结算支付</a></li>
+                <li class="op" id="pay"><a href="#" data-toggle="modal" data-target="#adminpay">一键结算</a></li>
+                
                 <li class="op dropdown" id="statistics">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    	 统计信息<b class="caret"></b>
@@ -74,6 +75,29 @@
         </div>
     </div>
     </nav>
+   
+   <div class="modal fade" id="adminpay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">一键结算</h4>
+            </div>
+            <div class="modal-body">
+            	<h3>此操作将一次性结算各客栈费用，是否确定?</h3>
+            	</div>
+            <div class="modal-footer">
+            <form action="adminPay">
+            		<button type="button" onclick='adminPay()' class="btn btn-primary">确定</button>
+      
+            		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            	</form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div> 
+    
+    
 </body>
 <script type="text/javascript">
 $(document).ready(function() { 
@@ -93,4 +117,6 @@ $(document).ready(function() {
 	 });
 });
 </script>
+<script src="./js/toastr.js"></script>
+<script src="./js/anavigation.js"></script>
 </html>

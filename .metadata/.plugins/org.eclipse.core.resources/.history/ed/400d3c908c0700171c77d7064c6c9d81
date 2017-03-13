@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+#sub{
+	display: none;
+}
+
+#loginBox
+{	
+	padding:60px;
+	margin-top:100px;
+	padding:50px;
+	border-radius:5px;
+	box-shadow: 3px 3px 2px #888888;
+	background-color:white;
+}
+body{
+	font-family:微软雅黑;
+	background:url("../img/logo.png") no-repeat #F5F6EB;
+	background-position:10px 110px;
+	
+	
+}
+#loginSpan{
+	font-weight:800;
+	font-size:30px;
+	color:rgb(242,159,63);
+	margin:50px;
+	
+}
+#login{
+	margin-top:20px;
+}
+
+#login1{
+	margin-top:50px;
+}
+
+#usup{
+	float:left;
+	margin-top:15px;
+	font-size:18px;
+}
+
+#hsup{
+	float:right;
+	margin-top:15px;
+	font-size:18px;
+}
+
+#logo{
+	position: absolute;
+    top: 56px;
+    margin-left: 50px;
+    float:left;
+}
+
+.container{
+	text-align:center;
+}

@@ -48,7 +48,7 @@
         
         	<ul class="nav navbar-nav">
         		<li class="op" id="order"><a href="fuorder">预定客栈</a></li>
-        		 <c:if test="${vipInfo!=null }">
+        		 <c:if test="${vipInfo.state==1 }">
         			<li class="op" id="orderCancel"><a href="fuorderCancel">我的订单</a></li>
                 	<li class="op" id="statistics"><a href="fustatistics">统计信息</a></li>
         		</c:if>

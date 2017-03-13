@@ -23,7 +23,7 @@
 <link href="./css/toastr.css" rel="stylesheet"/>
 <link rel="stylesheet" href="./css/daterangepicker.min.css">
 <link rel="stylesheet" href="./css/preOrder.css">
-<title>??</title>
+<title>预订客栈</title>
 </head>
 <body style="font-family:微软雅黑;background-color:#F5F6EB;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>

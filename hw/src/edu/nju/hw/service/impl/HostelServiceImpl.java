@@ -1,5 +1,8 @@
 package edu.nju.hw.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,9 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.nju.hw.mapper.FinanceMapper;
 import edu.nju.hw.mapper.HcheckMapper;
 import edu.nju.hw.mapper.HostelMapper;
+import edu.nju.hw.mapper.OrderMapper;
 import edu.nju.hw.mapper.PlanMapper;
+import edu.nju.hw.mapper.VipMapper;
+import edu.nju.hw.model.Finance;
 import edu.nju.hw.model.Hed;
 import edu.nju.hw.model.Hostel;
+import edu.nju.hw.model.Order;
+import edu.nju.hw.model.adminPay;
 import edu.nju.hw.model.Page;
 import edu.nju.hw.service.HostelService;
 
@@ -31,6 +39,12 @@ public class HostelServiceImpl implements HostelService {
 	
 	@Resource
 	public FinanceMapper financeMapper;
+	
+	@Resource
+	public OrderMapper orderMapper;
+	
+	@Resource
+	public VipMapper vipMapper;
 
 	@Override
 	public boolean isExisted(String name, String phone, String level, String bankCard, String province, String city,
@@ -308,7 +322,65 @@ public class HostelServiceImpl implements HostelService {
 		return totalPage;
 	}
 
-	
+	@Override
+	public boolean adminPay() {
+		// TODO Auto-generated method stub
+		
+		//1取得分别该付给哪些客栈多少钱（根据state=3）,hw扣钱,客栈加钱
+		List<adminPay> pay=new ArrayList<adminPay>();
+		pay=orderMapper.getadminPayTotalandHid();
+		if(pay.isEmpty()==true){
+			return false;
+		}
+		
+		double total=0;
+		Hostel h;
+		String date=getNowDate();
+		
+		for(adminPay a:pay){
+			total+=a.getTotal();
+			Finance f=financeMapper.getFinanceByDate(date,"HW");
+			if(f==null){
+				System.out.println("null");
+				financeMapper.insertFinance("HW",a.getTotal(),date);
+			}else{
+				System.out.println("not null");
+				double money=f.getMoney()+a.getTotal();
+				financeMapper.updateFinance("HW",money,date);
+			}
+		}
+		vipMapper.updateHW(vipMapper.selectHWBalanceById(1)-total);//hw扣钱
+		for(adminPay a:pay){
+			String hid=a.getHid();
+			h=getHostelInfo(hid);
+			double bankBalance=h.getBankBalance()+a.getTotal();
+			updateHostelBankBalance(hid, bankBalance);
+			
+			
+			
+			Finance f=financeMapper.getFinanceByDate(date,hid);
+			if(f==null){
+				System.out.println("null");
+				financeMapper.insertFinance(hid,a.getTotal(),date);
+			}else{
+				System.out.println("not null");
+				double money=f.getMoney()+a.getTotal();
+				financeMapper.updateFinance(hid,money,date);
+			}
+		}
+		
+		
+		//2将结算过的订单状态改为4(已结算状态)
+		orderMapper.turnState3to4();
+		return true;
+	}
+
+	public static String getNowDate(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     System.out.println("当前日期：" + sdf.format(d));
+	     return sdf.format(d);
+	}
 
 	
 

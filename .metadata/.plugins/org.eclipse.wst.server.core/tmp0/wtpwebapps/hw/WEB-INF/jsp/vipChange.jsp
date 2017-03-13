@@ -25,7 +25,7 @@
 
 <link href="./css/toastr.css" rel="stylesheet"/>
 <link href="./css/vipChange.css" rel="stylesheet"/>
-<title>修改信息</title>
+<title>会员信息修改</title>
 </head>
 <body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/unavigation.jsp"%>

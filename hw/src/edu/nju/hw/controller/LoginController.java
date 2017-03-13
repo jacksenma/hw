@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,15 +41,19 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request,HttpServletResponse response,HttpSession session){
-		System.out.println("login 换");
+//		System.out.println("login 换");
 		String name=request.getParameter("loginName");
 		String psd=request.getParameter("loginPsd");
-		System.out.println(name+" login "+psd);
+//		System.out.println(name+" login "+psd);
 		User user=userService.getUserInfo(name,psd);
-		System.out.println(user);
+//		System.out.println(user);
 		Cookie cookie1 = new Cookie("vid","");
 		cookie1.setPath("/");
 		response.addCookie(cookie1);
+		
+		Cookie cookie3 = new Cookie("registerName",name);
+		cookie3.setPath("/");
+		response.addCookie(cookie3);
 //		request.setAttribute("user", user);
 //		System.out.println(user.getId()+user.getName());
 //		model.addAttribute("user",user);
@@ -69,12 +74,43 @@ public class LoginController {
 		else if(user.getRole()==1){
 			System.out.println("vip");
 			Vip vip=vipService.getVipInfo(user.getId());
+			
+			if(vip.getDDL().equals(getNowDate())){
+				if(vip.getState()==1){//正常状态
+					if(vip.getBalance()<30){
+						vip.setState(2);;//变为暂停状态
+						//更新状态
+						vipService.updateVipState(vip.getId(),2);
+						//更新DDL延长一年，用来判断暂停状态后的一年
+						Date date = new Date();
+						SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+						Calendar canlandar = Calendar.getInstance();
+						canlandar.setTime(date);
+						canlandar.add(Calendar.YEAR, +1);
+						String ddl=df.format(canlandar.getTime()).toString();
+						System.out.println("ddl="+ddl);
+						vipService.updateDDL(ddl,vip.getId());
+					}
+						
+				}
+				else if(vip.getState()==2){//如果是暂停状态到期
+					//删除会员信息
+					vipService.deleteVip(vip.getId());
+				}
+				
+			}
 			session.setAttribute("vipInfo",vip);
 			Cookie cookie = new Cookie("vid",vip.getId());
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+			
 			session.setAttribute("startDate", df.format(new Date()));
+//			Date date = (new SimpleDateFormat("yyyy-MM-dd")).parse(df.format(new Date()));
+//			Calendar cal = Calendar.getInstance();
+//			cal.setTime(date);
+//			cal.add(Calendar.DATE, 1);
+//			System.out.println((new SimpleDateFormat("yyyy-MM-dd")).format(cal.getTime()));
 			session.setAttribute("endDate", df.format(new Date()));
 //			Cookie[] cookies = request.getCookies();
 //			for(Cookie cookie : cookies){
@@ -151,7 +187,12 @@ public class LoginController {
 		}
 		}
 	}
-	
+	public static String getNowDate(){
+		 Date d = new Date();
+	     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     System.out.println("当前日期：" + sdf.format(d));
+	     return sdf.format(d);
+	}
 	
 	
 }

@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +43,9 @@ public class UserController {
 //		RequestDispatcher rd=request.getRequestDispatcher("/index.jsp");
 //		rd.forward(request, response);
 //		response.sendRedirect("c.jsp");
+		Cookie cookie1 = new Cookie("registerName",name);
+		cookie1.setPath("/");
+		response.addCookie(cookie1);
 		response.sendRedirect("/hw/index.jsp");
 //		return "redirect:/user/welcome";
 		
@@ -55,8 +56,8 @@ public class UserController {
 		System.out.println("uregisterAjax");
 		PrintWriter out;
 		String name=request.getParameter("uname");
-		String psd=request.getParameter("upsd");
-		System.out.println(name+" registerAjax "+psd);
+//		String psd=request.getParameter("upsd");
+//		System.out.println(name+" registerAjax "+psd);
 		if(userService.isUser(name)){
 			try {
 			out = response.getWriter();

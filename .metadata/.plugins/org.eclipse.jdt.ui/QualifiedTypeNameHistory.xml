@@ -3,7 +3,6 @@
 <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
 <fullyQualifiedTypeName name="java.lang.Double"/>
 <fullyQualifiedTypeName name="edu.nju.hw.service.VipService"/>
-<fullyQualifiedTypeName name="edu.nju.hw.model.Order"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Hed"/>
 <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.Finance"/>
@@ -15,8 +14,13 @@
 <fullyQualifiedTypeName name="edu.nju.hw.service.impl.VipServiceImpl"/>
 <fullyQualifiedTypeName name="edu.nju.hw.mapper.HcheckMapper"/>
 <fullyQualifiedTypeName name="net.sf.json.JSONArray"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="edu.nju.hw.model.VipOrderNum"/>
 <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.util.Timer"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="edu.nju.hw.model.Order"/>
+<fullyQualifiedTypeName name="edu.nju.hw.mapper.OrderMapper"/>
+<fullyQualifiedTypeName name="edu.nju.hw.mapper.VipMapper"/>
+<fullyQualifiedTypeName name="edu.nju.hw.model.Vip"/>
 </qualifiedTypeNameHistroy>

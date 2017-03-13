@@ -229,7 +229,7 @@ function next(){
 //		var imgclass="";
 		var pimgtd=$("<td style='width:50%'></td>")
 //		var pimgtd=$("<td class="+imgclass+"></td>");
-		var pimg=$("<img style='width:100%,height:100%;padding:0;float:right' src='"+imgUrl+"' class="+imgclass+">");
+		var pimg=$("<img style='width:100%,height:150px;padding:0;float:right' src='"+imgUrl+"' class="+imgclass+">");
 		
 		var texttd=$("<td style='float:left;text-align:left;margin-left:20px'></td>")
 		var p1=$("<p></p>")

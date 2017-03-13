@@ -24,7 +24,7 @@
 
 <!-- ??? Bootstrap ?? JavaScript ?? -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<title>大气的jQuery树型时间轴特效 - 站长素材</title>
+<title>统计信息</title>
 <link href="./css/style.css" rel="stylesheet" type="text/css" />
 </head>
 

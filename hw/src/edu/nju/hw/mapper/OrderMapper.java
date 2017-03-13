@@ -17,4 +17,9 @@ public interface OrderMapper {
 
 	public void updateOrderState(String vipId, String hid, String orderDate, int origin_state, int now_state);
 
+	//查询所有已完成订单（用来给客栈结算）
+	public List getadminPayTotalandHid();
+
+	void turnState3to4();
+
 }

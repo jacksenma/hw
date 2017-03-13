@@ -23,7 +23,9 @@
 <title>无法修改</title>
 </head>
 <body>
-<p>客栈信息已修改，审核结果将在三个工作日内发送到您的手机上，请耐心等待</p>
-<p>如有问题，请<a href="mailto:871608324@qq.com">联系我们</a></p>
-</body>
+<div style="height:100px;width:1000px;margin-top:250px;text-align:right;background:url(./img/hchange.png)" class="col-lg-8 col-lg-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+<p style="margin-top:56px;margin-right:55px;font-size:24px;font-weight:800"><u><a href="mailto:871608324@qq.com">联系我们</a></u></p>
+</div>
+
+</body style="background-color:#F5F6EB;font-family:微软雅黑;">
 </html>

@@ -28,7 +28,8 @@
 <link rel="stylesheet" href="./css/ladda-themeless.min.css">
 <link rel="stylesheet" href="./css/prism.css">
 <link href="./css/umain.css" rel="stylesheet"/>
-<title>预定客栈</title>
+
+<title>预订客栈</title>
 
 </head>
 <body style="background-color:#F5F6EB;font-family:微软雅黑;">
@@ -133,7 +134,35 @@ $("#order").css({"color":"rgb(255, 255, 255)","background-color":"rgb(255,233,87
 <div id="sorry" style="display: none;margin:auto auto">抱歉，未找到符合条件的客栈</div>
 </div>
 </div>
-
+<div id="top" class="scroll" style="display:none;position:fixed;right:260px;top:520px;"><img alt="" src="./img/top.png"></div>
+<script type="text/javascript">$('div[class=scroll]').fadeOut();</script>
+<script type="text/javascript">
+$(function () {
+	
+    showScroll();
+    function showScroll() {
+        $(window).scroll(function () {
+            var scrollValue = $(window).scrollTop();
+            if(scrollValue > 300) {
+            	$("#top").attr("display","block");
+            	$('div[class=scroll]').fadeIn();
+                }
+            else{
+            	$('div[class=scroll]').fadeOut();
+                }
+            
+        });
+        $('#scroll').click(function () {
+            $("html,body").animate({ scrollTop: 0 }, 200);
+        });
+    }
+});
+$(function(){
+  $("#top").click(function() {
+      $("html,body").animate({scrollTop:0}, 500);
+  }); 
+ })
+</script>
 
 <!--  
 <div id="showPage" class="col-lg-12  col-sm-12  col-xs-12" >

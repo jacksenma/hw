@@ -25,7 +25,7 @@
 <link href="./css/fileinput.min.css" rel="stylesheet"/>
 <link href="./css/hchange.css" rel="stylesheet"/>
 
-<title>修改信息</title>
+<title>客栈信息修改</title>
 
 修改信息
 </head>

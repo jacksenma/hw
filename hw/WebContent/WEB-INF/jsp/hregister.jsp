@@ -27,7 +27,7 @@
 <link href="./css/fileinput.min.css" rel="stylesheet"/>
 
 <link href="./css/hregister.css" rel="stylesheet"/>
-<title>Insert title here</title>
+<title>客栈注册</title>
 </head>
 <body>
 

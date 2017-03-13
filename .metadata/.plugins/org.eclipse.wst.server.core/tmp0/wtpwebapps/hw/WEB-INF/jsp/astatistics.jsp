@@ -20,7 +20,7 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!-- tostr -->
-<title>Login</title>
+<title>本站财务情况</title>
 </head>
 <body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/anavigation.jsp"%>

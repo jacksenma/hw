@@ -2,13 +2,13 @@ toastr.options = {
 		  "closeButton": false,
 		  "debug": false,
 		  "newestOnTop": false,
-		  "progressBar": false,
+		  "progressBar":true,
 		  "positionClass": "toast-top-center",
 		  "preventDuplicates": false,
 		  "onclick": null,
 		  "showDuration": "300",
 		  "hideDuration": "1000",
-		  "timeOut": "2500",
+		  "timeOut": "1500",
 		  "extendedTimeOut": "1000",
 		  "showEasing": "swing",
 		  "hideEasing": "linear",
@@ -32,7 +32,9 @@ function checkForm() {
 	            	   if(data=="yes")
 	            		   toastr.warning('用户名已存在');
 	            	   else{
-	            		   $("#sub").click();
+	            		   toastr.success('注册成功,1.5秒后跳转至登录页面');
+	            		   setTimeout(function() { $("#sub").click() }, 1500);
+	            		   
 	            	   }
 	                  }
 	            });
@@ -40,6 +42,27 @@ function checkForm() {
 			
 	}
 	
+}
+
+function isUser(uname){
+	$.ajax({
+        type: "POST",
+        url: "http://localhost:8080/hw/uregisterAjax",
+        data: "uname="+uname,
+        success: function(data){
+     	   if(data=="yes"){
+     		  toastr.warning('用户名已存在');
+     		 $("#unameDIV").addClass("has-error");
+     		$("#unameDIV").removeClass("has-success");
+     	   }else{
+     		  toastr.success('用户名可用');
+     		  $("#unameDIV").addClass("has-success");
+     		 $("#unameDIV").removeClass("has-error");
+     	   }
+     		   
+     	   
+           }
+     });
 }
 function stopDefault(e) {  
     //如果提供了事件对象，则这是一个非IE浏览器   
@@ -65,3 +88,20 @@ $(document).ready(
             })    
         }    
     ); 
+
+
+
+var secs = 2; //倒计时的秒数 
+var URL ;
+function Load(url){
+URL = url;
+for(var i=secs;i>=0;i--) 
+{ 
+   window.setTimeout('doUpdate(' + i + ')', (secs-i) * 1000); 
+} 
+}
+function doUpdate(num) 
+{ 
+//document.getElementById('ShowDiv').innerHTML = '将在'+num+'秒后自动跳转到主页' ;
+if(num == 0) { window.location = URL; }
+}

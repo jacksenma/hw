@@ -23,7 +23,7 @@
 
 <!-- tostr -->
 <link href="css/toastr.css" rel="stylesheet"/>
-<title>审批开店信息</title>
+<title>查看客栈情况</title>
 </head>
 <body style="background-color:#F5F6EB;font-family:微软雅黑;">
 <%@ include file="/WEB-INF/jsp/anavigation.jsp"%>

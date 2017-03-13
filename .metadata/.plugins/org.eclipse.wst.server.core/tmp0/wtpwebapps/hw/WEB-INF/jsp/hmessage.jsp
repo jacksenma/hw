@@ -20,11 +20,30 @@
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!-- tostr -->
+
 <title>Message</title>
 </head>
-<body>
-<p>客栈信息已注册，审核结果将在三个工作日内发送到您的手机上，请耐心等待</p>
-<p>如有问题，请<a href="mailto:871608324@qq.com">联系我们</a></p>
-
-
+<!-- onload="Load('index.jsp')" -->
+<body style="background-color:#F5F6EB;font-family:微软雅黑;">
+<div style="height:100px;width:1000px;margin-top:250px;text-align:right;background:url(./img/hregister.png)" class="col-lg-10 col-lg-offset-2 col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+<p style="margin-top:56px;margin-right:55px;font-size:24px;font-weight:800"><u><a href="mailto:871608324@qq.com">联系我们</a></u></p>
+</div>
+<div id="ShowDiv"></div>
+</body>
+<script language="javascript">
+var secs = 30; //倒计时的秒数 
+var URL ;
+function Load(url){
+URL = url;
+for(var i=secs;i>=0;i--) 
+{ 
+   window.setTimeout('doUpdate(' + i + ')', (secs-i) * 1000); 
+} 
+}
+function doUpdate(num) 
+{ 
+document.getElementById('ShowDiv').innerHTML = '将在'+num+'秒后自动跳转到主页' ;
+if(num == 0) { window.location = URL; }
+}
+</script>
 </html>
